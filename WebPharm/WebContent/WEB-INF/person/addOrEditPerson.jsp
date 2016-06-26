@@ -1,4 +1,4 @@
-<%@page import="enums.PersonRole"%>
+<%@page import="enums.PersonRole, utils.Constants"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -54,7 +54,7 @@
 					</div></td>
 				<td class="td1"><input type="text"
 					name="date"
-					value=" <fmt:formatDate pattern="dd.MM.yyyy"
+					value=" <fmt:formatDate pattern="<%= Constants.format %>"
 							value="${person.dateOfBirthday.time}" />" /></td>
 				<td class="td1"><input class="hid"
 					type=${dateErr == "" ? "hidden" : "text"} name="hid"

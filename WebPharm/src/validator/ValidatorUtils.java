@@ -1,21 +1,14 @@
-package utils;
+package validator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import utils.Formater;
+import utils.InvalidDateException;
 
 public class ValidatorUtils {
 
 	public static boolean isValidStringByLength(String param, int length) {
-		//boolean isValid = false;
-		return (param.length() > 0 && param.length() <= length) ;
-				/*{
-			isValid = true;*/
-		/*}
-		return isValid;
-	*/}
+		return (param.length() > 0 && param.length() <= length);
+	}
 
-	
 	public static boolean isValidDate(String date) {
 		boolean isValid = false;
 		try {
@@ -23,6 +16,7 @@ public class ValidatorUtils {
 			isValid = true;
 		} catch (InvalidDateException e) {
 			isValid = false;
+			System.out.println(e);
 		}
 		return isValid;
 	}

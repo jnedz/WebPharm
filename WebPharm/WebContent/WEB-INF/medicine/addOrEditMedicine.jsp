@@ -1,4 +1,4 @@
-<%@page import="enums.MedicineType"%>
+<%@page import="enums.MedicineType, utils.Constants"%>
 <%@page import="utils.TitlesDTO"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -46,7 +46,7 @@
 						<label for="dateOfManufact">Date of Manufacture: </label>
 					</div></td>
 				<td class="td1"><input type="text" name="dateOfManufact"
-					value="${dateOfManufact}" placeholder='format "dd.MM.yyyy"' /></td>
+					value="${dateOfManufact}" placeholder='format "<%= Constants.format %>"' /></td>
 				<td class="td1"><input class="hid"
 					type=${dateErr == "" ? "hidden" : "text"} name="hid"
 					value="${dateErr}" readonly /></td>
