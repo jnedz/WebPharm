@@ -1,0 +1,345 @@
+package dao;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import enums.Country;
+import enums.MedicineType;
+import model.Medicine;
+import model.Pharmacy;
+import model.Producer;
+import utils.DbUtils;
+
+public class PharmacyMedicineDAO {
+	/**
+	 * 
+	 * @param ph
+	 * @param med
+	 * @param count
+	 *            medicine count which must be in pharmacies_medicines table
+	 */
+	public static void add(Pharmacy ph, Medicine med, int count) {
+
+		String sql = "INSERT INTO pharmacies_medicines (pharmacy_id, medicine_id, price, count) VALUES (?, ?, ?, ?)";
+
+		try {
+			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+			statement.setInt(1, ph.getId());
+			statement.setLong(2, med.getId());
+			statement.setDouble(3, med.getPrice());
+			statement.setInt(4, count);
+			int rowsInserted = statement.executeUpdate();
+			if (rowsInserted > 0) {
+				System.out.println("A new pharmacy-medicine was inserted successfully!");
+				statement.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception in addPharmacy_medicines(PharmacyMedicine pm)!");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 *            delete couple pharmacy-medicine from the table
+	 */
+	public static void delete(Pharmacy pharmacy, Medicine medicine) {
+		String sql = "DELETE FROM pharmacies_medicines WHERE pharmacy_id = ? and medicine_id = ?";
+		try {
+			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+			statement.setInt(1, pharmacy.getId());
+			statement.setLong(2, medicine.getId());
+			int rowsDeleted = statement.executeUpdate();
+			if (rowsDeleted > 0) {
+				System.out.println("A pharmacy_medicine was deleted successfully!");
+			}
+			statement.close();
+		} catch (SQLException ex) {
+			System.out.println("Exception in deletePharmacyMedicine(long id)!");
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            id from the pharmacies_medicines table
+	 */
+	@SuppressWarnings("unused")
+	private static void deleteById(long id) {
+		String sql = "DELETE FROM pharmacies_medicines WHERE id=?";
+		try {
+			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+			statement.setLong(1, id);
+			int rowsDeleted = statement.executeUpdate();
+			if (rowsDeleted > 0) {
+				System.out.println("A pharmacy_medicine was deleted successfully!");
+			}
+			statement.close();
+		} catch (SQLException ex) {
+			System.out.println("Exception in deletePharmacyMedicine(long id)!");
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param pharmId
+	 *            pharmacy id
+	 * @return all medicines from one pharmacy with id = pharId
+	 */
+	public static List<Medicine> getAllMedsByPharmId(int pharmId) {
+		List<Medicine> list = new ArrayList<>();
+		Medicine med = new Medicine();
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id where medicines.id in (select distinct medicine_id from pharmacies_medicines where "
+				+ "pharmacy_id = " + pharmId + ")";	
+		try {
+			Statement statement = (Statement) DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				med = new Medicine();
+				med.setId(result.getLong(1));
+				med.setTitle(result.getString(2));
+				med.setType(MedicineType.valueOf(result.getString(3)));
+				Date date = Date.valueOf(result.getDate(4).toString());
+				GregorianCalendar cal = new GregorianCalendar();
+				cal.setTime(date);
+				med.setDateOfManufact(cal);
+				med.setTerm(result.getInt(5));
+				med.setPrice(getPrice(PharmacyDAO.getPharmacyById(pharmId), med));
+				med.setCount(get—ountOfMed(PharmacyDAO.getPharmacyById(pharmId), med));
+
+				Producer producer = new Producer();
+				producer.setId(result.getInt("producer_id"));
+				producer.setTitle(result.getString("title"));
+				producer.setCountry(Country.valueOf(result.getString("country")));
+				med.setProducer(producer);
+
+				list.add(med);
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in getPharmMedsByPharmId(int pharmId)!");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	/**
+	 * 
+	 * @param medTitle
+	 *            medicines title
+	 * @return a list of Pharmacies that have medicines with title medTitle
+	 */
+	public static List<Pharmacy> getPharmByMedTitle(String medTitle) {
+		List<Pharmacy> list = new ArrayList<>();
+		Pharmacy pharmacy = new Pharmacy();
+			String sql = "select * from pharmacies where id in (select distinct pharmacy_id from pharmacies_medicines where "
+			+ "pharmacy_id in (select id from medicines where title='" + medTitle + "'))";
+
+			try {
+				Statement statement = (Statement) DbUtils.getConnection().createStatement();
+				ResultSet result = statement.executeQuery(sql);
+
+				while (result.next()) {
+					pharmacy = new Pharmacy();
+					pharmacy.setId(result.getInt("id"));
+					pharmacy.setTitle(result.getString("title"));
+					pharmacy.setDescription(result.getString("description"));
+					list.add(pharmacy);
+				}
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Exception in getPharmByMedTitle(medTitile)!");
+				e.printStackTrace();
+			}
+		return list;
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 * @return id from pharmasies_medicines table for the couple
+	 *         pharmacy-medicine. Return "0" if there is not medicine in
+	 *         pharmacy..
+	 */
+	@SuppressWarnings("unused")
+	private static long getPharmMedId(Pharmacy pharmacy, Medicine medicine) {
+		long id = 0;
+		String sql = "SELECT * FROM pharmacies_medicines inner join medicines ON pharmacies_medicines.medicine_id = medicines.id inner join pharmacies "
+				+ "ON pharmacies_medicines.pharmacy_id = pharmacies.id WHERE pharmacies_medicines.pharmacy_id = "
+				+ pharmacy.getId() + " and pharmacies_medicines.medicine_id = " + medicine.getId();
+		try {
+			Statement statement = (Statement) DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+
+			while (result.next()) {
+				id = result.getLong(1);
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in getPharmMedId(Pharmacy pharmacy, Medicine medicine)!");
+			e.printStackTrace();
+		}
+		return id;
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 *            pharmacy
+	 * @param medTitle
+	 *            medicine's title
+	 * @return count of medicines with title = medTitle (from one pharmacy =
+	 *         pharmacy)
+	 */
+	public static int get—ountByMedTitleFromPharm(Pharmacy pharmacy, String medTitle) {
+		int count = 0;
+
+		for (Medicine med : MedicineDAO.getMedicinesByTitle(medTitle)) {
+			long id = med.getId();
+
+			String sql = "SELECT sum(pharmacies_medicines.count) FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
+					+ id + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+			try {
+				java.sql.Statement statement = DbUtils.getConnection().createStatement();
+				ResultSet result = statement.executeQuery(sql);
+				while (result.next()) {
+					count += result.getInt(1);
+				}
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Exception in get—ountByTitleFromPharm(pharmacy, medTitle)!");
+			}
+		}
+		return count;
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 * @return count of medicine(by one Id) from the pharmacy
+	 */
+	public static int get—ountOfMed(Pharmacy pharmacy, Medicine medicine) {
+		int count = 0;
+		String sql = "SELECT count FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
+				+ medicine.getId() + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+		try {
+			java.sql.Statement statement = DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				count = result.getInt(1);
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in get—ountMed(pharmacy, medicine)!");
+		}
+		return count;
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 * @return price of medicine from the couple pharmacy-medicine
+	 */
+	public static double getPrice(Pharmacy pharmacy, Medicine medicine) {
+		double price = 0;
+		String sql = "SELECT price FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
+				+ medicine.getId() + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+		try {
+			java.sql.Statement statement = DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				price = result.getDouble(1);
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in get—ountMed(pharmacy, medicine)!");
+		}
+		return price;
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 * @param newPrice
+	 *            {@literal update price in couple pharmacy-medicine}
+	 */
+	public static void update(Pharmacy pharmacy, Medicine medicine, double newPrice) {
+		String sql = "UPDATE pharmacies_medicines SET price = ? WHERE pharmacy_id = " + pharmacy.getId()
+				+ " and medicine_id = " + medicine.getId();
+		try {
+			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+			statement.setDouble(1, newPrice);
+
+			int rowsUpdated = statement.executeUpdate();
+			if (rowsUpdated > 0) {
+				System.out.println("An existing pharmacy_medicine was updated successfully!");
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in update(pharm, med, price)");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param ph
+	 * @param med
+	 * @param newCount
+	 *            {@literal update count in couple pharmacy-medicine}
+	 */
+	public static void update(Pharmacy ph, Medicine med, int newCount) {
+		String sql = "UPDATE pharmacies_medicines SET count = ? WHERE pharmacy_id = " + ph.getId()
+				+ " and medicine_id = " + med.getId();
+		try {
+			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+
+			statement.setInt(1, newCount);
+			int rowsUpdated = statement.executeUpdate();
+			if (rowsUpdated > 0) {
+				System.out.println("An existing pharmacy_medicine was updated successfully!");
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in update(PharmacyMedicine pm)");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param pharmacy
+	 * @param medicine
+	 * @return boolean true if medicine is in pharmacy else return false
+	 */
+	public static boolean isExists(Pharmacy pharmacy, Medicine medicine) {
+		boolean res = false;
+		String sql = "SELECT pharmacies_medicines.medicine_id FROM pharmacies_medicines where pharmacy_id = ? and medicine_id = ?";
+		try {
+			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+			statement.setInt(1, pharmacy.getId());
+			statement.setLong(2, medicine.getId());
+			ResultSet result = statement.executeQuery();
+			res = result.next();
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in isExists(Pharmacy pharmacy, Medicine medicine)!");
+			e.printStackTrace();
+		}
+		return res;
+	}
+}
