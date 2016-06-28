@@ -1,4 +1,5 @@
-<%@page import="enums.PersonRole, utils.Constants"%>
+<%@page import="enums.PersonRole"%>
+<%@page import="utils.Constants"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,13 +17,14 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/personHeader.jsp" />
-<br>
+	<br>
 	<form action="PersonsServlet" method="POST">
-		<input type="hidden" name="id" value="${person.id}" /> 
-		<input type="hidden"
-			name="selectedRole" value="${selectedRole}" />
+		<input type="hidden" name="id" value="${id}" /> <input
+			type="hidden" name="selectedRole" value="${selectedRole}" />
 		<table class="table1" border="0">
-			<caption>Enter Person`s data:<br></caption>
+			<caption>
+				Enter Person`s data:<br>
+			</caption>
 			<tr>
 				<th class="th1"></th>
 				<th class="th1"></th>
@@ -32,47 +34,47 @@
 				<td class="td1"><div class="field">
 						<label for="firstName">First name:</label>
 					</div></td>
-				<td class="td1"><input type="text" name="firstName"
-					value="${person.firstName}" /></td>
+				<td class="td1"><input type="text" name="firstName" placeholder="length>=20"
+					value="${firstName}" tabindex="1" /></td>
 				<td class="td1"><input class="hid"
 					type=${firstNameErr == "" ? "hidden" : "text"} name="hid"
-					value="${firstNameErr}" readonly/></td>
+					value="${firstNameErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="lastName">Last name:</label>
 					</div></td>
-				<td class="td1"><input type="text" name="lastName"
-					value="${person.lastName}" /></td>
+				<td class="td1"><input type="text" name="lastName" placeholder="length>=20"
+					value="${lastName}" tabindex="2" /></td>
 				<td class="td1"><input class="hid"
 					type=${lastNameErr == "" ? "hidden" : "text"} name="hid"
-					value="${lastNameErr}" readonly/></td>
+					value="${lastNameErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
-						<label for="date">Date of BirthDay:</label> 
+						<label for="date">Date of BirthDay:</label>
 					</div></td>
-				<td class="td1"><input type="text"
-					name="date"
-					value=" <fmt:formatDate pattern="<%= Constants.format %>"
-							value="${person.dateOfBirthday.time}" />" /></td>
+				<td class="td1"><input type="text" name="dateOfBirthday"
+					value="${dateOfBirthday}"
+					placeholder='format "<%= Constants.format %>"' tabindex="3" /></td>
 				<td class="td1"><input class="hid"
 					type=${dateErr == "" ? "hidden" : "text"} name="hid"
-					value="${dateErr}" readonly/></td>
+					value="${dateErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="role">Role:</label>
 					</div></td>
-				<td class="td1"><c:forEach items="<%=PersonRole.values()%>" var="role">
-					<INPUT TYPE="radio" NAME="role"
-						${role == person.role ? 'checked' : ''} VALUE="${role}"> ${role}
+				<td class="td1"><c:forEach items="<%=PersonRole.values()%>"
+						var="role">
+						<INPUT TYPE="radio" NAME="role"
+							${role == selectedRole ? 'checked' : ''} VALUE="${role}"> ${role}
 	       </c:forEach></td>
 				<td class="td1"></td>
 			</tr>
-			</table>
+		</table>
 		<input type="submit" value="Add data" />
 	</form>
-			
+
 </body>
 </html>

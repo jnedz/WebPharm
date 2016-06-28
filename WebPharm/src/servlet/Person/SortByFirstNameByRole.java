@@ -39,11 +39,12 @@ public class SortByFirstNameByRole extends HttpServlet {
 		System.out.println("555555555555555555");
 		System.out.println("~~~" + request.getParameter("role"));
 		System.out.println("###" + request.getParameter("order"));
-
-		String order = request.getParameter("order");
+		System.out.println("###" + request.getParameter("criteria"));
 		List<Person> sortedList = PersonDAO.getAll();
 		
 		String role = request.getParameter("role");
+		String order = request.getParameter("order");
+		String criteria = request.getParameter("criteria");
 		
 		if (request.getParameter("role")==null){
 			role = "AllPersons";
@@ -52,21 +53,21 @@ public class SortByFirstNameByRole extends HttpServlet {
 			order = "NoSort";
 		} 
 		
-		
-		sortedList = PersonDAO.sortByCriteria("dateOfBirthday", order, role);
+		sortedList = PersonDAO.sortByCriteria(criteria, order, role);
+	//	sortedList = PersonDAO.sortByCriteria("dateOfBirthday", order, role);
 
 		
 		//String reverseOrder = "ASC";
 		if (order.equals("ASC")){
 			order="DESC";
+		}else {
+			order = "ASC";
 		}
-		else order = "ASC";
 		
 		request.setAttribute("order", order);
-		
-		request.setAttribute("persons", sortedList);
 		request.setAttribute("selectRole", role);
-		// request.setAttribute("order", order);
+		request.setAttribute("criteria", criteria);
+		request.setAttribute("persons", sortedList);
 		request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 
 	}

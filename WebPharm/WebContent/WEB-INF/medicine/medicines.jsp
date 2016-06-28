@@ -1,4 +1,5 @@
 <%@page import="enums.MedicineType"%>
+<%@page import="utils.Constants"%> 
 <%@page import="utils.TitlesDTO"%>
 <%@page import="model.MedicineDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -75,7 +76,7 @@
 					<td class="td" style="text-align: center;"><c:out
 							value="${medicine.title}" /></td>
 					<td class="td" style="text-align: center;"><fmt:formatDate
-							pattern="dd.MM.yyyy" value="${medicine.dateOfManufact.time}" /></td>
+							pattern="<%= Constants.format %>" value="${medicine.dateOfManufact.time}" /></td>
 					<td class="td" style="text-align: center;"><c:out
 							value="${medicine.term} mnth" /></td>
 					<td class="td" style="text-align: center;"><c:out
@@ -94,11 +95,11 @@
 					--%>
 
 					<td class="td" style="text-align: center;"><h3>
-							<a href="EditMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/update.png" alt="Edit" width="35" height="35" style="vertical-align: middle"></a>
+							<a href="EditMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/update.png" alt="Edit" width="20" height="20" style="vertical-align: middle" title="Edit"></a>
 						</h3></td>
 
 					<td class="td" style="text-align: center;"><h3>
-							<a href="DeleteMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/delete.png" alt="Delete" width="35" height="35" style="vertical-align: middle"></a>
+							<a href="DeleteMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/delete.png" alt="Delete" width="20" height="20" style="vertical-align: middle" title="Delete"></a>
 						</h3></td>
 				</tr>
 			</c:forEach>

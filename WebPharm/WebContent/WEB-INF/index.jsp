@@ -20,7 +20,7 @@
 		<input type="submit" value="All Persons" />
 	</form>
 	<br>
-	<form action="AllProducers" method="post">
+	<form action="AllProducers" method="get">
 		<input type="submit" value="All Producers" />
 	</form>
 	<br>

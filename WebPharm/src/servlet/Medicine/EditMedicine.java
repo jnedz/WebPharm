@@ -17,7 +17,7 @@ import dao.ProducerDAO;
 import enums.MedicineType;
 import model.Medicine;
 import model.Producer;
-import utils.Formater;
+import utils.Formatter;
 
 /**
  * Servlet implementation class EditMedicine
@@ -44,7 +44,7 @@ public class EditMedicine extends HttpServlet {
 			Medicine m = MedicineDAO.getMedicineById(Long.parseLong(request.getParameter("id")));
 			request.setAttribute("id", m.getId());
 			request.setAttribute("title", m.getTitle());
-			request.setAttribute("dateOfManufact", Formater.fromDateToString(m.getDateOfManufact()));
+			request.setAttribute("dateOfManufact", Formatter.fromDateToString(m.getDateOfManufact()));
 			request.setAttribute("term", m.getTerm());
 			request.setAttribute("price", m.getPrice());
 			request.setAttribute("count", m.getCount());

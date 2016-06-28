@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.mysql.jdbc.Constants;
 
 import model.Person;
-import utils.Formater;
+import utils.Formatter;
 import utils.InvalidDateException;
+import validator.ValidatorUtils;
 import dao.PersonDAO;
+import enums.Country;
 import enums.PersonRole;
-
-
 
 /**
  * Servlet implementation class MainServlet
@@ -53,50 +53,70 @@ public class PersonsServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException  {
+			throws ServletException, IOException {
 
-		Person p = new Person();
-		int id = 0;
-		try{
-		id = Integer.parseInt(request.getParameter("id"));
-		}catch(Exception e){
+		Person person = new Person();
+		boolean isError = false;
+		long id = 0;
+		try {
+			id = Long.parseLong(request.getParameter("id"));
+		} catch (Exception e) {
 		}
 		if (id > 0) {
-			p = PersonDAO.getPersonById(Integer.parseInt(request.getParameter("id")));
+			person = PersonDAO.getPersonById(id);
+			request.setAttribute("id", id);
 		}
 
-		String firstName = request.getParameter("firstName") != "" ? request.getParameter("firstName") : "NoFirstName";
-		p.setFirstName(firstName);
-		String lastName = request.getParameter("lastName") != "" ? request.getParameter("lastName") : "NoLastName";
-		p.setLastName(lastName);
-		String role = request.getParameter("role") != "" ? request.getParameter("role") : "WORKER";
-		p.setRole(PersonRole.valueOf(role));
-		/*
-		 * SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MM yyyy"
-		 * ); Date dte; try { dte = simpleDateFormat
-		 * .parse(request.getParameter("date") != "" ?
-		 * request.getParameter("date") : simpleDateFormat.format( new Date()
-		 * )); GregorianCalendar gregorianCalendar = (GregorianCalendar)
-		 * GregorianCalendar.getInstance(); gregorianCalendar.setTime(dte);
-		 * p.setDateOfBirthday(gregorianCalendar);
-		 * 
-		 * } catch (ParseException e) {
-		 * 
-		 * e.printStackTrace(); }
-		 */
-		
-			p.setDateOfBirthday(Formater.toDateFromString(request.getParameter("date") != "" ? request.getParameter("date")
-					: Formater.fromDateToString(new GregorianCalendar())));
+		String firstNameErr = "";
+		String lastNameErr = "";
+		String dateErr = "";
 
-		if (id > 0) {
-			PersonDAO.update(p);
-			request.setAttribute("persons", PersonDAO.getAll());
-			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
+		String firstName = request.getParameter("firstName");
+		if (ValidatorUtils.isValidStringByLength(firstName, 21)) {
+			person.setFirstName(firstName);
 		} else {
-			PersonDAO.add(p);
-			request.setAttribute("persons", PersonDAO.getAll());
-			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
+			firstNameErr = "title format exception!";
+			isError = true;
+			request.setAttribute("firstNameErr", firstNameErr);
 		}
+		request.setAttribute("firstName", firstName);
+
+		String lastName = request.getParameter("lastName");
+		if (ValidatorUtils.isValidStringByLength(lastName, 21)) {
+			person.setLastName(lastName);
+		} else {
+			lastNameErr = "title format exception!";
+			isError = true;
+			request.setAttribute("lastNameErr", lastNameErr);
+		}
+		request.setAttribute("lastName", lastName);
+
+		String dateOfBirthday = request.getParameter("dateOfBirthday");
+		if (ValidatorUtils.isValidDate(dateOfBirthday)) {
+			person.setDateOfBirthday(Formatter.toDateFromString(dateOfBirthday));
+		} else {
+			dateErr = "date format exception!";
+			isError = true;
+			request.setAttribute("dateErr", dateErr);
+		}
+		request.setAttribute("dateOfBirthday", dateOfBirthday);
+
+		String role = request.getParameter("role");
+		person.setRole(PersonRole.valueOf(role));
+		request.setAttribute("selectedRole", role);
+
+		if (isError == false) {
+			if (id > 0) {
+				PersonDAO.update(person);
+			} else {
+				PersonDAO.add(person);
+			}
+				request.setAttribute("persons", PersonDAO.getAll());
+				request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/person/addOrEditPerson.jsp").forward(request, response);
+		}
+
 	}
 
 }

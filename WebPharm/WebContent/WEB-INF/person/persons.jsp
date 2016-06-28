@@ -1,4 +1,5 @@
-<%@page import="enums.PersonRole, utils.Constants"%> 
+<%@page import="enums.PersonRole"%> 
+<%@page import="utils.Constants"%> 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -21,31 +22,6 @@
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/personHeader.jsp" />
 
-
-	<script type="text/javascript">
-		function formAutoSubmit() {
-			var frm = document.getElementById("userSelect");
-			frm.submit();
-		}
-	</script>
-
-
-	<%-- 		SortByFirstName: <a href="SortByFirstName?role=${role}&order=${order}"><button> --%>
-	<%-- 
-
-	<form>
-		Enter Your Name: <input type="text" id="userName" />
-	</form>
-	<br>
-	<br>
-
-	<strong>Ajax Response</strong>:
-	<div id="ajaxGetUserServletResponse"></div>
-
-	${5-40} ${buttonRole}
-
- --%>
-
 	<br>
 	<br>
 	<form action="SelectPersonByInput" method="post" id="form2">
@@ -54,27 +30,27 @@
 			<table>
 				<tr>
 					<td>First name:</td>
-					<td><input type="text" name="firstName" value="${firstName}"
-						placeholder="length<=20 symbols"></td>
+					<td><input type="text" name="firstNameForSeach" value="${firstNameForSeach}"
+						placeholder="length<=20 symbols" tabindex="1"></td>
 					<td><input class="hid"
 						type=${firstNameErr == "" ? "hidden" : "text"} name="hid"
-						value="${firstNameErr}" readonly /></td>
+						value="${firstNameErr}" readonly tabindex="-1"/></td>
 				</tr>
 				<tr>
 					<td>Last name:</td>
-					<td><input type="text" name="lastName" value="${lastName}"
-						placeholder="length<=20 symbols"></td>
+					<td><input type="text" name="lastNameForSeach" value="${lastNameForSeach}"
+						placeholder="length<=20 symbols" tabindex="2"></td>
 					<td><input class="hid"
 						type=${lastNameErr == "" ? "hidden" : "text"} name="hid"
-						value="${lastNameErr}" readonly /></td>
+						value="${lastNameErr}" readonly tabindex="-1"/></td>
 				</tr>
 				<tr>
 					<td>Date of birthday:</td>
-					<td><input type="text" name="date" value="${date}"
-						placeholder='format "<%= Constants.format %>"'></td>
+					<td><input type="text" name="dateForSeach" value="${dateForSeach}"
+						placeholder='format "<%= Constants.format %>"' tabindex="3"></td>
 					<td><input class="hid"
 						type=${dateErr == "" ? "hidden" : "text"} name="hid"
-						value="${dateErr}" readonly /></td>
+						value="${dateErr}" readonly tabindex="-1"/></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -105,31 +81,12 @@
 		</select>
 	</form>
 
-	<%-- 		<button value="ASC" name="order">
-				<img src="${buttonRole == 'WORKER' ?'img/22.jpg' : 'img/11.jpg'}"
-					width="35" height="28" alt="Sort" style="vertical-align: middle">
-			</button>
---%>
-	<%-- 	</fieldset>--%>
 
-
-
-	<%-- 	<br>
-	
-	
-	<form action="addOrEditPerson.jsp" method="post">
-		<input type="submit" value="Add Person" />
-	</form>--%>
 
 	<br>
 
-	<%-- 	<a href="${pageContext.request.contextPath}/person/addOrEditPerson.jsp"><button>Add Person</button></a> --%>
 	<a href="EditPerson?id=<c:out value="0"/>"><button>Add
 			Person</button></a>
-
-
-	<!-- 	<button value = "DESC" name = "order"><img src="img/22.jpg" width="35" height="28" alt="Sort"
-					style="vertical-align: middle"></button>   -->
 
 	<h4>
 		<a href="AllPersons"><button class="sendsubmitC">
@@ -137,6 +94,7 @@
 					style="vertical-align: middle" width=33px height=33px>
 			</button></a>
 	</h4>
+	<input type="hidden" value="${criteria}" name="criteria"/>
 	<table class="table">
 
 		<thead>
@@ -145,48 +103,73 @@
 				<th class="th" bgcolor="silver"><H1>
 						First Name
 						
-<%-- <a href=${order == null ? 'SortByFirstNameByRole?order=ASC' : 'SortByFirstNameByRole?order="${order}"'} >  --%>
-
 <c:choose>
-    <c:when test="${order == null}">
-        <a href="SortByFirstNameByRole?order=ASC" > 
+    <c:when test="${order == null || criteria != 'firstName'}">
+        <a href="SortByFirstNameByRole?order=ASC&criteria=firstName" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="img/noSort.png"
+						width="25" height="25" alt="NoSort"
+						style="vertical-align: middle"/> 
+							</button></a>
     </c:when>    
     <c:otherwise>
-        <a href="SortByFirstNameByRole?order=${order}" > 
+        <a href="SortByFirstNameByRole?order=${order}&criteria=firstName" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
+						width="25" height="25" alt="Sort"
+						style="vertical-align: middle"/> 
+							</button></a>
           </c:otherwise>
 </c:choose>
-	
-	<button name="order" id="userSelect">
-			<img src="${order == 'ASC' ?'img/22.jpg' : 'img/11.jpg'}"
-						width="35" height="28" alt="Sort"
-						style="vertical-align: middle"/> 
-							</button></a> 
 							
-							
-						<%-- 	
-						<form action="SortByRole" method="post" id="form1">
-						<%--<a href="SortByFirstNameByRole?order ='ASC'"><button
-								class="sendsubmitS">
-								<img
-									src="${buttonRole == 'WORKER' ?'img/22.jpg' : 'img/11.jpg'}"
-									width="33" height="33" alt="Sort"
-									style="vertical-align: middle">
-							</button></a>
-							 <select size="1" name="order">
-				<option ${order == "NoSort" ? 'selected' : ''} value="NoSort">No
-					Sort</option>
-				<option ${order == "ASC" ? 'selected' : ''} value="ASC">A-Z</option>
-				<option ${order == "DESC" ? 'selected' : ''} value="DESC">Z-A</option>
-			</select>
-				</form>	
-						--%>
-
-
-
 					</H1></th>
-				<th class="th" bgcolor="silver"><H1>Last Name</H1></th>
+				<th class="th" bgcolor="silver"><H1>Last Name
+				
+	<c:choose>
+    <c:when test="${order == null || criteria != 'lastName'}">
+        <a href="SortByFirstNameByRole?order=ASC&criteria=lastName" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="img/noSort.png"
+						width="25" height="25" alt="NoSort"
+						style="vertical-align: middle"/> 
+							</button></a>
+    </c:when>    
+    <c:otherwise>
+        <a href="SortByFirstNameByRole?order=${order}&criteria=lastName" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
+						width="25" height="25" alt="Sort"
+						style="vertical-align: middle"/> 
+							</button></a>
+          </c:otherwise>
+</c:choose>
+				
+				</H1></th>
+				<th class="th" bgcolor="silver"><H1>Date of Birthday 
+	
+	<c:choose>
+    <c:when test="${order == null || criteria != 'dateOfBirthday'}">
+        <a href="SortByFirstNameByRole?order=ASC&criteria=dateOfBirthday" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="img/noSort.png"
+						width="25" height="25" alt="NoSort"
+						style="vertical-align: middle"/> 
+							</button></a>
+    </c:when>    
+    <c:otherwise>
+        <a href="SortByFirstNameByRole?order=${order}&criteria=dateOfBirthday" > 
+        <button class="buttonOrder" name="order" id="userSelect">
+			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
+						width="25" height="25" alt="Sort"
+						style="vertical-align: middle"/> 
+							</button></a>
+          </c:otherwise>
+</c:choose>			
+				
+				
+				
+				
 				<th class="th" bgcolor="silver"><H1>Role</H1></th>
-				<th class="th" bgcolor="silver"><H1>Date of BirthDay 
 				
 				
 				</H1></th>
@@ -204,23 +187,23 @@
 							value="${person.firstName}" /></td>
 					<td class="td" style="text-align: center;"><c:out
 							value="${person.lastName}" /></td>
+					<td class="td" style="text-align: center;"><fmt:formatDate
+							pattern="<%= Constants.format %>" value="${person.dateOfBirthday.time}" /></td>
 					<td class="td" style="text-align: center;"><c:out
 							value="${person.role}" /></td>
-					<td class="td" style="text-align: center;"><fmt:formatDate
-							pattern="dd.MM.yyyy" value="${person.dateOfBirthday.time}" /></td>
 
 					<td class="td" style="text-align: center;"><h3>
 							<a href="EditPerson?id=<c:out value="${person.id}"/>"><button
 									class="sendsubmitS">
-									<img src="img/update.png" alt="Edit" width="35" height="35"
-										style="vertical-align: middle">
+									<img src="img/update.png" alt="Edit" width="20" height="20"
+										style="vertical-align: middle" title="Edit">
 								</button></a>
 						</h3></td>
 
 					<td class="td" style="text-align: center;"><h3>
 							<a href="DeletePerson?id=<c:out value="${person.id}"/>"><img
-								src="img/delete.png" alt="Delete" width="35" height="35"
-								style="vertical-align: middle"></a>
+								src="img/delete.png" alt="Delete" width="20" height="20"
+								style="vertical-align: middle" title="Delete"></a>
 						</h3></td>
 				</tr>
 			</c:forEach>

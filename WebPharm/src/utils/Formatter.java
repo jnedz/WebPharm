@@ -7,11 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Formater {
+public class Formatter {
 
-	public static final String dateFormat = "dd.MM.yyyy";
+//	public static final String dateFormat = "dd.MM.yyyy";
 
 	public static final GregorianCalendar toDateFromString(String dt) {
+		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
 
 		GregorianCalendar gregorianCalendar = (GregorianCalendar) GregorianCalendar
@@ -23,7 +24,6 @@ public class Formater {
 			throw new InvalidDateException();
 		}
 		gregorianCalendar.setTime(dte);
-
 		return gregorianCalendar;
 	}
 

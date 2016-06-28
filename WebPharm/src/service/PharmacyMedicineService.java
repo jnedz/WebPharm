@@ -126,7 +126,11 @@ public class PharmacyMedicineService {
 
 		} else {
 			medicines =	MedicineService.getDateSortedList(getAllMedsByPharmId(pharmacy.getId()));
-			
+		/*	for (Medicine medicine : medicines) {
+				if (medicine.getCount()==0){
+					medicines.remove(medicine);
+				}
+			}*/
 			for (Medicine medicine : medicines) {
 				if (medicine.getCount() <= count) {
 					// medicine.setCount(medicine.getCount() + count);
@@ -170,7 +174,7 @@ public class PharmacyMedicineService {
 	 * 
 	 * @return all medicines from one pharmacy with id = pharId
 	 */
-	public List<Medicine> getAllMedsByPharmId(int pharmId) {
+	public static List<Medicine> getAllMedsByPharmId(int pharmId) {
 		return PharmacyMedicineDAO.getAllMedsByPharmId(pharmId);
 	}
 

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.PersonDAO;
 import model.Person;
-import utils.Formater;
+import utils.Formatter;
 
 /**
  * Servlet implementation class SelectPersonByInput
@@ -40,9 +40,9 @@ public class SelectPersonByInput extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String date = request.getParameter("date");
+		String firstNameForSeach = request.getParameter("firstNameForSeach");
+		String lastNameForSeach = request.getParameter("lastNameForSeach");
+		String dateForSeach = request.getParameter("dateForSeach");
 		boolean isError = false;
 		String firstNameErr = "";
 		String lastNameErr = "";
@@ -50,28 +50,28 @@ public class SelectPersonByInput extends HttpServlet {
 
 		List<Person> persons = new ArrayList<>();
 
-		if (firstName.isEmpty() && lastName.isEmpty() && date.isEmpty()) {
+		if (firstNameForSeach.isEmpty() && lastNameForSeach.isEmpty() && dateForSeach.isEmpty()) {
 			request.setAttribute("persons", PersonDAO.getAll());
 			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		}
 
-		if (firstName.length() > 20) {
+		if (firstNameForSeach.length() > 20) {
 			firstNameErr = "name format exception!";
 			isError = true;
 			request.setAttribute("firstNameErr", firstNameErr);
 		}
-		if (lastName.length() > 20) {
+		if (lastNameForSeach.length() > 20) {
 			lastNameErr = "name format exception!";
 			isError = true;
 			request.setAttribute("lastNameErr", lastNameErr);
 		}
 
-		if (date.length() > 0) {
+		if (dateForSeach.length() > 0) {
 			try {
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				Date dte;
 				GregorianCalendar gregorianCalendar = (GregorianCalendar) GregorianCalendar.getInstance();
-				dte = simpleDateFormat.parse(date);
+				dte = simpleDateFormat.parse(dateForSeach);
 				gregorianCalendar.setTime(dte);
 			} catch (ParseException e) {
 				dateErr = "date format exception!";
@@ -81,17 +81,17 @@ public class SelectPersonByInput extends HttpServlet {
 		}
 		
 		if (isError == true) {
-			request.setAttribute("firstName", firstName);
-			request.setAttribute("lastName", lastName);
-			request.setAttribute("date", date);
+			request.setAttribute("firstNameForSeach", firstNameForSeach);
+			request.setAttribute("lastNameForSeach", lastNameForSeach);
+			request.setAttribute("dateForSeach", dateForSeach);
 			request.setAttribute("persons", PersonDAO.getAll());
 			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		}
 
 		for (Person person : PersonDAO.getAll()) {
-			if (firstName.length() == 0 || person.getFirstName().contains(firstName)) {
-				if (lastName.length() == 0 || person.getLastName().contains(lastName)) {
-					if (date.length() == 0 || Formater.fromDateToString(person.getDateOfBirthday()).contains(date)) {
+			if (firstNameForSeach.length() == 0 || person.getFirstName().contains(firstNameForSeach)) {
+				if (lastNameForSeach.length() == 0 || person.getLastName().contains(lastNameForSeach)) {
+					if (dateForSeach.length() == 0 || Formatter.fromDateToString(person.getDateOfBirthday()).contains(dateForSeach)) {
 						persons.add(person);
 					}
 				}
@@ -101,9 +101,9 @@ public class SelectPersonByInput extends HttpServlet {
 		if (persons.size() == 0) {
 			request.getRequestDispatcher("/parts/message.jsp").forward(request, response);
 		} else {
-			request.setAttribute("firstName", firstName);
-			request.setAttribute("lastName", lastName);
-			request.setAttribute("date", date);
+			request.setAttribute("firstNameForSeach", firstNameForSeach);
+			request.setAttribute("lastNameForSeach", lastNameForSeach);
+			request.setAttribute("dateForSeach", dateForSeach);
 			request.setAttribute("persons", persons);
 			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="a"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,17 +27,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<a:forEach items="${pharmacies}" var="pharmacy">
+			<c:forEach items="${pharmacies}" var="pharmacy">
 				<tr>
-					<td class="td" bgcolor="silver" style="text-align: center;"><h2><a:out value="${pharmacy.id}" /></h2></td>
-					<td class="td" style="text-align: center;"><a:out value="${pharmacy.title}" /></td>
-					<td class="td" style="text-align: center;"><a:out value="${pharmacy.description}" /></td>
+					<td class="td" bgcolor="silver" style="text-align: center;"><h2><c:out value="${pharmacy.id}" /></h2></td>
+					<td class="td" style="text-align: center;">
+					<a href="PharmaciesServlet?idPharm=<c:out value='${pharmacy.id}'/>">${pharmacy.title}</a></td>
+					<td class="td" style="text-align: center;"><c:out value="${pharmacy.description}" /></td>
 					<td class="td" style="text-align: center;"><h3><a
-						href="UserController?action=edit&userId=<a:out value="${user.uname}"/>"><img src="img/update.png" alt="Edit" width="35" height="35" style="vertical-align: middle"></a></h3></td>
+						href="UserController?action=edit&userId=<c:out value="${user.uname}"/>"><img src="img/update.png" alt="Edit" width="20" height="20" style="vertical-align: middle" title="Edit"></a></h3></td>
 					<td class="td" style="text-align: center;"><h3><a
-						href="UserController?action=delete&userId=<a:out value="${user.uname}"/>"><img src="img/delete.png" alt="Delete" width="35" height="35" style="vertical-align: middle"></a></h3></td>
+						href="UserController?action=delete&userId=<c:out value="${user.uname}"/>"><img src="img/delete.png" alt="Delete" width="20" height="20" style="vertical-align: middle" title="Delete"></a></h3></td>
 				</tr>
-			</a:forEach>
+			</c:forEach>
 		</tbody>
 	</table>
 </body>

@@ -18,7 +18,7 @@
 		<h4>Producer title: ${producer.title},
 			counry: ${producer.country}</h4>
 
-		<form action='EditProducer' method="get">
+		<form action='AddOrEditProducer' method="get">
 			<input type="hidden" name="id" value="${producer.id}" /> <input
 				type="submit" value="Edit Producer" />
 		</form><br>

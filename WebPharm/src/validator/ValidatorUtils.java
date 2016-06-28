@@ -1,6 +1,6 @@
 package validator;
 
-import utils.Formater;
+import utils.Formatter;
 import utils.InvalidDateException;
 
 public class ValidatorUtils {
@@ -12,7 +12,7 @@ public class ValidatorUtils {
 	public static boolean isValidDate(String date) {
 		boolean isValid = false;
 		try {
-			Formater.toDateFromString(date);
+			Formatter.toDateFromString(date);
 			isValid = true;
 		} catch (InvalidDateException e) {
 			isValid = false;

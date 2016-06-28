@@ -15,12 +15,16 @@
 <jsp:include page="/header.jsp" />
 <jsp:include page="/producerHeader.jsp" />
 <p>
-	<form action="addProducer.jsp" method="post">
+
+
+<br>
+	<a href="AddOrEditProducer?id=<c:out value="0"/>"><button>Add Producer</button></a>
+<%-- <form action="addProducer.jsp" method="post">--%>	
 	<%
  	session.setAttribute("fromAddMed", "no");
  %>
-		<input type="submit" value="Add Producer" />
-	</form>
+	<%--	<input type="submit" value="Add Producer" />
+	</form>--%>	
 		<h4>
 			<b><a href="AllProducers"><button class="sendsubmitC"><img src="img/search.png" alt="Search" 
           style="vertical-align: middle" width=33px height=33px></button></a></b> 
@@ -45,10 +49,10 @@
 					<td class="td" style="text-align: center;"><c:out
 							value="${producer.country}" /></td>
 					<td class="td" style="text-align: center;"><h3>
-							<a href="EditProducer?id=<c:out value="${producer.id}"/>"><img src="img/update.png" alt="Edit" width="35" height="35" style="vertical-align: middle"></a>
+							<a href="AddOrEditProducer?id=<c:out value="${producer.id}"/>"><img src="img/update.png" alt="Edit" width="20" height="20" style="vertical-align: middle" title="Edit"></a>
 						</h3></td>
 					<td class="td" style="text-align: center;"><h3>
-							<a href="DeleteProducer?id=<c:out value="${producer.id}"/>"><img src="img/delete.png" alt="Delete" width="35" height="35" style="vertical-align: middle"></a>
+							<a href="DeleteProducer?id=<c:out value="${producer.id}"/>"><img src="img/delete.png" alt="Delete" width="20" height="20" style="vertical-align: middle" title="Delete"></a>
 						</h3></td>
 				</tr>
 			</c:forEach>

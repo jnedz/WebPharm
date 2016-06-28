@@ -1,6 +1,8 @@
 package servlet.Pharmacy;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.PersonDAO;
 import dao.PharmacyDAO;
+import model.Medicine;
+import model.Pharmacy;
+import service.PharmacyMedicineService;
 
 /**
  * Servlet implementation class MainServlet
  */
-@WebServlet("/pharmacies")
+@WebServlet("/PharmaciesServlet")
 public class PharmaciesServlet  extends HttpServlet{
 
 	/**
@@ -35,11 +38,15 @@ public class PharmaciesServlet  extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
+		Pharmacy pharmacy = PharmacyDAO.getPharmacyById(idPharm);
+		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getAllMedsByPharmId(idPharm));
+		request.setAttribute("idPharm", idPharm);
+		request.setAttribute("medicines", medicines);
+		request.setAttribute("pharmacy", pharmacy);
+		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request, response);
 		
 		
-		request.setAttribute("pharmacies", PharmacyDAO.getAll());
-       
-        request.getRequestDispatcher("/pharmacy/pharmacies.jsp").forward(request, response); 
 		
         }
 

@@ -10,25 +10,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.MedicineDAO;
 import dao.PersonDAO;
 import dao.ProducerDAO;
 import enums.Country;
+import enums.MedicineType;
 import enums.PersonRole;
+import model.Medicine;
 import model.Person;
 import model.Producer;
+import utils.Formatter;
+import validator.ValidatorUtils;
 
 /**
  * Servlet implementation class EditProducer
  */
-@WebServlet("/EditProducer")
-public class EditProducer extends HttpServlet {
+@WebServlet("/AddOrEditProducer")
+public class AddOrEditProducer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditProducer() {
+	public AddOrEditProducer() {
 		super();
 	}
 
@@ -38,10 +44,22 @@ public class EditProducer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Producer p = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
-
-		request.setAttribute("producer", p);
-		request.getRequestDispatcher("/producer/editProducer.jsp").forward(request, response);
+		
+		System.out.println("$$$$$$$$$$$$$$$$$$$$" + request.getParameter("id"));
+		HttpSession session = request.getSession(true);
+		System.out.println("#####################" + session.getAttribute("fromAddMed"));
+		if ("yes".equals(session.getAttribute("fromAddMed").toString())) {
+			session.setAttribute("fromAddMed", "yes");
+		}
+		
+		if (Integer.parseInt(request.getParameter("id")) > 0) {
+		Producer producer = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("id", request.getParameter("id"));
+		request.setAttribute("producerTitle", producer.getTitle());
+		request.setAttribute("country", producer.getCountry());
+		request.setAttribute("selectedCountry", producer.getCountry());
+		}
+		request.getRequestDispatcher("/producer/addOrEditProducer.jsp").forward(request, response);
 	}
 
 	/**
@@ -50,16 +68,6 @@ public class EditProducer extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Producer p = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
-System.out.println(p);
-		String title = request.getParameter("title") != "" ? request.getParameter("title") : p.getTitle();
-		p.setTitle(title);
-		p.setCountry(Country.valueOf(request.getParameter("country")));
-		ProducerDAO.update(p);
-		System.out.println("!!!!!!!upd");
-		request.setAttribute("producers", ProducerDAO.getAll());
-		request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
-
+		doGet(request, response);
 	}
-
 }

@@ -13,7 +13,7 @@ import dao.ProducerDAO;
 import enums.MedicineType;
 import model.Medicine;
 import model.Producer;
-import utils.Formater;
+import utils.Formatter;
 import validator.ValidatorUtils;
 
 
@@ -53,6 +53,7 @@ public class AllMedicines extends HttpServlet {
 		try {
 				id = Long.parseLong(request.getParameter("id"));
 				med = MedicineDAO.getMedicineById(Long.parseLong(request.getParameter("id")));
+				request.setAttribute("id", id);
 		} catch (Exception e) {
 		}
 
@@ -74,8 +75,7 @@ public class AllMedicines extends HttpServlet {
 
 		String dateOfManufact = request.getParameter("dateOfManufact");
 		if (ValidatorUtils.isValidDate(dateOfManufact)){
-			
-			med.setDateOfManufact(Formater.toDateFromString(dateOfManufact));
+			med.setDateOfManufact(Formatter.toDateFromString(dateOfManufact));
 		}else{
 			dateErr = "date format exception!";
 			isError = true;

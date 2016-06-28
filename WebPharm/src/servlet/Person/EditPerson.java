@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.PersonDAO;
 
 import model.Person;
+import utils.Formatter;
 
 
 /**
@@ -37,8 +38,12 @@ public class EditPerson extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (Long.parseLong(request.getParameter("id")) > 0){
-		Person p = PersonDAO.getPersonById(Long.parseLong(request.getParameter("id")));
-		request.setAttribute("person", p);
+		Person person = PersonDAO.getPersonById(Long.parseLong(request.getParameter("id")));
+		request.setAttribute("id", person.getId());
+		request.setAttribute("firstName", person.getFirstName());
+		request.setAttribute("lastName", person.getLastName());
+		request.setAttribute("dateOfBirthday", Formatter.fromDateToString(person.getDateOfBirthday()));
+		request.setAttribute("selectedRole", person.getRole());
 		}
 		request.getRequestDispatcher("/person/addOrEditPerson.jsp").forward(request, response);
 	}
