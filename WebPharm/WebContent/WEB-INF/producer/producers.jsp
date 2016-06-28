@@ -21,7 +21,7 @@
 	<a href="AddOrEditProducer?id=<c:out value="0"/>"><button>Add Producer</button></a>
 <%-- <form action="addProducer.jsp" method="post">--%>	
 	<%
- 	session.setAttribute("fromAddMed", "no");
+ 	application.setAttribute("fromAddMed", "no");
  %>
 	<%--	<input type="submit" value="Add Producer" />
 	</form>--%>	

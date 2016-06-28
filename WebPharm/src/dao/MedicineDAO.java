@@ -40,7 +40,7 @@ public class MedicineDAO {
 		med.setCount(rs.getInt(7));
 
 		Producer producer = new Producer();
-		producer.setId(rs.getInt("producer_id"));
+		producer.setId(rs.getInt("id_producer"));
 		producer.setTitle(rs.getString("producers.title"));
 		producer.setCountry(Country.valueOf(rs.getString("country")));
 		med.setProducer(producer);
@@ -53,7 +53,7 @@ public class MedicineDAO {
 	 *            medicine which is adding into medicines table
 	 */
 	public static void add(Medicine medicine) {
-		String sql = "INSERT INTO Medicines (title, type, dateOfManufact, term, price, count, producer_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Medicines (title, type, dateOfManufact, term, price, count, id_producer) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
 			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setString(1, medicine.getTitle());
@@ -110,7 +110,7 @@ public class MedicineDAO {
 	 */
 	public static List<Medicine> getMedicinesByTitle(String title) {
 		List<Medicine> medicines = new ArrayList<>();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id  where medicines.title = '"
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where medicines.title = '"
 				+ title + "'";
 		try {
 			Statement statement = DbUtils.getConnection().createStatement();
@@ -134,7 +134,7 @@ public class MedicineDAO {
 	 *         manufacture
 	 */
 	public static List<Medicine> getMedicinesDateSortedByTitle(String title) {
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id "
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id "
 				+ "WHERE medicines.title = '" + title + "' order by dateOfManufact ASC";
 		List<Medicine> medicines = new ArrayList<>();
 		try {
@@ -159,7 +159,7 @@ public class MedicineDAO {
 	 */
 	public static Medicine getMedicineById(long id) {
 		Medicine med = new Medicine();
-		String sql = "SELECT * FROM medicines join producers ON medicines.producer_id = producers.id WHERE medicines.id = "
+		String sql = "SELECT * FROM medicines join producers ON medicines.id_producer = producers.id WHERE medicines.id = "
 				+ id;
 		try {
 			Statement statement = (Statement) DbUtils.getConnection().createStatement();
@@ -243,7 +243,7 @@ public class MedicineDAO {
 	 */
 	public static List<Medicine> getMedicinesByProducerId(int producerId) {
 		List<Medicine> medicines = new ArrayList<>();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_Id = producers.id WHERE producer_Id = "
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id WHERE id_producer = "
 				+ producerId;
 		try {
 			Statement statement = (Statement) DbUtils.getConnection().createStatement();
@@ -265,7 +265,7 @@ public class MedicineDAO {
 	 * @return list of all medicines from medicines table
 	 */
 	public static List<Medicine> getAll() {
-		String sql = "SELECT * FROM medicines join producers on medicines.producer_id = producers.id";
+		String sql = "SELECT * FROM medicines join producers on medicines.id_producer = producers.id";
 		List<Medicine> medicines = new ArrayList<>();
 		try {
 			Statement statement = (Statement) DbUtils.getConnection().createStatement();
@@ -313,7 +313,7 @@ public class MedicineDAO {
  */
 	public static Medicine getMedicine(Medicine medicine) {
 		Medicine med = new Medicine();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id  where medicines.title = ? and medicines.dateOfManufact = ?";
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where medicines.title = ? and medicines.dateOfManufact = ?";
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setString(1, medicine.getTitle());
@@ -362,7 +362,7 @@ public class MedicineDAO {
 	public static List<Medicine> deleteMedicineWithZeroCount() {
 		List<Medicine> medicines = new ArrayList<>();
 		Medicine med = new Medicine();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id  where medicines.count = 0";
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where medicines.count = 0";
 		try {
 			Statement statement = DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -385,7 +385,7 @@ public class MedicineDAO {
 	public static List<Medicine> overdueMeds() {
 		List<Medicine> list = new ArrayList<>();
 		Medicine med = new Medicine();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id";
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id";
 		try {
 			Statement statement = DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -411,7 +411,7 @@ public class MedicineDAO {
 	 */
 	public static List<Medicine> getMedicinesByTypeAndTitle(String type, String title) {
 		List<Medicine> medicines = new ArrayList<>();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id  where medicines.title = '"
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where medicines.title = '"
 				+ title + "' and medicines.type = '" + type + "'";
 		try {
 			Statement statement = DbUtils.getConnection().createStatement();
@@ -436,7 +436,7 @@ public class MedicineDAO {
 	 */
 	public static List<Medicine> getMedicinesByType(String type) {
 		List<Medicine> medicines = new ArrayList<>();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id  where "
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where "
 				+ "medicines.type = '" + type + "'";
 		try {
 			Statement statement = DbUtils.getConnection().createStatement();

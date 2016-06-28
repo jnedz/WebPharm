@@ -41,7 +41,8 @@ public class AllProducers extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
+		
+
 		Producer producer = new Producer();
 		System.out.println(request.getParameter("id"));
 		boolean isError = false;
@@ -77,7 +78,13 @@ public class AllProducers extends HttpServlet {
 				request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
 			} else {
 				ProducerDAO.add(producer);
-				if ("yes".equals(session.getAttribute("fromAddMed").toString())) {
+				
+				
+				//System.out.println("APPLICATION" + request.application.getAttribute("fromAddMed").toString());
+				
+				//if ("yes".equals(session.getAttribute("fromAddMed").toString())) {
+					if ("yes".equals(getServletConfig().getServletContext().getAttribute("fromAddMed"))){
+					
 					request.getRequestDispatcher("/medicine/addOrEditMedicine.jsp").forward(request, response);
 				} else {
 					request.setAttribute("producers", ProducerDAO.getAll());

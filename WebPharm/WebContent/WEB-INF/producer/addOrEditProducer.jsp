@@ -26,8 +26,8 @@
 	
 
 	<form action="AllProducers" method="POST">
- 	<%session.setAttribute("fromAddMed", session.getAttribute("fromAddMed"));%>
-		 
+ 	<%-- <%session.setAttribute("fromAddMed", session.getAttribute("fromAddMed"));%>
+	 --%>	 
 		<input type="hidden" name="id" value="${id}" /> 
 		<input type="hidden" name="selectedCountry" value="${selectedCountry}" />
 		<table class="table1" border="0">

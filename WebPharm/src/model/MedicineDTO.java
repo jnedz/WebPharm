@@ -25,15 +25,7 @@ public class MedicineDTO {
 	}
 
 	 
-	//private int producerId;
 
-	/*public int getProducerId() {
-		return producerId;
-	}
-
-	public void setProducerId(int producer_id) {
-		this.producerId = producer_id;
-	}*/
 
 	public long getId() {
 		return id;

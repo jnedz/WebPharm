@@ -11,9 +11,6 @@ import repository.ProducersRepository;
 public class RecreateTablesDB {
 
 	public static void main(String[] args) throws SQLException {
-		DbUtils.dropPharmaciesMedicinesTable();
-		DbUtils.createPharmaciesMedicinesTable();
-		PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
 		DbUtils.dropPersonTable();
 		DbUtils.dropPharmaciesMedicinesTable();
 		DbUtils.dropMedicineTable();

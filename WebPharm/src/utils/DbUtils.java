@@ -64,7 +64,7 @@ public class DbUtils {
 			String sql = "create table Medicines (id INT NOT NULL AUTO_INCREMENT, title varchar(20) not null, "
 					+ "type enum ('NOTYPE', 'SED', 'ANTIBIOTIC') default 'NOTYPE',   "
 					+ "dateOfManufact date, term int not null default 60, price double, count int, "
-					+ "producer_id int, FOREIGN KEY (producer_Id) REFERENCES Producers(id),  primary key (id))";
+					+ "id_producer int, FOREIGN KEY (id_producer) REFERENCES Producers(id),  primary key (id))";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();

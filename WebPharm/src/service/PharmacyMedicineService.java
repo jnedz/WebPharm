@@ -87,6 +87,8 @@ public class PharmacyMedicineService {
 	 */
 	public void deliveryMedToPharmacy(String title, int count) {
 		List<Medicine> medicines;
+		
+		System.out.println("count=" + count);
 
 		int medicinesCount = new MedicineService().getMedicinesCountByTitle(title);
 		if (medicinesCount < count || count <= 0) {

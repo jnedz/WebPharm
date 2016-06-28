@@ -37,84 +37,75 @@
 						<label for="title">Title:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="title"
-					placeholder="length<=20 symbols" value="${title}" tabindex="1"/></td>
+					placeholder="length<=20 symbols" value="${title}" tabindex="1" /></td>
 				<td class="td1"><input class="hid"
 					type=${titleErr == "" ? "hidden" : "text"} name="hid"
-					value="${titleErr}" readonly tabindex="-1"/></td>
+					value="${titleErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="dateOfManufact">Date of Manufacture: </label>
 					</div></td>
 				<td class="td1"><input type="text" name="dateOfManufact"
-					value="${dateOfManufact}" placeholder='format "<%= Constants.format %>"' tabindex="2"/></td>
+					value="${dateOfManufact}"
+					placeholder='format "<%= Constants.format %>"' tabindex="2" /></td>
 				<td class="td1"><input class="hid"
 					type=${dateErr == "" ? "hidden" : "text"} name="hid"
-					value="${dateErr}" readonly tabindex="-1"/></td>
+					value="${dateErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="term">Term:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="term" value="${term}"
-					placeholder="number of months validity" tabindex="3"/></td>
+					placeholder="number of months validity" tabindex="3" /></td>
 				<td class="td1"><input class="hid"
 					type=${termErr == "" ? "hidden" : "text"} name="hid"
-					value="${termErr}" readonly tabindex="-1"/></td>
+					value="${termErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="price">Price:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="price"
-					value="${price}" placeholder="format '0.00'" tabindex="4"/></td>
+					value="${price}" placeholder="format '0.00'" tabindex="4" /></td>
 				<td class="td1"><input class="hid"
 					type=${priceErr == "" ? "hidden" : "text"} name="hid"
-					value="${priceErr}" readonly tabindex="-1"/></td>
+					value="${priceErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="count">Count:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="count"
-					value="${count}" placeholder="medicine count" tabindex="5"/></td>
+					value="${count}" placeholder="medicine count" tabindex="5" /></td>
 				<td class="td1"><input class="hid"
 					type=${countErr == "" ? "hidden" : "text"} name="hid"
-					value="${countErr}" readonly tabindex="-1"/></td>
+					value="${countErr}" readonly tabindex="-1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="producerTitle">${id >0 ? 'Producer titile:' : 'Select producer:'}</label>
 					</div></td>
-				<td class="td1">
-				
-				<c:choose>
-    <c:when test="${id >0}">
-     <h5>  ${selectedTitle}</h5>
-    </c:when>    
-    <c:otherwise>
-				<select size="1" name="producerTitle">
-						<c:forEach items="<%=TitlesDTO.producersTitles()%>"
-							var="producerTitle"> 
-							<option ${producerTitle == selectedTitle ? 'selected' : ''}
-								value="${producerTitle}">${producerTitle}</option>
-				 		</c:forEach> 
-				</select></td>
+				<td class="td1"><c:choose>
+						<c:when test="${id >0}">
+							<h5>${selectedTitle}</h5>
+						</c:when>
+						<c:otherwise>
+							<select size="1" name="producerTitle">
+								<c:forEach items="<%=TitlesDTO.producersTitles()%>"
+									var="producerTitle">
+									<option ${producerTitle == selectedTitle ? 'selected' : ''}
+										value="${producerTitle}">${producerTitle}</option>
+								</c:forEach>
+							</select></td>
 				<td class="td1"><h5>
-			
-	<%-- 					or <a href="<c:out value = "${pageContext.request.contextPath}"/>/producer/addProducer.jsp">Add Producer</a> 
-	 --%> 					<a href="AddOrEditProducer?id=<c:out value="0"/>">or Add Producer</a>
-					</h5> <%
- 	session.setAttribute("fromAddMed", "yes");
- %>
- 
- 
-          </c:otherwise>
-</c:choose>
-				
- 
- 
- </td>
+
+						<a href="AddOrEditProducer?id=<c:out value="0"/>">or Add
+							Producer</a>
+					</h5> <% application.setAttribute("fromAddMed", "yes");
+// 	session.setAttribute("fromAddMed", "yes");
+ %> </c:otherwise> </c:choose></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">

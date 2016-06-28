@@ -26,7 +26,7 @@ public class PharmacyMedicineDAO {
 	 */
 	public static void add(Pharmacy ph, Medicine med, int count) {
 
-		String sql = "INSERT INTO pharmacies_medicines (pharmacy_id, medicine_id, price, count) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO pharmacies_medicines (id_pharmacy, id_medicine, price, count) VALUES (?, ?, ?, ?)";
 
 		try {
 			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
@@ -52,7 +52,7 @@ public class PharmacyMedicineDAO {
 	 *            delete couple pharmacy-medicine from the table
 	 */
 	public static void delete(Pharmacy pharmacy, Medicine medicine) {
-		String sql = "DELETE FROM pharmacies_medicines WHERE pharmacy_id = ? and medicine_id = ?";
+		String sql = "DELETE FROM pharmacies_medicines WHERE id_pharmacy = ? and id_medicine = ?";
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pharmacy.getId());
@@ -99,8 +99,8 @@ public class PharmacyMedicineDAO {
 	public static List<Medicine> getAllMedsByPharmId(int pharmId) {
 		List<Medicine> list = new ArrayList<>();
 		Medicine med = new Medicine();
-		String sql = "SELECT * FROM medicines JOIN producers ON medicines.producer_id = producers.id where medicines.id in (select distinct medicine_id from pharmacies_medicines where "
-				+ "pharmacy_id = " + pharmId + ")";	
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id where medicines.id in (select distinct id_medicine from pharmacies_medicines where "
+				+ "id_pharmacy = " + pharmId + ")";	
 		try {
 			Statement statement = (Statement) DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -119,7 +119,7 @@ public class PharmacyMedicineDAO {
 				med.setCount(get—ountOfMed(PharmacyDAO.getPharmacyById(pharmId), med));
 
 				Producer producer = new Producer();
-				producer.setId(result.getInt("producer_id"));
+				producer.setId(result.getInt("id_producer"));
 				producer.setTitle(result.getString("title"));
 				producer.setCountry(Country.valueOf(result.getString("country")));
 				med.setProducer(producer);
@@ -143,8 +143,8 @@ public class PharmacyMedicineDAO {
 	public static List<Pharmacy> getPharmByMedTitle(String medTitle) {
 		List<Pharmacy> list = new ArrayList<>();
 		Pharmacy pharmacy = new Pharmacy();
-			String sql = "select * from pharmacies where id in (select distinct pharmacy_id from pharmacies_medicines where "
-			+ "pharmacy_id in (select id from medicines where title='" + medTitle + "'))";
+			String sql = "select * from pharmacies where id in (select distinct id_pharmacy from pharmacies_medicines where "
+			+ "id_pharmacy in (select id from medicines where title='" + medTitle + "'))";
 
 			try {
 				Statement statement = (Statement) DbUtils.getConnection().createStatement();
@@ -176,9 +176,9 @@ public class PharmacyMedicineDAO {
 	@SuppressWarnings("unused")
 	private static long getPharmMedId(Pharmacy pharmacy, Medicine medicine) {
 		long id = 0;
-		String sql = "SELECT * FROM pharmacies_medicines inner join medicines ON pharmacies_medicines.medicine_id = medicines.id inner join pharmacies "
-				+ "ON pharmacies_medicines.pharmacy_id = pharmacies.id WHERE pharmacies_medicines.pharmacy_id = "
-				+ pharmacy.getId() + " and pharmacies_medicines.medicine_id = " + medicine.getId();
+		String sql = "SELECT * FROM pharmacies_medicines inner join medicines ON pharmacies_medicines.id_medicine = medicines.id inner join pharmacies "
+				+ "ON pharmacies_medicines.id_pharmacy = pharmacies.id WHERE pharmacies_medicines.id_pharmacy = "
+				+ pharmacy.getId() + " and pharmacies_medicines.id_medicine = " + medicine.getId();
 		try {
 			Statement statement = (Statement) DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -209,8 +209,8 @@ public class PharmacyMedicineDAO {
 		for (Medicine med : MedicineDAO.getMedicinesByTitle(medTitle)) {
 			long id = med.getId();
 
-			String sql = "SELECT sum(pharmacies_medicines.count) FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
-					+ id + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+			String sql = "SELECT sum(pharmacies_medicines.count) FROM pharmacies_medicines where pharmacies_medicines.id_medicine = "
+					+ id + " and pharmacies_medicines.id_pharmacy = " + pharmacy.getId();
 			try {
 				java.sql.Statement statement = DbUtils.getConnection().createStatement();
 				ResultSet result = statement.executeQuery(sql);
@@ -233,8 +233,8 @@ public class PharmacyMedicineDAO {
 	 */
 	public static int get—ountOfMed(Pharmacy pharmacy, Medicine medicine) {
 		int count = 0;
-		String sql = "SELECT count FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
-				+ medicine.getId() + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+		String sql = "SELECT count FROM pharmacies_medicines where pharmacies_medicines.id_medicine = "
+				+ medicine.getId() + " and pharmacies_medicines.id_pharmacy = " + pharmacy.getId();
 		try {
 			java.sql.Statement statement = DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -256,8 +256,8 @@ public class PharmacyMedicineDAO {
 	 */
 	public static double getPrice(Pharmacy pharmacy, Medicine medicine) {
 		double price = 0;
-		String sql = "SELECT price FROM pharmacies_medicines where pharmacies_medicines.medicine_id = "
-				+ medicine.getId() + " and pharmacies_medicines.pharmacy_id = " + pharmacy.getId();
+		String sql = "SELECT price FROM pharmacies_medicines where pharmacies_medicines.id_medicine = "
+				+ medicine.getId() + " and pharmacies_medicines.id_pharmacy = " + pharmacy.getId();
 		try {
 			java.sql.Statement statement = DbUtils.getConnection().createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -279,8 +279,8 @@ public class PharmacyMedicineDAO {
 	 *            {@literal update price in couple pharmacy-medicine}
 	 */
 	public static void update(Pharmacy pharmacy, Medicine medicine, double newPrice) {
-		String sql = "UPDATE pharmacies_medicines SET price = ? WHERE pharmacy_id = " + pharmacy.getId()
-				+ " and medicine_id = " + medicine.getId();
+		String sql = "UPDATE pharmacies_medicines SET price = ? WHERE id_pharmacy = " + pharmacy.getId()
+				+ " and id_medicine = " + medicine.getId();
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setDouble(1, newPrice);
@@ -303,8 +303,8 @@ public class PharmacyMedicineDAO {
 	 *            {@literal update count in couple pharmacy-medicine}
 	 */
 	public static void update(Pharmacy ph, Medicine med, int newCount) {
-		String sql = "UPDATE pharmacies_medicines SET count = ? WHERE pharmacy_id = " + ph.getId()
-				+ " and medicine_id = " + med.getId();
+		String sql = "UPDATE pharmacies_medicines SET count = ? WHERE id_pharmacy = " + ph.getId()
+				+ " and id_medicine = " + med.getId();
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 
@@ -328,7 +328,7 @@ public class PharmacyMedicineDAO {
 	 */
 	public static boolean isExists(Pharmacy pharmacy, Medicine medicine) {
 		boolean res = false;
-		String sql = "SELECT pharmacies_medicines.medicine_id FROM pharmacies_medicines where pharmacy_id = ? and medicine_id = ?";
+		String sql = "SELECT pharmacies_medicines.id_medicine FROM pharmacies_medicines where id_pharmacy = ? and id_medicine = ?";
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pharmacy.getId());
