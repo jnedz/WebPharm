@@ -105,7 +105,7 @@
 						
 <c:choose>
     <c:when test="${order == null || criteria != 'firstName'}">
-        <a href="SortByFirstNameByRole?order=ASC&criteria=firstName" > 
+        <a href="SortByFirstNameByRole?order=ASC&criteria=firstName&role=${selectRole}" > 
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="img/noSort.png"
 						width="25" height="25" alt="NoSort"
@@ -113,7 +113,7 @@
 							</button></a>
     </c:when>    
     <c:otherwise>
-        <a href="SortByFirstNameByRole?order=${order}&criteria=firstName" > 
+        <a href="SortByFirstNameByRole?order=${order}&criteria=firstName&role=${selectRole}" > 
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
 						width="25" height="25" alt="Sort"
@@ -127,7 +127,7 @@
 				
 	<c:choose>
     <c:when test="${order == null || criteria != 'lastName'}">
-        <a href="SortByFirstNameByRole?order=ASC&criteria=lastName" > 
+        <a href="SortByFirstNameByRole?order=ASC&criteria=lastName&role=${selectRole}" >
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="img/noSort.png"
 						width="25" height="25" alt="NoSort"
@@ -135,7 +135,7 @@
 							</button></a>
     </c:when>    
     <c:otherwise>
-        <a href="SortByFirstNameByRole?order=${order}&criteria=lastName" > 
+        <a href="SortByFirstNameByRole?order=${order}&criteria=lastName&role=${selectRole}" > 
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
 						width="25" height="25" alt="Sort"
@@ -149,7 +149,7 @@
 	
 	<c:choose>
     <c:when test="${order == null || criteria != 'dateOfBirthday'}">
-        <a href="SortByFirstNameByRole?order=ASC&criteria=dateOfBirthday" > 
+        <a href="SortByFirstNameByRole?order=ASC&criteria=dateOfBirthday&role=${selectRole}" > 
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="img/noSort.png"
 						width="25" height="25" alt="NoSort"
@@ -157,7 +157,7 @@
 							</button></a>
     </c:when>    
     <c:otherwise>
-        <a href="SortByFirstNameByRole?order=${order}&criteria=dateOfBirthday" > 
+        <a href="SortByFirstNameByRole?order=${order}&criteria=dateOfBirthday&role=${selectRole}" > 
         <button class="buttonOrder" name="order" id="userSelect">
 			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
 						width="25" height="25" alt="Sort"

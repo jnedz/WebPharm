@@ -50,7 +50,13 @@ public class DeliveryMedicinesMessage extends HttpServlet {
 		request.setAttribute("idMed", idMed);
 		request.setAttribute("pharmacy", pharmacy);
 		request.setAttribute("medicine", medicineFromPharm);
-		request.setAttribute("count", PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicineFromPharm));
+		
+		int count = PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, medicineFromPharm.getTitle());
+		request.setAttribute("count", count);
+		
+		int countAll = MedicineDAO.get—ountByTitle(medicineFromPharm.getTitle());
+		request.setAttribute("countAll", countAll);	
+		
 		request.setAttribute("way", way);
 		request.getRequestDispatcher("/pharmacy/deliveryMedicinesMessage.jsp").forward(request, response);
 	}

@@ -13,19 +13,28 @@ import utils.DbUtils;
 public class ProducerDAO {
 
 	public static void add(Producer producer) {
-		String sql = "INSERT INTO producers (title, country) VALUES (?, ?)";
-		try {
-			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
-			statement.setString(1, producer.getTitle());
-			statement.setString(2, producer.getCountry().name());
-			int rowsInserted = statement.executeUpdate();
-			if (rowsInserted > 0) {
-				System.out.println("A new producer was inserted successfully!");
-				statement.close();
+		List<Producer> producers = getAll();
+		boolean isEqualsProd = false;
+		for (Producer prod : producers) {
+			if (producer.getTitle().equals(prod.getTitle()) && producer.getCountry().equals(prod.getCountry())) {
+				isEqualsProd = true;
 			}
-		} catch (SQLException e) {
-			System.out.println("Exception in addProducer(Producer producer)!");
-			e.printStackTrace();
+		}
+		if (isEqualsProd == false) {
+			String sql = "INSERT INTO producers (title, country) VALUES (?, ?)";
+			try {
+				java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
+				statement.setString(1, producer.getTitle());
+				statement.setString(2, producer.getCountry().name());
+				int rowsInserted = statement.executeUpdate();
+				if (rowsInserted > 0) {
+					System.out.println("A new producer was inserted successfully!");
+					statement.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("Exception in add(Producer producer)!");
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -37,7 +46,7 @@ public class ProducerDAO {
 	}
 
 	/*
-	 * @Exception if we can't delete producer used in Medicines table 
+	 * @Exception if we can't delete producer used in Medicines table
 	 */
 	public static void delete(Producer producer) throws SQLException {
 		String sql = "DELETE FROM producers WHERE id = ?";
@@ -51,7 +60,7 @@ public class ProducerDAO {
 	}
 
 	/*
-	 * @Exception if we can't delete producer used in Medicines table 
+	 * @Exception if we can't delete producer used in Medicines table
 	 */
 	public static void delete(int id) throws SQLException {
 		String sql = "DELETE FROM producers WHERE id=?";
@@ -107,20 +116,28 @@ public class ProducerDAO {
 	}
 
 	public static void update(Producer producer) {
-		String sql = "UPDATE producers SET title = ?, country = ? WHERE id= "
-				+ producer.getId();
-		try {
-			PreparedStatement statement = (PreparedStatement) DbUtils.getConnection().prepareStatement(sql);
-			statement.setString(1, producer.getTitle());
-			statement.setString(2, producer.getCountry().name());
-			int rowsUpdated = statement.executeUpdate();
-			if (rowsUpdated > 0) {
-				System.out.println("An existing produser was updated successfully!");
+		List<Producer> producers = getAll();
+		boolean isEqualsProd = false;
+		for (Producer prod : producers) {
+			if (producer.getTitle().equals(prod.getTitle()) && producer.getCountry().equals(prod.getCountry())) {
+				isEqualsProd = true;
 			}
-			statement.close();
-		} catch (SQLException e) {
-			System.out.println("Exception in update(Producer producer)!");
-			e.printStackTrace();
+		}
+		if (isEqualsProd == false) {
+			String sql = "UPDATE producers SET title = ?, country = ? WHERE id= " + producer.getId();
+			try {
+				PreparedStatement statement = (PreparedStatement) DbUtils.getConnection().prepareStatement(sql);
+				statement.setString(1, producer.getTitle());
+				statement.setString(2, producer.getCountry().name());
+				int rowsUpdated = statement.executeUpdate();
+				if (rowsUpdated > 0) {
+					System.out.println("An existing produser was updated successfully!");
+				}
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Exception in update(Producer producer)!");
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -145,7 +162,7 @@ public class ProducerDAO {
 		}
 		return producers;
 	}
-	
+
 	public static Producer getProducerByTitle(String title) {
 		String sql = "SELECT * FROM producers WHERE title= '" + title + "'";
 		Producer producer = new Producer();

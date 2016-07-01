@@ -1,5 +1,9 @@
 package service;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -8,10 +12,44 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.MedicineDAO;
+import enums.Country;
 import enums.MedicineType;
 import model.Medicine;
+import model.Producer;
+import utils.DbUtils;
 
 public class MedicineService {
+
+	/**
+	 * 
+	 * @return list of all medicines with unique title from medicines table
+	 */
+	public static List<Medicine> getMedicinesWithUniqueTitle() {
+
+		List<Medicine> medicines = new ArrayList<>();
+		List<Medicine> medicinesFromDB = MedicineDAO.getAllSortedByTypeAndTitle();
+
+		System.out.println("&&&&&&&&&&&&&&&" + medicinesFromDB);
+
+			for (Medicine medicineFromDB : medicinesFromDB) {
+				if(medicines.isEmpty()){
+				medicines.add(medicineFromDB);
+				medicinesFromDB.remove(0);
+			}else{
+				for (Medicine medicine : medicines) {
+					if (medicineFromDB.getTitle().equals(medicine.getTitle())) {
+						medicine.setCount(medicine.getCount() + medicineFromDB.getCount());
+						medicinesFromDB.remove(medicineFromDB);
+					}
+					else{
+						medicines.add(medicineFromDB);
+					}
+				}
+			}
+		}
+		return medicines;
+	}
+
 	/**
 	 * 
 	 * @param meds

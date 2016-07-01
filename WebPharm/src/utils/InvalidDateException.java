@@ -10,14 +10,14 @@ public class InvalidDateException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private GregorianCalendar gc;
+	private String gc;
 	
-	public GregorianCalendar getGc() {
+	public String getGc() {
 		return gc;
 	}
 
 
-	public void setGc(GregorianCalendar gc) {
+	public void setGc(String gc) {
 		this.gc = gc;
 	}
 
@@ -27,7 +27,7 @@ public class InvalidDateException extends RuntimeException {
 	}
 	
 	
-	public InvalidDateException(GregorianCalendar gc){
+	public InvalidDateException(String gc){
 		
 		super("Invalid date" + gc);
 		this.gc = gc;

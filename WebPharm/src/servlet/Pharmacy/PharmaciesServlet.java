@@ -1,6 +1,5 @@
 package servlet.Pharmacy;
 
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,10 +39,15 @@ public class PharmaciesServlet  extends HttpServlet{
 
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
 		Pharmacy pharmacy = PharmacyDAO.getPharmacyById(idPharm);
+		
 		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getAllMedsByPharmId(idPharm));
+		if (medicines.size()==0){
+			request.setAttribute("pharmacy", pharmacy);
+			request.getRequestDispatcher("/pharmacy/messageNoMedsInPharm.jsp").forward(request, response);
+		}
 		request.setAttribute("idPharm", idPharm);
-		request.setAttribute("medicines", medicines);
 		request.setAttribute("pharmacy", pharmacy);
+		request.setAttribute("medicines", medicines);
 		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request, response);
 		
 		

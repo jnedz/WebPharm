@@ -8,18 +8,18 @@ import java.sql.Statement;
 public class DbUtils {
 
 	static final String DB_URL = "jdbc:mysql://localhost/test";
-	static final String USER = "root";
+		static final String USER = "root";
 	static final String PASS = "root";
 	private static Connection conn = null;
 
-	static {
+	/*static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("Connection false");
 		}
-	}
+	}*/
 
 	public static Connection getConnection() {
 		return conn;
@@ -78,15 +78,7 @@ public class DbUtils {
 		Statement statement = null;
 		try {
 			String sql = "create table Pharmacies_Medicines (id INT NOT NULL AUTO_INCREMENT, id_pharmacy int, "
-					+ /* "medicine_title varchar(20) not null, " */ "id_medicine int, price double, count int,  "
-					// + "FOREIGN KEY (medicine_title, price, count) REFERENCES
-					// medicines(title, price, count) ON UPDATE CASCADE, "
-					// + "FOREIGN KEY (medicine_title) REFERENCES
-					// medicines(title) ON UPDATE CASCADE, "
-					// + "FOREIGN KEY (price) REFERENCES medicines(price) ON
-					// UPDATE CASCADE, "
-					// + "FOREIGN KEY (count) REFERENCES medicines(count) ON
-					// UPDATE CASCADE,
+					+  "id_medicine int, price double, count int,  "
 					+ "foreign key (id_pharmacy) references pharmacies (id),"
 					+ "foreign key (id_medicine) references medicines (id)," + " primary key (id) )";
 			
@@ -113,7 +105,35 @@ public class DbUtils {
 		}
 
 	}
+	
+	public static void createUsersTable() {
 
+		Statement statement = null;
+		try {
+			String sql = "create table Users (id INT NOT NULL AUTO_INCREMENT, "
+					+ "login varchar(20) not null, password  varchar(20) not null, role enum('WORKER', 'USER'), primary key (id) )";
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("Exeption in createUsersTable()!");
+		}
+
+	}
+
+	public static void dropUsersTable() {
+
+		Statement statement = null;
+		try {
+			String sql = "drop table  if exists Users";
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("SQL exception in dropUsersTable().");
+		}
+	}
+	
 	public static void dropPersonTable() {
 
 		Statement statement = null;
@@ -186,5 +206,12 @@ public class DbUtils {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public static void main(String ... args) throws ClassNotFoundException, SQLException{
+		Class.forName("com.mysql.jdbc.Driver");
+		conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		
 	}
 }

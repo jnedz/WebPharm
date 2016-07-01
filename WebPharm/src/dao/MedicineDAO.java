@@ -1,6 +1,5 @@
 package dao;
 
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import service.MedicineService;
 import utils.DbUtils;
 
 public class MedicineDAO {
-	
+
 	/**
 	 * 
 	 * @param rs
@@ -46,7 +47,7 @@ public class MedicineDAO {
 		med.setProducer(producer);
 		return med;
 	}
-	
+
 	/**
 	 * 
 	 * @param medicine
@@ -223,7 +224,8 @@ public class MedicineDAO {
 			statement.setInt(4, medicine.getTerm());
 			statement.setDouble(5, medicine.getPrice());
 			statement.setInt(6, medicine.getCount());
-		//	statement.setInt(7, medicine.getProducer().getId()); //!!!!!!!!!!!!!!!!!!!!!
+			// statement.setInt(7, medicine.getProducer().getId());
+			// //!!!!!!!!!!!!!!!!!!!!!
 
 			int rowsUpdated = statement.executeUpdate();
 			if (rowsUpdated > 0) {
@@ -277,7 +279,35 @@ public class MedicineDAO {
 			statement.close();
 			result.close();
 		} catch (SQLException ex) {
-			System.out.println("Exception in getAllMedicines()!");
+			System.out.println("Exception in getAll()! (medicines)");
+			ex.printStackTrace();
+		}
+		return medicines;
+	}
+
+	/**
+	 * 
+	 * @return list of all medicines from medicines table sorted by type and by
+	 *         title
+	 */
+	public static List<Medicine> getAllSortedByTypeAndTitle() {
+		String sql = "SELECT * FROM medicines join producers on medicines.id_producer = producers.id order by medicines.type DESC";
+		List<Medicine> medicines = new ArrayList<>();
+		try {
+			Statement statement = (Statement) DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				medicines.add(convert(result));
+			}
+			Collections.sort(medicines, new Comparator<Medicine>() {
+				public int compare(Medicine o1, Medicine o2) {
+					return o1.getTitle().compareTo(o2.getTitle());
+				}
+			});
+			statement.close();
+			result.close();
+		} catch (SQLException ex) {
+			System.out.println("Exception in getAllSortedByTypeAndTitle()!");
 			ex.printStackTrace();
 		}
 		return medicines;
@@ -306,11 +336,12 @@ public class MedicineDAO {
 		}
 		return res;
 	}
-/**
- * 
- * @param medicine 
- * @return medicine by title and date of manufacture
- */
+
+	/**
+	 * 
+	 * @param medicine
+	 * @return medicine by title and date of manufacture
+	 */
 	public static Medicine getMedicine(Medicine medicine) {
 		Medicine med = new Medicine();
 		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id  where medicines.title = ? and medicines.dateOfManufact = ?";
@@ -402,7 +433,7 @@ public class MedicineDAO {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * 
 	 * @param title
@@ -426,7 +457,6 @@ public class MedicineDAO {
 		}
 		return medicines;
 	}
-
 
 	/**
 	 * 

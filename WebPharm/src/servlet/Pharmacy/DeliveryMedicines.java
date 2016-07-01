@@ -58,8 +58,12 @@ public class DeliveryMedicines extends HttpServlet {
 
 		Medicine medicine = pharmMedServiceWithMed.getMedicine();
 		request.setAttribute("medicine", medicine);
-		request.setAttribute("count",
-				PharmacyMedicineDAO.getÑountOfMed(pharmacy, medicine));
+		
+		int count = PharmacyMedicineDAO.getÑountByMedTitleFromPharm(pharmacy, medicine.getTitle());
+		request.setAttribute("count", count);
+		
+		int countAll = MedicineDAO.getÑountByTitle(medicine.getTitle());
+		request.setAttribute("countAll", countAll);
 
 		String way = request.getParameter("way");
 		System.out.println("#################" + way);
@@ -71,18 +75,22 @@ public class DeliveryMedicines extends HttpServlet {
 
 		int quantityMed = 0;
 
-		System.out.println("~~~~~~~~" + idPharm + "----" + idMed + "~~~~~~~~~~"
+	/*	System.out.println("~~~~~~~~" + idPharm + "----" + idMed + "~~~~~~~~~~"
 				+ medicine.getCount());
-System.out.println("quantMed" + PharmacyMedicineDAO.getÑountOfMed(pharmacy, medicine));
-		if (ValidatorUtils.isValidNumber(quantity,
-				PharmacyMedicineDAO.getÑountOfMed(pharmacy, medicine))) {
+System.out.println("quantMed" + PharmacyMedicineDAO.getÑountOfMed(pharmacy, medicine));*/
+		int maxCount = 0;
+		if (way.equals("toPharmacy")){
+			maxCount = countAll;
+		}
+		if (way.equals("fromPharmacy")){
+			maxCount = count;
+		}
+		
+		if (ValidatorUtils.isValidNumber(quantity, maxCount)) {
 			quantityMed = Integer.parseInt(quantity);
-			
-			// TODO if quantityMed > quantity (delivery from pharmacy) or if
-			// quantityMed < quantity (delivery to pharmacy)
 			request.setAttribute("quantity", quantityMed);
 		} else {
-			quantityErr = "not enough quantity!";
+			quantityErr = "incorrect quantity!";
 			request.setAttribute("quantityErr", quantityErr);
 			request.getRequestDispatcher(
 					"/pharmacy/deliveryMedicinesMessage.jsp").forward(request,

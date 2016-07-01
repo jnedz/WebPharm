@@ -26,9 +26,10 @@
 		<input type="hidden" name="way" value="${way}" /> 
 		<input type="hidden" name="medicine" value="${medicine}" />
 		<input type="hidden" name="count" value="${count}" />
+		<input type="hidden" name="countAll" value="${countAll}" />
 		<input type="hidden" name="pharmacy" value="${pharmacy}" />
 		<br><h4> Pharmacy "${pharmacy.title}" has ${count} packs of
-		${medicine.title}.  Pharmacies have ${medicine.count} packs of
+		${medicine.title}.  Pharmacies have ${countAll} packs of
 		${medicine.title}.<br>Enter quantity for delivery ${way == "toPharmacy" ? "to pharmacy" : "from pharmacy"}:
 		</h4>
 		<input type="text" name="quantity" placeholder="quantity>0"

@@ -14,6 +14,10 @@
 <style type="text/css">
  @import "style.css"
 </style>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.0.0.js" /></script>
+<script src="${pageContext.request.contextPath}/js/app-ajax.js"
+	type="text/javascript"></script>
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -29,16 +33,18 @@
 	<form action="SortMedByTypeAndTitle" method="post">
 		<fieldset >
 		  <legend><h4>Select medicines type and title:</h4></legend>
+	Type:
 			<select size="1" name="type">
 				<option value="AllTypes">All Types</option>
 				<c:forEach items="<%=MedicineType.values()%>" var="type">
-					<option value="${type}">${type}</option>
+					<option ${selectType != "AllTypes" and type == selectType ? 'selected' : ''} value="${type}">${type}</option>
 				</c:forEach>
 				</select>
+			 Title: 
 			<select size="1" name="title">
 				<option value="AllTitles">All Titles</option>
 				<c:forEach items="<%=TitlesDTO.titles()%>" var="title">
-					<option value="${title}">${title}</option>
+					<option ${selectTitle != "AllTitles" and title == selectTitle ? 'selected' : ''} value="${title}">${title}</option>
 				</c:forEach>
 				</select>
 				<button class="sendsubmit"><img src="img/search.png" alt="Search" 

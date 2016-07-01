@@ -38,7 +38,7 @@ public class AllMedicines extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("producers",ProducerDAO.getAll());
-		request.setAttribute("medicines", MedicineDAO.getAll());
+		request.setAttribute("medicines", MedicineDAO.getAllSortedByTypeAndTitle());
 		request.getRequestDispatcher("/medicine/medicines.jsp").forward(request, response); 
 	}
 

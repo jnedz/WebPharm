@@ -13,9 +13,10 @@
 <body>
 <jsp:include page="/header.jsp"/>
 	<center>
-		<h4>You cannot delete this element <br><br>because of keys between a
-			tables Producers-Medicines-Pharmacies!</h4><br>
-			<input value="Return" type="button" onclick="history.back()">
+		<h4>You cannot delete this producer. <br><br>Some medicines are produced by him.</h4><br>
+		<form action="AllProducers" method="get">
+		<input type="submit" value="Return" />
+	</form>
 	</center>
 </body>
 </html>

@@ -74,6 +74,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="Add data" />
+		<p><input value="Return" type="button" onclick="history.back()">
 	</form>
 
 </body>

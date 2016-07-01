@@ -1,6 +1,7 @@
 package servlet.Producer;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,38 +21,39 @@ import validator.ValidatorUtils;
 @WebServlet("/AllProducers")
 public class AllProducers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AllProducers() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setAttribute("producers", ProducerDAO.getAll());
-		request.getRequestDispatcher("/producer/producers.jsp").forward(request, response); 
+	public AllProducers() {
+		super();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setAttribute("producers", ProducerDAO.getAll());
+		request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		Producer producer = new Producer();
-		System.out.println(request.getParameter("id"));
 		boolean isError = false;
 		int id = 0;
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
 			producer = ProducerDAO.getProducerById(id);
 			request.setAttribute("id", id);
-
 		} catch (Exception e) {
 		}
 
@@ -72,30 +74,36 @@ public class AllProducers extends HttpServlet {
 		request.setAttribute("selectedCountry", country);
 
 		if (isError == false) {
-			if (id > 0) {
-				ProducerDAO.update(producer);
-				request.setAttribute("producers", ProducerDAO.getAll());
-				request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
-			} else {
-				ProducerDAO.add(producer);
-				
-				
-				//System.out.println("APPLICATION" + request.application.getAttribute("fromAddMed").toString());
-				
-				//if ("yes".equals(session.getAttribute("fromAddMed").toString())) {
-					if ("yes".equals(getServletConfig().getServletContext().getAttribute("fromAddMed"))){
-					
-					request.getRequestDispatcher("/medicine/addOrEditMedicine.jsp").forward(request, response);
-				} else {
+			boolean isEqualsProd = false;
+			for (Producer prod : ProducerDAO.getAll()) {
+				if (prod.getTitle().equals(producer.getTitle()) && prod.getCountry().equals(producer.getCountry())) {
+					isEqualsProd = true;
+					System.out.println("!!!!!!!!!!!! isEqualsProd = true!");
+					request.setAttribute("producerTitle", producerTitle);
+					request.setAttribute("country", country);
+					request.getRequestDispatcher("/producer/messageIsEqualsProd.jsp").forward(request, response);
+				}
+			}
+			if (isEqualsProd == false) {
+				if (id > 0) {
+					ProducerDAO.update(producer);
 					request.setAttribute("producers", ProducerDAO.getAll());
 					request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
+				} else {
+					ProducerDAO.add(producer);
+
+					if ("yes".equals(getServletConfig().getServletContext().getAttribute("fromAddMed"))) {
+
+						request.getRequestDispatcher("/medicine/addOrEditMedicine.jsp").forward(request, response);
+					} else {
+						request.setAttribute("producers", ProducerDAO.getAll());
+						request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
+					}
 				}
 			}
 		} else {
 			request.getRequestDispatcher("/producer/addOrEditProducer.jsp").forward(request, response);
 		}
-
 	}
-
-
+	
 }

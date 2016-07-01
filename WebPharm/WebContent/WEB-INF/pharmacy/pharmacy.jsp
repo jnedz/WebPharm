@@ -19,11 +19,15 @@
 <jsp:include page="/header.jsp" />
 <jsp:include page="/pharmacyHeader.jsp" />
 <h4><br>
+
+<input type=hidden name="idPharm" value="${idPharm}"> 
+<a href="AddMedicineFromPharmacy?idPharm=<c:out value="${idPharm}"/>"><img src="img/add.png" alt="addMedicine" width="100" height="100"
+								style="vertical-align: middle" title="add medicine"></a>
+<br>
 Pharmacy: ${pharmacy.title}<br>
 Description: ${pharmacy.description}</h4>
+
 <center><h4>
-				<p>Medicines from Pharmacy "${pharmacy.title}":</p>
-<input type=hidden name="idPharm" value="${idPharm}"> 
 			</h4></center>
 <table class="table" border=1>
 <thead>

@@ -46,17 +46,23 @@ public class SortMedByTypeAndTitle extends HttpServlet {
 		
 		List<Medicine> meds = new ArrayList<>();
 		
-		if ( request.getParameter("type").equals("AllTypes") && request.getParameter("title").equals("AllTitles")){
+		String type = request.getParameter("type");
+		request.setAttribute("selectType", type);
+		
+		String title = request.getParameter("title");
+		request.setAttribute("selectTitle", title);
+		
+		if ( type.equals("AllTypes") && title.equals("AllTitles")){
 			meds = MedicineDAO.getAll();
 		} 
-		if (request.getParameter("type").equals("AllTypes") && !(request.getParameter("title").equals("AllTitles")) ){
+		if (type.equals("AllTypes") && !(title.equals("AllTitles")) ){
 			meds = MedicineDAO.getMedicinesByTitle(request.getParameter("title"));
 		} 
-		if (request.getParameter("title").equals("AllTitles") && !(request.getParameter("type").equals("AllTypes")) ){
+		if (title.equals("AllTitles") && !(type.equals("AllTypes")) ){
 			meds = MedicineDAO.getMedicinesByType(request.getParameter("type"));
 		} 
 		
-		if (!(request.getParameter("title").equals("AllTitles")) && !(request.getParameter("type").equals("AllTypes"))){
+		if (!(title.equals("AllTitles")) && !(type.equals("AllTypes"))){
 			meds = MedicineDAO.getMedicinesByTypeAndTitle(request.getParameter("type"), request.getParameter("title"));
 		}
 		if (meds.size()==0){

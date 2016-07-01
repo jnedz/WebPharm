@@ -40,24 +40,23 @@ public class SortByFirstNameByRole extends HttpServlet {
 		System.out.println("~~~" + request.getParameter("role"));
 		System.out.println("###" + request.getParameter("order"));
 		System.out.println("###" + request.getParameter("criteria"));
+		
 		List<Person> sortedList = PersonDAO.getAll();
 		
 		String role = request.getParameter("role");
 		String order = request.getParameter("order");
 		String criteria = request.getParameter("criteria");
 		
-		if (request.getParameter("role")==null){
+		if (request.getParameter("role")==null || request.getParameter("role")==""){
 			role = "AllPersons";
 		}
+		
 		if (request.getParameter("order") == null) {
 			order = "NoSort";
 		} 
 		
 		sortedList = PersonDAO.sortByCriteria(criteria, order, role);
-	//	sortedList = PersonDAO.sortByCriteria("dateOfBirthday", order, role);
 
-		
-		//String reverseOrder = "ASC";
 		if (order.equals("ASC")){
 			order="DESC";
 		}else {
