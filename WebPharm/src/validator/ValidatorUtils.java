@@ -20,6 +20,8 @@ public class ValidatorUtils {
 		}
 		return isValid;
 	}
+	
+	//TODO regexp for validate Name Jhjh-Kkjh
 
 	public static boolean isValidNumber(String number, int max) {
 		boolean isValid = false;
