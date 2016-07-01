@@ -30,6 +30,8 @@ public class MedicineService {
 		List<Medicine> medicinesFromDB = MedicineDAO.getAllSortedByTypeAndTitle();
 
 		System.out.println("&&&&&&&&&&&&&&&" + medicinesFromDB);
+		
+		//   mysql> select type, title, sum(count) from medicines group by title, type;
 
 			for (Medicine medicineFromDB : medicinesFromDB) {
 				if(medicines.isEmpty()){
