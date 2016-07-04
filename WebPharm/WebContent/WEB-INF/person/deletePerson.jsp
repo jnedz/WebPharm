@@ -13,6 +13,10 @@
 <body>
 <jsp:include page="/header.jsp" />
 <jsp:include page="/personHeader.jsp" />
+<div class="mainBlock">
+
+<a href="AllPersons" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return to all persons"></a>
 	<center>
 			<h4>Do you really want to delete person ${person.firstName}
 				${person.lastName}?</h4>
@@ -24,5 +28,6 @@
 		<a href="DeletePersonYes?id=<c:out value='<%=request.getParameter("id")%>'/>"><button>YES</button></a>
 		<a href="AllPersons"><button>NO</button></a>
 	</center>
+	</div>
 </body>
 </html>

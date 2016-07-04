@@ -1,9 +1,15 @@
 @CHARSET "UTF-8";
-
-persons {
-	font-size: 180%;
+.registration {
+	 border-radius: 5px; 
+   height: 8px; 
+   width: 80px;
+   font-size: 90%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #333366;
+	color: maroon;
+   
+ 	float: right; 
+	margin-top:-60px;
+	padding-right: 20px;
 }
 
 h1 {
@@ -152,6 +158,8 @@ input[type="text"] {
    font-size: 11px; 
    font-family: Tahoma; 
 }
+
+
 input[type="password"] {
    border-radius: 5px; 
    height: 20px; 
@@ -170,8 +178,8 @@ cursor: pointer;
 cursor: hand; 
 }
 .sendsubmitC {
-width:  35px;  
-height: 35px; 
+width:  100px;  
+height: 100px; 
 margin: 0;
 padding:0;
 border: 0;
@@ -191,27 +199,83 @@ border: 0;
 cursor: pointer; 
 cursor: hand; 
 }
+
+.mainBlock {
+padding-left: 50px;
+	padding-top: 130px;
+	}
+.selectPerson {
+	padding-right: 500px;
+}
+
+.addButton {
+	position: absolute;
+	top: 155px; 
+    right: 70px;
+}
+.addButton3 {
+	position: absolute;
+    right: 70px;
+	width:  100px;  
+height: 100px; 
+margin: 0;
+padding:0;
+border: 0;
+background: transparent url('img/img/add.png') 70% 70% no-repeat ;
+background-size: cover;
+cursor: pointer; 
+cursor: hand; 
+    
+}
+
+.addButton2 {
+	position: absolute;
+    right: 70px;
+}
+.reloadButton {
+	position: absolute;
+    
+	top: 155px; 
+    left: 70px;
+}
+.returnButton {
+	position: absolute;
+    right: 70px;
+}
+.returnButton2 {
+	position: absolute;
+    left: 70px;
+    top: 170px;
+}
 header {
+	z-index: 1;
+	 position: fixed;
 	display: block;
-	height: 110px;
+	height: 120px;
+	 width: 100%;
 	background-image: url('img/header01.jpg');
 }
-pH {
+.title {
+	z-index: 1;
+	position: fixed;
+	width: 100%;
+	margin-top: 45px;
 	display: block;
-	height: 110px;
-	background-image: url('img/person.jpg') !important;
+	height: 10px;
+	
 }
-mH {
+.mH {
+	padding-top:110px
 	display: block;
 	height: 110px;
 	background-image: url('img/medicine.jpg') !important;
 }
-phH {
+.phH {
 	display: block;
 	height: 110px;
 	background-image: url('img/pharmacy.jpg') !important;
 }
-prH {
+.prH {
 	display: block;
 	height: 110px;
 	background-image: url('img/producer.jpg') !important;

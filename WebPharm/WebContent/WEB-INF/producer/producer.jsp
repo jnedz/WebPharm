@@ -13,6 +13,9 @@
 <body>
 <jsp:include page="/header.jsp" />
 <jsp:include page="/producerHeader.jsp" />
+<div class="mainBlock">
+<a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
 	<center>
 		<input type="hidden" name="id" value="${producer.id}" />
 		<h4>Producer title: ${producer.title},
@@ -21,8 +24,9 @@
 		<form action='AddOrEditProducer' method="get">
 			<input type="hidden" name="id" value="${producer.id}" /> <input
 				type="submit" value="Edit Producer" />
-		</form><br>
-		<input value="Return" type="button" onclick="history.back()">
+		</form><%-- <br>
+		<input value="Return" type="button" onclick="history.back()">--%>
 		</center>
+		</div>
 </body>
 </html>

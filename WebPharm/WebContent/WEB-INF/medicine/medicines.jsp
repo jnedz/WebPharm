@@ -22,15 +22,18 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <jsp:include page="/medicineHeader.jsp" />
-<%--	<form action="SortByType" method="post">
-		<select size="1" name="type">
-			<option value="AllMedicines">All MEDICINES</option>
-			<c:forEach items="<%=MedicineType.values()%>" var="type">
-				<option value="${type}">${type}</option>
-			</c:forEach>
-		</select> <input type="submit" value="select">
-	</form> --%>
-	<form action="SortMedByTypeAndTitle" method="post">
+<div class="mainBlock">
+
+<a href="AllMedicines" class="reloadButton"><img src="img/reload.png" alt="ReloadMedicines" width="100" height="100"
+								style="vertical-align: middle" title="reload medicines"></a>
+	<a href="EditMedicine?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addMedicin" width="100" height="100"
+								style="vertical-align: middle" title="add medicine"></a>
+	
+	<br><br><br><br><br><br><br><br>
+
+
+
+	<form action="SortMedByTypeAndTitle" method="post" class="selectPerson">
 		<fieldset >
 		  <legend><h4>Select medicines type and title:</h4></legend>
 	Type:
@@ -53,13 +56,7 @@
 		</fieldset>
 	</form>
 	<br>
-	<a href="EditMedicine?id=<c:out value="0"/>"><button>Add Medicine</button></a>
-
-	<h3>
-			<a href="AllMedicines"><button class="sendsubmitC"><img src="img/search.png" alt="Search" 
-          style="vertical-align: middle" width=33px height=33px></button></a> 
-			
-		</h3>
+<br>
 	<table  class="table">
 		<thead>
 			<tr>
@@ -111,5 +108,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<a href="EditMedicine?id=<c:out value="0"/>" class="addButton2"><img src="img/add.png" alt="addMedicin" width="100" height="100"
+								style="vertical-align: middle" title="add medicine"></a>
+	
+	</div>
 </body>
 </html>

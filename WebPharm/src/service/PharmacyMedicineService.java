@@ -1,13 +1,9 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.MedicineDAO;
-import dao.PharmacyDAO;
 import dao.PharmacyMedicineDAO;
 import model.Medicine;
 import model.Pharmacy;
@@ -297,7 +293,7 @@ public class PharmacyMedicineService {
 	 * @return count of medicines with title = medTitle (from one pharmacy =
 	 *         pharmacy)
 	 */
-	public int get—ountByMedTitleFromPharm(Pharmacy pharmacy, String medTitle) {
+	public static int get—ountByMedTitleFromPharm(Pharmacy pharmacy, String medTitle) {
 		return PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, medTitle);
 	}
 	

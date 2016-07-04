@@ -1,18 +1,18 @@
 package servlet.Pharmacy;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.PharmacyDAO;
-import dao.PharmacyMedicineDAO;
 import model.Medicine;
 import model.Pharmacy;
+import service.MedicineService;
 import service.PharmacyMedicineService;
+import service.PharmacyService;
 
 /**
  * Servlet implementation class DeliveryMedicinesMessage
@@ -35,11 +35,11 @@ public class DeliveryMedicinesMessage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
-		Pharmacy pharmacy = PharmacyDAO.getPharmacyById(idPharm);
+		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		
 		long idMed = Long.parseLong(request.getParameter("idMed"));
 		
-		PharmacyMedicineService pharmMedServ = new PharmacyMedicineService(pharmacy, MedicineDAO.getMedicineById(idMed));
+		PharmacyMedicineService pharmMedServ = new PharmacyMedicineService(pharmacy, MedicineService.getMedicineById(idMed));
 		Medicine medicineFromPharm = pharmMedServ.getMedicine();
 		
 		
@@ -51,10 +51,10 @@ public class DeliveryMedicinesMessage extends HttpServlet {
 		request.setAttribute("pharmacy", pharmacy);
 		request.setAttribute("medicine", medicineFromPharm);
 		
-		int count = PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, medicineFromPharm.getTitle());
+		int count = PharmacyMedicineService.get—ountByMedTitleFromPharm(pharmacy, medicineFromPharm.getTitle());
 		request.setAttribute("count", count);
 		
-		int countAll = MedicineDAO.get—ountByTitle(medicineFromPharm.getTitle());
+		int countAll = MedicineService.get—ountByTitle(medicineFromPharm.getTitle());
 		request.setAttribute("countAll", countAll);	
 		
 		request.setAttribute("way", way);

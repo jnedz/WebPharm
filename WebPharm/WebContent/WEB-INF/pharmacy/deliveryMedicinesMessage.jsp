@@ -19,7 +19,10 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/pharmacyHeader.jsp" />
-	
+	<div class="mainBlock">
+	<a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
+	<br><br><br><br><br>
 	<form action="DeliveryMedicines?idMed=<c:out value="${idMed}"/>&way=<c:out value="${way}"/>&idPharm=<c:out value="${idPharm}"/>" method="get">
 	<input type="hidden" name="idPharm" value="${idPharm}" /> 
 		<input type="hidden" name="idMed" value="${idMed}" /> 
@@ -38,6 +41,7 @@
 			type=${quantityErr == "" ? "hidden" : "text"} name="hid"
 			value="${quantityErr}" readonly tabindex="-1" />
 			<input type="submit" value="Delivery"> 
-		</form>	
+		</form>
+		</div>	
 </body>
 </html>

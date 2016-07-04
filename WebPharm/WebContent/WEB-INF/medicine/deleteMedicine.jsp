@@ -13,10 +13,14 @@
 <body>
 <jsp:include page="/header.jsp" />
 <jsp:include page="/medicineHeader.jsp" />
+<div class="mainBlock">
+<a href="AllMedicines" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return to all medicines"></a>
 	<center>
 	<h4>Do you really want to delete medicine with title ${medicine.title}?</h4>
 	<a href="DeleteMedicineYes?id=<c:out value = "${medicine.id}"/>"><button>YES</button></a>
 	<a href="AllMedicines"><button>NO</button></a>
 	</center>
+	</div>
 </body>
 </html>

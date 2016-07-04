@@ -1,9 +1,7 @@
 <center>
-	<header>
-		<phH> <br>
-		<p>
-			<persons> PHARMACIES</persons>
-		</p>
-		</phH>
-	</header>
+<div class="title">
+<br>
+	<p>
+	<h4>PHARMACIES</h4>
+</div>
 </center>

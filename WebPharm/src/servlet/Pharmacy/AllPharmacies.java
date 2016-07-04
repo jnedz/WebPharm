@@ -1,13 +1,14 @@
 package servlet.Pharmacy;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PharmacyDAO;
+import service.PharmacyService;
 
 /**
  * Servlet implementation class AllPharmacies
@@ -27,7 +28,10 @@ public class AllPharmacies extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("pharmacies", PharmacyDAO.getAll());
+		
+		System.out.println("registration " + getServletConfig().getServletContext().getAttribute("registration"));
+		System.out.println("roleReg " + request.getParameter("roleReg"));
+		request.setAttribute("pharmacies", PharmacyService.getAll());
 		request.getRequestDispatcher("/pharmacy/pharmacies.jsp").forward(request, response);
 	}
 

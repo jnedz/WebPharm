@@ -1,14 +1,15 @@
 package servlet.Producer;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProducerDAO;
 import model.Producer;
+import service.ProducerService;
 
 /**
  * Servlet implementation class ProducerInfo
@@ -31,7 +32,7 @@ public class ProducerInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Producer p = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
+		Producer p = ProducerService.getProducerById(Integer.parseInt(request.getParameter("id")));
 
 		System.out.println(request.getParameter("id"));
 		System.out.println(p);

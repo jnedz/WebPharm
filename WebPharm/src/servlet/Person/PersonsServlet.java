@@ -1,12 +1,6 @@
 package servlet.Person;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
@@ -15,15 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.jdbc.Constants;
-
-import model.Person;
-import utils.Formatter;
-import utils.InvalidDateException;
-import validator.ValidatorUtils;
-import dao.PersonDAO;
-import enums.Country;
 import enums.PersonRole;
+import model.Person;
+import service.PersonService;
+import utils.Formatter;
+import validator.ValidatorUtils;
 
 /**
  * Servlet implementation class MainServlet
@@ -46,7 +36,7 @@ public class PersonsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setAttribute("persons", PersonDAO.getAll());
+		request.setAttribute("persons", PersonService.getAll());
 		request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 
 	}
@@ -63,7 +53,7 @@ public class PersonsServlet extends HttpServlet {
 		} catch (Exception e) {
 		}
 		if (id > 0) {
-			person = PersonDAO.getPersonById(id);
+			person = PersonService.getPersonById(id);
 			request.setAttribute("id", id);
 		}
 
@@ -91,7 +81,7 @@ public class PersonsServlet extends HttpServlet {
 		}
 		request.setAttribute("lastName", lastName);
 
-		String dateOfBirthday = request.getParameter("dateOfBirthday");
+		String dateOfBirthday = request.getParameter("dateOfBirthday").isEmpty() ? Formatter.fromDateToString(new GregorianCalendar()) : request.getParameter("dateOfBirthday");
 		if (ValidatorUtils.isValidDate(dateOfBirthday)) {
 			person.setDateOfBirthday(Formatter.toDateFromString(dateOfBirthday));
 		} else {
@@ -107,11 +97,11 @@ public class PersonsServlet extends HttpServlet {
 
 		if (isError == false) {
 			if (id > 0) {
-				PersonDAO.update(person);
+				PersonService.update(person);
 			} else {
-				PersonDAO.add(person);
+				PersonService.add(person);
 			}
-				request.setAttribute("persons", PersonDAO.getAll());
+				request.setAttribute("persons", PersonService.getAll());
 				request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/person/addOrEditPerson.jsp").forward(request, response);

@@ -1,10 +1,7 @@
 <center>
-	<header>
-	<prH>
-		<br>
-		<p>
-			<persons> PRODUCERS </persons>
-			</p>
-			</prH>
-	</header>
+<div class="title">
+<br>
+	<p>
+	<h4>PRODUCERS</h4>
+</div>
 </center>

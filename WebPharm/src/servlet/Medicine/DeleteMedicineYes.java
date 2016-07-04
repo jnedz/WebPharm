@@ -1,16 +1,14 @@
 package servlet.Medicine;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.ProducerDAO;
 import service.MedicineService;
-import service.ProducerService;
 
 /**
  * Servlet implementation class DeleteMedicineYes
@@ -32,13 +30,13 @@ public class DeleteMedicineYes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			MedicineDAO.delete(MedicineDAO.getMedicineById(Long.parseLong(request.getParameter("id"))));
+			MedicineService.delete(MedicineService.getMedicineById(Long.parseLong(request.getParameter("id"))));
 		} catch (Exception e) {
 			request.getRequestDispatcher("/parts/exception.jsp").forward(request, response);
 			System.out.println("Exception in deleteMedicine(id)!");
 			e.printStackTrace();
 		}
-		request.setAttribute("medicines", MedicineDAO.getAll());
+		request.setAttribute("medicines", MedicineService.getAll());
 		request.getRequestDispatcher("/medicine/medicines.jsp").forward(request, response); 
 	}
 	

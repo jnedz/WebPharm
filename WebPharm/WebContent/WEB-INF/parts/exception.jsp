@@ -12,11 +12,15 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
+<div class="mainBlock">
+<a href="AllProducers" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return to all producers"></a>
 	<center>
 		<h4>You cannot delete this producer. <br><br>Some medicines are produced by him.</h4><br>
-		<form action="AllProducers" method="get">
-		<input type="submit" value="Return" />
+	<%-- 	<form action="AllProducers" method="get">
+		<input type="submit" value="Return" />--%>
 	</form>
 	</center>
+	</div>
 </body>
 </html>

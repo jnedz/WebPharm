@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PharmacyDAO;
 import model.Medicine;
 import model.Pharmacy;
 import service.PharmacyMedicineService;
+import service.PharmacyService;
 
 /**
  * Servlet implementation class MainServlet
@@ -38,7 +38,7 @@ public class PharmaciesServlet  extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
-		Pharmacy pharmacy = PharmacyDAO.getPharmacyById(idPharm);
+		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		
 		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getAllMedsByPharmId(idPharm));
 		if (medicines.size()==0){

@@ -12,8 +12,12 @@
 <body>
 <jsp:include page="/header.jsp" />
 <jsp:include page="/producerHeader.jsp" />
+<div class="mainBlock">
+<a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
 <center>
-<h4>Producer "${producerTitle}" (country ${country}) already exists.</h4><br><input value="Return" type="button" onclick="history.back()">
+<h4>Producer "${producerTitle}" (country ${country}) already exists.</h4>
 </center>
+</div>
 </body>
 </html>

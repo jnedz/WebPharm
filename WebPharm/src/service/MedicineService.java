@@ -1,9 +1,5 @@
 package service;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -12,11 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.MedicineDAO;
-import enums.Country;
 import enums.MedicineType;
 import model.Medicine;
-import model.Producer;
-import utils.DbUtils;
 
 public class MedicineService {
 
@@ -26,30 +19,7 @@ public class MedicineService {
 	 */
 	public static List<Medicine> getMedicinesWithUniqueTitle() {
 
-		List<Medicine> medicines = new ArrayList<>();
-		List<Medicine> medicinesFromDB = MedicineDAO.getAllSortedByTypeAndTitle();
-
-		System.out.println("&&&&&&&&&&&&&&&" + medicinesFromDB);
-		
-		//   mysql> select type, title, sum(count) from medicines group by title, type;
-
-			for (Medicine medicineFromDB : medicinesFromDB) {
-				if(medicines.isEmpty()){
-				medicines.add(medicineFromDB);
-				medicinesFromDB.remove(0);
-			}else{
-				for (Medicine medicine : medicines) {
-					if (medicineFromDB.getTitle().equals(medicine.getTitle())) {
-						medicine.setCount(medicine.getCount() + medicineFromDB.getCount());
-						medicinesFromDB.remove(medicineFromDB);
-					}
-					else{
-						medicines.add(medicineFromDB);
-					}
-				}
-			}
-		}
-		return medicines;
+		return MedicineDAO.getMedicinesWithUniqueTitle();
 	}
 
 	/**
@@ -87,25 +57,6 @@ public class MedicineService {
 	public List<Medicine> getMedicinesDateSortedByTitle(String title, String destination) {
 		return getDateSortedList(MedicineDAO.getMedicinesByTitle(title));
 	}
-	// public List<Medicine> getMedicinesDateSortedByTitle(String title, String
-	// destination) {
-	// List<Medicine> sortedList = new
-	// ArrayList<>(MedicineDAO.getMedicinesByTitle(title));
-	// Collections.sort(sortedList, new Comparator<Medicine>() {
-	//
-	// @Override
-	// public int compare(Medicine o1, Medicine o2) {
-	// if (o1.getDateOfManufact().before(o2.getDateOfManufact()))
-	// return -1;
-	// else if (o1.getDateOfManufact().after(o2.getDateOfManufact()))
-	// return 1;
-	// else
-	// return 0;
-	// }
-	// });
-	//
-	// return sortedList;
-	// }
 
 	/**
 	 * 
@@ -354,7 +305,7 @@ public class MedicineService {
 	 * @param medicine
 	 *            medicine which is adding into medicines table
 	 */
-	public void add(Medicine medicine) {
+	public static void add(Medicine medicine) {
 		MedicineDAO.add(medicine);
 	}
 
@@ -379,7 +330,7 @@ public class MedicineService {
 	 *            medicine`s title
 	 * @return list of medicines with the same title String title
 	 */
-	public List<Medicine> getMedicinesByTitle(String title) {
+	public static List<Medicine> getMedicinesByTitle(String title) {
 		return MedicineDAO.getMedicinesByTitle(title);
 	}
 
@@ -400,7 +351,7 @@ public class MedicineService {
 	 *            medicine`s id
 	 * @return medicine with typed id
 	 */
-	public Medicine getMedicineById(long id) {
+	public static Medicine getMedicineById(long id) {
 		return MedicineDAO.getMedicineById(id);
 	}
 
@@ -409,7 +360,7 @@ public class MedicineService {
 	 * @param medicine
 	 *            medicine for delete
 	 */
-	public void delete(Medicine medicine) {
+	public static void delete(Medicine medicine) {
 		MedicineDAO.delete(medicine);
 	}
 
@@ -427,7 +378,7 @@ public class MedicineService {
 	 * @param medicine
 	 *            medicine for update
 	 */
-	public void update(Medicine medicine) {
+	public static void update(Medicine medicine) {
 		MedicineDAO.update(medicine);
 	}
 
@@ -444,7 +395,7 @@ public class MedicineService {
 	 * 
 	 * @return list of all medicines from medicines table
 	 */
-	public List<Medicine> getAll() {
+	public static List<Medicine> getAll() {
 		return MedicineDAO.getAll();
 	}
 
@@ -453,7 +404,7 @@ public class MedicineService {
 	 * @param title
 	 * @return sum count of medicines with typed count
 	 */
-	public int get—ountByTitle(String title) {
+	public static int get—ountByTitle(String title) {
 		return MedicineDAO.get—ountByTitle(title);
 	}
 
@@ -475,5 +426,13 @@ public class MedicineService {
 
 	public static List<Medicine> getMedicinesByTypeAndTitle(String type, String title) {
 		return MedicineDAO.getMedicinesByTypeAndTitle(type, title);
+	}
+
+	public static List <Medicine> getAllSortedByTypeAndTitle() {
+		return MedicineDAO.getAllSortedByTypeAndTitle();
+	}
+
+	public static List<Medicine> getMedicinesByType(String type) {
+		return MedicineDAO.getMedicinesByType(type);
 	}
 }

@@ -11,11 +11,11 @@ import repository.ProducersRepository;
 public class RecreateTablesDB {
 
 	public static void main(String[] args) throws SQLException {
-		/*DbUtils.dropPersonTable();
+		DbUtils.dropPersonTable();
 		DbUtils.dropPharmaciesMedicinesTable();
 		DbUtils.dropMedicineTable();
 		DbUtils.dropPharmaciesTable();
-		DbUtils.dropProducersTable();*/
+		DbUtils.dropProducersTable();
 
 		DbUtils.createProducerTable();
 		DbUtils.createMedicineTable();
@@ -32,5 +32,8 @@ public class RecreateTablesDB {
 		
 		DbUtils.dropUsersTable();
 		DbUtils.createUsersTable();
+		DbUtils.dropPersonsUsersTable();
+		DbUtils.createPersonsUsersTable();
+		
 	}
 }

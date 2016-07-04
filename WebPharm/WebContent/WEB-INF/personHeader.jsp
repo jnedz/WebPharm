@@ -1,10 +1,7 @@
 <center>
-<header> 
-<pH>
+<div class="title">
 <br>
 	<p>
-	<persons>PERSONS</persons>
-	</p>
-	</pH>
-</header>
+	<h4>PERSONS</h4>
+</div>
 </center>

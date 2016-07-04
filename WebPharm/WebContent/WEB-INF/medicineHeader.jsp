@@ -1,8 +1,7 @@
 <center>
-	<header>
-		<mH> <br>
-		<p>
-			<persons> MEDICINES </persons>
-		</mH>
-	</header>
+<div class="title">
+<br>
+	<p>
+	<h4>MEDICINES</h4>
+</div>
 </center>

@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <jsp:include page="/pharmacyHeader.jsp" />
-
+<div class="mainBlock">
 
 	
 	<table  class="table">
@@ -55,5 +55,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

@@ -1,18 +1,16 @@
 package servlet.Producer;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.ProducerDAO;
 import enums.Country;
 import model.Producer;
+import service.ProducerService;
 import validator.ValidatorUtils;
 
 /**
@@ -36,7 +34,7 @@ public class AllProducers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setAttribute("producers", ProducerDAO.getAll());
+		request.setAttribute("producers", ProducerService.getAll());
 		request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
 	}
 
@@ -52,7 +50,7 @@ public class AllProducers extends HttpServlet {
 		int id = 0;
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
-			producer = ProducerDAO.getProducerById(id);
+			producer = ProducerService.getProducerById(id);
 			request.setAttribute("id", id);
 		} catch (Exception e) {
 		}
@@ -75,7 +73,7 @@ public class AllProducers extends HttpServlet {
 
 		if (isError == false) {
 			boolean isEqualsProd = false;
-			for (Producer prod : ProducerDAO.getAll()) {
+			for (Producer prod : ProducerService.getAll()) {
 				if (prod.getTitle().equals(producer.getTitle()) && prod.getCountry().equals(producer.getCountry())) {
 					isEqualsProd = true;
 					System.out.println("!!!!!!!!!!!! isEqualsProd = true!");
@@ -86,17 +84,17 @@ public class AllProducers extends HttpServlet {
 			}
 			if (isEqualsProd == false) {
 				if (id > 0) {
-					ProducerDAO.update(producer);
-					request.setAttribute("producers", ProducerDAO.getAll());
+					ProducerService.update(producer);
+					request.setAttribute("producers", ProducerService.getAll());
 					request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
 				} else {
-					ProducerDAO.add(producer);
+					ProducerService.add(producer);
 
 					if ("yes".equals(getServletConfig().getServletContext().getAttribute("fromAddMed"))) {
 
 						request.getRequestDispatcher("/medicine/addOrEditMedicine.jsp").forward(request, response);
 					} else {
-						request.setAttribute("producers", ProducerDAO.getAll());
+						request.setAttribute("producers", ProducerService.getAll());
 						request.getRequestDispatcher("/producer/producers.jsp").forward(request, response);
 					}
 				}

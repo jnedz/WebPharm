@@ -1,9 +1,6 @@
 package servlet.Person;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PersonDAO;
 import model.Person;
-import service.PharmacyService;
+import service.PersonService;
 
 /**
  * Servlet implementation class SortByFirstName
@@ -41,7 +37,7 @@ public class SortByFirstNameByRole extends HttpServlet {
 		System.out.println("###" + request.getParameter("order"));
 		System.out.println("###" + request.getParameter("criteria"));
 		
-		List<Person> sortedList = PersonDAO.getAll();
+		List<Person> sortedList = PersonService.getAll();
 		
 		String role = request.getParameter("role");
 		String order = request.getParameter("order");
@@ -55,7 +51,7 @@ public class SortByFirstNameByRole extends HttpServlet {
 			order = "NoSort";
 		} 
 		
-		sortedList = PersonDAO.sortByCriteria(criteria, order, role);
+		sortedList = PersonService.sortByCriteria(criteria, order, role);
 
 		if (order.equals("ASC")){
 			order="DESC";

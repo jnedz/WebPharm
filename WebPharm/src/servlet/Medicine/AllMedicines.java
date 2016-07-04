@@ -1,6 +1,7 @@
 package servlet.Medicine;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.ProducerDAO;
 import enums.MedicineType;
 import model.Medicine;
 import model.Producer;
+import service.MedicineService;
+import service.ProducerService;
 import utils.Formatter;
 import validator.ValidatorUtils;
 
@@ -37,8 +38,8 @@ public class AllMedicines extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("producers",ProducerDAO.getAll());
-		request.setAttribute("medicines", MedicineDAO.getAllSortedByTypeAndTitle());
+		request.setAttribute("producers",ProducerService.getAll());
+		request.setAttribute("medicines", MedicineService.getAllSortedByTypeAndTitle());
 		request.getRequestDispatcher("/medicine/medicines.jsp").forward(request, response); 
 	}
 
@@ -52,7 +53,7 @@ public class AllMedicines extends HttpServlet {
 		long id = 0;
 		try {
 				id = Long.parseLong(request.getParameter("id"));
-				med = MedicineDAO.getMedicineById(Long.parseLong(request.getParameter("id")));
+				med = MedicineService.getMedicineById(Long.parseLong(request.getParameter("id")));
 				request.setAttribute("id", id);
 		} catch (Exception e) {
 		}
@@ -73,7 +74,7 @@ public class AllMedicines extends HttpServlet {
 		}
 		request.setAttribute("title", title);
 
-		String dateOfManufact = request.getParameter("dateOfManufact");
+		String dateOfManufact = request.getParameter("dateOfManufact").isEmpty() ? Formatter.fromDateToString(new GregorianCalendar()) : request.getParameter("dateOfManufact");
 		if (ValidatorUtils.isValidDate(dateOfManufact)){
 			med.setDateOfManufact(Formatter.toDateFromString(dateOfManufact));
 		}else{
@@ -114,7 +115,7 @@ public class AllMedicines extends HttpServlet {
 		request.setAttribute("count", count);
 
 		String producerTitle = request.getParameter("producerTitle");
-		Producer p = ProducerDAO.getProducerByTitle(producerTitle);
+		Producer p = ProducerService.getProducerByTitle(producerTitle);
 		med.setProducer(p);
 		request.setAttribute("selectedTitle", producerTitle);
 
@@ -124,11 +125,11 @@ public class AllMedicines extends HttpServlet {
 
 		if (isError == false) {
 			if (id > 0) {
-				MedicineDAO.update(med);
+				MedicineService.update(med);
 			}else {
-				MedicineDAO.add(med);
+				MedicineService.add(med);
 			}
-			request.setAttribute("medicines", MedicineDAO.getAll());
+			request.setAttribute("medicines", MedicineService.getAll());
 			request.getRequestDispatcher("/medicine/medicines.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/medicine/addOrEditMedicine.jsp").forward(request, response);

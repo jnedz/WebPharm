@@ -1,8 +1,6 @@
 package servlet.Pharmacy;
 
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.PharmacyDAO;
-import dao.PharmacyMedicineDAO;
 import model.Medicine;
 import model.Pharmacy;
+import service.MedicineService;
 import service.PharmacyMedicineService;
+import service.PharmacyService;
 import validator.ValidatorUtils;
 
 /**
@@ -44,7 +41,7 @@ public class DeliveryMedicines extends HttpServlet {
 		request.setAttribute("idPharm", idPharm);
 		request.setAttribute("id", idPharm);
 
-		Pharmacy pharmacy = PharmacyDAO.getPharmacyById(idPharm);
+		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		request.setAttribute("pharmacy", pharmacy);
 
 		PharmacyMedicineService pharmMedService = new PharmacyMedicineService(
@@ -54,15 +51,15 @@ public class DeliveryMedicines extends HttpServlet {
 		request.setAttribute("idMed", idMed);
 
 		PharmacyMedicineService pharmMedServiceWithMed = new PharmacyMedicineService(
-				pharmacy, MedicineDAO.getMedicineById(idMed));
+				pharmacy, MedicineService.getMedicineById(idMed));
 
 		Medicine medicine = pharmMedServiceWithMed.getMedicine();
 		request.setAttribute("medicine", medicine);
 		
-		int count = PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, medicine.getTitle());
+		int count = PharmacyMedicineService.get—ountByMedTitleFromPharm(pharmacy, medicine.getTitle());
 		request.setAttribute("count", count);
 		
-		int countAll = MedicineDAO.get—ountByTitle(medicine.getTitle());
+		int countAll = MedicineService.get—ountByTitle(medicine.getTitle());
 		request.setAttribute("countAll", countAll);
 
 		String way = request.getParameter("way");
@@ -77,7 +74,7 @@ public class DeliveryMedicines extends HttpServlet {
 
 	/*	System.out.println("~~~~~~~~" + idPharm + "----" + idMed + "~~~~~~~~~~"
 				+ medicine.getCount());
-System.out.println("quantMed" + PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine));*/
+System.out.println("quantMed" + PharmacyMedicineService.get—ountOfMed(pharmacy, medicine));*/
 		int maxCount = 0;
 		if (way.equals("toPharmacy")){
 			maxCount = countAll;

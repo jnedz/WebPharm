@@ -1,9 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<jsp:include page="/header.jsp" />
-  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,9 +9,10 @@
 <style type="text/css">
  @import "style.css"
 </style>
+<jsp:include page="/header.jsp" />
 </head>
 <body>
-
+<div class="mainBlock">
 	<br>
 	<form action="AllPersons" method="post">
 		<input type="submit" value="All Persons" />
@@ -32,5 +30,6 @@
 		<input type="submit" value="All Pharmacies" />
 	</form>
 	<br>
+	</div>
 </body>
 </html>

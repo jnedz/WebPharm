@@ -1,7 +1,6 @@
 package servlet.Pharmacy;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
-import dao.MedicineDAO;
 import model.Medicine;
 import service.MedicineService;
 
@@ -36,11 +32,10 @@ public class AddMedicineFromPharmacy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	/*	List<Medicine> medicines = MedicineService.getMedicinesWithUniqueTitle();
-		System.out.println("@@@@@@@" + MedicineDAO.getAll());
-		System.out.println("___________\n" + medicines);*/
-		
-		List<Medicine> medicines = MedicineDAO.getAll();
+		List<Medicine> medicines = MedicineService.getMedicinesWithUniqueTitle();
+		System.out.println("@@@@@@@" + MedicineService.getAll());
+		System.out.println("___________\n" + medicines);
+		//List<Medicine> medicines = MedicineService.getAll();
 		System.out.println("##########" + request.getParameter("idPharm"));
 		
 		request.setAttribute("idPharm", request.getParameter("idPharm"));

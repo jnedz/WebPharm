@@ -12,8 +12,12 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
+<div class="mainBlock">
+<a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
 	<center>
-		<h4>Search results not found. </h4><br><input value="Return" type="button" onclick="history.back()">
+		<h4>Search results not found. </h4><%-- <br><input value="Return" type="button" onclick="history.back()">--%>
 	</center>
+	</div>
 </body>
 </html>

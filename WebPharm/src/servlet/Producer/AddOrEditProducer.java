@@ -1,28 +1,15 @@
 package servlet.Producer;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.MedicineDAO;
-import dao.PersonDAO;
-import dao.ProducerDAO;
-import enums.Country;
-import enums.MedicineType;
-import enums.PersonRole;
-import model.Medicine;
-import model.Person;
 import model.Producer;
-import utils.Formatter;
-import validator.ValidatorUtils;
+import service.ProducerService;
 
 /**
  * Servlet implementation class EditProducer
@@ -54,7 +41,7 @@ public class AddOrEditProducer extends HttpServlet {
 		//}
 		
 		if (Integer.parseInt(request.getParameter("id")) > 0) {
-		Producer producer = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
+		Producer producer = ProducerService.getProducerById(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("id", request.getParameter("id"));
 		request.setAttribute("producerTitle", producer.getTitle());
 		request.setAttribute("country", producer.getCountry());

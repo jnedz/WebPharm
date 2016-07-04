@@ -1,22 +1,12 @@
 package service;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 
 import dao.PersonDAO;
 import enums.PersonRole;
 import model.Person;
-import utils.DbUtils;
 
 public class PersonService {
 	
@@ -80,5 +70,9 @@ public class PersonService {
 	
 	public static List<Person> sortByFirstName(String order) {
 		return PersonDAO.sortByFirstName(order);
+	}
+
+	public static List<Person> sortByCriteria(String criteria, String order, String role) {
+		return PersonDAO.sortByCriteria(criteria, order, role);
 	}
 }

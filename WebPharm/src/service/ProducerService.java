@@ -1,19 +1,14 @@
 package service;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 
 import dao.MedicineDAO;
 import dao.ProducerDAO;
 import enums.Country;
 import model.Medicine;
 import model.Producer;
-import utils.DbUtils;
 
 public class ProducerService {
 	/*
@@ -72,7 +67,7 @@ public class ProducerService {
 		ProducerDAO.delete(id);
 	}
 
-	public static List<Producer> getAllProducers() {
+	public static List<Producer> getAll() {
 		return ProducerDAO.getAll();
 	}
 
@@ -87,6 +82,11 @@ public class ProducerService {
 	public static List<Producer> getProducersByTitle(String title) {
 		return ProducerDAO.getProducersByTitle(title);
 	}
+
+	public static Producer getProducerByTitle(String title) {
+		return ProducerDAO.getProducerByTitle(title);
+	}
+
 	
 	
 }

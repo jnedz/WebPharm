@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import enums.MedicineType;
 import model.Medicine;
 import service.MedicineService;
 
@@ -53,17 +51,17 @@ public class SortMedByTypeAndTitle extends HttpServlet {
 		request.setAttribute("selectTitle", title);
 		
 		if ( type.equals("AllTypes") && title.equals("AllTitles")){
-			meds = MedicineDAO.getAll();
+			meds = MedicineService.getAll();
 		} 
 		if (type.equals("AllTypes") && !(title.equals("AllTitles")) ){
-			meds = MedicineDAO.getMedicinesByTitle(request.getParameter("title"));
+			meds = MedicineService.getMedicinesByTitle(request.getParameter("title"));
 		} 
 		if (title.equals("AllTitles") && !(type.equals("AllTypes")) ){
-			meds = MedicineDAO.getMedicinesByType(request.getParameter("type"));
+			meds = MedicineService.getMedicinesByType(request.getParameter("type"));
 		} 
 		
 		if (!(title.equals("AllTitles")) && !(type.equals("AllTypes"))){
-			meds = MedicineDAO.getMedicinesByTypeAndTitle(request.getParameter("type"), request.getParameter("title"));
+			meds = MedicineService.getMedicinesByTypeAndTitle(request.getParameter("type"), request.getParameter("title"));
 		}
 		if (meds.size()==0){
 			request.getRequestDispatcher("/parts/message.jsp").forward(request, response); 

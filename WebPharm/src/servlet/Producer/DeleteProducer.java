@@ -1,7 +1,6 @@
 package servlet.Producer;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProducerDAO;
 import model.Producer;
 import service.ProducerService;
 
@@ -35,7 +33,7 @@ public class DeleteProducer extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("(for delete) Producer_id = " + request.getParameter("id"));
-		Producer p = ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id")));
+		Producer p = ProducerService.getProducerById(Integer.parseInt(request.getParameter("id")));
 		System.out.println(request.getParameter("id"));
 		System.out.println(p);
 		// request.setAttribute("title", p.getTitle());

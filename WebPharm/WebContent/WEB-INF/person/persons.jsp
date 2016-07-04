@@ -21,10 +21,18 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/personHeader.jsp" />
-
-	<br>
-	<br>
-	<form action="SelectPersonByInput" method="post" id="form2">
+<div class="mainBlock">
+	
+		<a href="AllPersons" class="reloadButton"><img src="img/reload.png" alt="ReloadPersons" width="100" height="100"
+								style="vertical-align: middle" title="reload persons"></a>
+	<a href="EditPerson?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addPerson" width="100" height="100"
+								style="vertical-align: middle" title="add person"></a>
+	
+	<br><br><br><br><br><br><br><br>
+	
+	
+	
+	<form action="SelectPersonByInput" method="post" id="form2" class="selectPerson">
 		<fieldset>
 			<legend> Enter Person`s Data for search: </legend>
 			<table>
@@ -80,20 +88,7 @@
 			</c:forEach>
 		</select>
 	</form>
-
-
-
-	<br>
-
-	<a href="EditPerson?id=<c:out value="0"/>"><button>Add
-			Person</button></a>
-
-	<h4>
-		<a href="AllPersons"><button class="sendsubmitC">
-				<img src="img/search.png" alt="Search"
-					style="vertical-align: middle" width=33px height=33px>
-			</button></a>
-	</h4>
+<br>
 	<input type="hidden" value="${criteria}" name="criteria"/>
 	<table class="table">
 
@@ -209,5 +204,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<a href="EditPerson?id=<c:out value="0"/>" class="addButton2"><img src="img/add.png" alt="addPerson" width="100" height="100"
+								style="vertical-align: middle" title="add person"></a>
+	
+	</div>
 </body>
 </html>

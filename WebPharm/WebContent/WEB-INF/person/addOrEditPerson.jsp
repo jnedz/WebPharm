@@ -17,10 +17,14 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/personHeader.jsp" />
+	<div class="mainBlock">
 	<br>
 	<form action="PersonsServlet" method="POST">
-		<input type="hidden" name="id" value="${id}" /> <input
-			type="hidden" name="selectedRole" value="${selectedRole}" />
+	<button class="addButton3"><img src="img/add.png" alt="addPerson" width="100" height="100"
+								style="vertical-align: middle" title=${id>0 ? "edit person" : "add person"}></button>
+	
+		<input type="hidden" name="id" value="${id}" /> <input type="hidden"
+			name="selectedRole" value="${selectedRole}" />
 		<table class="table1" border="0">
 			<caption>
 				Enter Person`s data:<br>
@@ -34,8 +38,8 @@
 				<td class="td1"><div class="field">
 						<label for="firstName">First name:</label>
 					</div></td>
-				<td class="td1"><input type="text" name="firstName" placeholder="length>=20"
-					value="${firstName}" tabindex="1" /></td>
+				<td class="td1"><input type="text" name="firstName"
+					placeholder="length>=20" value="${firstName}" tabindex="1" /></td>
 				<td class="td1"><input class="hid"
 					type=${firstNameErr == "" ? "hidden" : "text"} name="hid"
 					value="${firstNameErr}" readonly tabindex="-1" /></td>
@@ -44,8 +48,8 @@
 				<td class="td1"><div class="field">
 						<label for="lastName">Last name:</label>
 					</div></td>
-				<td class="td1"><input type="text" name="lastName" placeholder="length>=20"
-					value="${lastName}" tabindex="2" /></td>
+				<td class="td1"><input type="text" name="lastName"
+					placeholder="length>=20" value="${lastName}" tabindex="2" /></td>
 				<td class="td1"><input class="hid"
 					type=${lastNameErr == "" ? "hidden" : "text"} name="hid"
 					value="${lastNameErr}" readonly tabindex="-1" /></td>
@@ -68,14 +72,26 @@
 				<td class="td1"><c:forEach items="<%=PersonRole.values()%>"
 						var="role">
 						<INPUT TYPE="radio" NAME="role"
-							${role == selectedRole ? 'checked' : ''} VALUE="${role}"> ${role}
+							<c:choose>
+    <c:when test="${id>0 }">
+        ${role == selectedRole ? 'checked' : ''}
+    </c:when>    
+    <c:otherwise>
+        ${role == 'USER' ? 'checked' : ''}
+          </c:otherwise>
+</c:choose>
+							VALUE="${role}"> ${role}
 	       </c:forEach></td>
 				<td class="td1"></td>
 			</tr>
 		</table>
-		<input type="submit" value="Add data" />
-		<p><input value="Return" type="button" onclick="history.back()">
+<%--		<input type="submit" value=${id>0 ? 'Edit' : 'Add'} />
+		<p>
+			<input value="Return" type="button" onclick="history.back()"> --%>
 	</form>
-
+	
+	<a href="AllPersons" class="returnButton"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return to all persons"></a>
+</div>
 </body>
 </html>

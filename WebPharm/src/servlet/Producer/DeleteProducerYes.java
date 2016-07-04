@@ -1,13 +1,13 @@
 package servlet.Producer;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProducerDAO;
 import service.ProducerService;
 
 /**
@@ -30,13 +30,13 @@ public class DeleteProducerYes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ProducerService.deleteProducer(ProducerDAO.getProducerById(Integer.parseInt(request.getParameter("id"))));
+			ProducerService.deleteProducer(ProducerService.getProducerById(Integer.parseInt(request.getParameter("id"))));
 		} catch (Exception e) {
 			request.getRequestDispatcher("/parts/exception.jsp").forward(request, response);
 			System.out.println("Exception in deleteProducer(id)!");
 			e.printStackTrace();
 		}
-		request.setAttribute("producers", ProducerDAO.getAll());
+		request.setAttribute("producers", ProducerService.getAll());
 		request.getRequestDispatcher("/producer/producers.jsp").forward(request, response); 
 	}
 

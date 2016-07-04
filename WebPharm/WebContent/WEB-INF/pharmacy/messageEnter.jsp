@@ -10,30 +10,29 @@
 @import
 "style.css"
 </style>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-3.0.0.js" /></script>
-<script src="${pageContext.request.contextPath}/js/app-ajax.js"
-	type="text/javascript"></script>
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/pharmacyHeader.jsp" />
+	<div class="mainBlock">
 	<input type="hidden" name="login" value="${login}">
 	<input type="hidden" name="userIsExist" value="${userIsExist}">
-<center><h4>
+
 <c:choose>
     <c:when test="${userIsExist == 'true'}">
-       User with your registration data successfully founded!<br>Your login: ${login}, role: ${role}
+    <a href="AllPharmacies" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
+      <center><h4> User with your registration data successfully founded!<br>Your login: ${login}, role: ${role}</h4></center>
     </c:when>    
     <c:otherwise>
-      User with your registration data successfully was not found! <br>Please try again.  
+    <a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
+     <center><h4> User with your registration data was not found. <br>Please try again. </h4> </center>
           </c:otherwise>
 </c:choose>
 
-<p><a href="AllPharmacies"><button>Return</button></a>  
+<%--<p><a href="AllPharmacies"><button>Return</button></a>  --%> 
 
-</h4></center>
-
-
+</div>
 </body>
 </html>

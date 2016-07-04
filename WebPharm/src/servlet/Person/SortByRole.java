@@ -1,7 +1,6 @@
 package servlet.Person;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PersonDAO;
-import enums.PersonRole;
 import model.Person;
+import service.PersonService;
 
 /**
  * Servlet implementation class SortByRole
@@ -47,12 +45,12 @@ public class SortByRole extends HttpServlet {
 		request.setAttribute("role", request.getParameter("role"));
 
 		// if (request.getParameter("role").equals("WORKER")){
-		List<Person> list = PersonDAO.getAll();
+		List<Person> list = PersonService.getAll();
 
 		String role = request.getParameter("role");
 
 		if (!(role.equals("AllPersons"))) {
-			list = PersonDAO.getPersonsByRole(role);
+			list = PersonService.getPersonsByRole(role);
 		} 
 
 	//	request.setAttribute("buttonRole", request.getParameter("role"));

@@ -12,68 +12,20 @@
 @import
 "style.css"
 </style>
-
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/pharmacyHeader.jsp" />
+<div class="mainBlock">
+<a href="#" onclick="history.back()" class="reloadButton"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></a>
+<a href="AllPharmacies" class="addButton"><img src="img/reload.png" alt="ReloadPharmacies" width="100" height="100"
+								style="vertical-align: middle" title="reload pharmacies"></a>
+<%--	<a href="AddOrEditPharmacy?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addPharmacy" width="100" height="100"
+								style="vertical-align: middle" title="add pharmacy"></a> --%>
+	
+	<br><br><br><br><br><br><br><br>
 
-
-
-
-<a href="#" onclick="show_form(); return false"><span id="sp_sel"><h2>Registration</h2></span></a> 
-<div id="div_form" style="display:none" > 
-<form action="LoginPasswordPharmacy">
-
-		<p>
-			Login: <input type="text" maxlength="25" size="30" name="login">
-		</p>
-		<p>
-			Password: <input type="password" maxlength="25" size="30"
-				name="password">
-		</p>
-		<c:forEach items="<%=PersonRole.values()%>" var="role">
-			<INPUT TYPE="radio" NAME="role" VALUE="${role}"> ${role}
-	       </c:forEach>
-		<input type="submit" value="Enter">
-	</form> 
-</div>
-<script type="text/javascript"> 
-function show_form() 
-{ 
-var d = document;  
-var a = d.getElementById('div_form').style.display; 
-d.getElementById('div_form').style.display = (a == 'none')?'block':'none'; 
-d.getElementById('sp_sel').innerHTML = (a == 'none')?'close':'<h2>Registration</h2>';  
-} 
-</script> 
-
-<a href="#" onclick="show_form2(); return false"><span id="sp_sel2"><h2>Enter</h2></span></a> 
-<div id="div_form2" style="display:none" > 
-<form action="LoginPasswordPharmacy">
-<input type="hidden" name="enter" value="yes">
-		<p>
-			Login: <input type="text" maxlength="25" size="30" name="login">
-		</p>
-		<p>
-			Password: <input type="password" maxlength="25" size="30"
-				name="password">
-		</p>
-		<c:forEach items="<%=PersonRole.values()%>" var="role">
-			<INPUT TYPE="radio" NAME="role" VALUE="${role}"> ${role}
-	       </c:forEach>
-		<input type="submit" value="Enter">
-	</form> 
-</div>
-<script type="text/javascript"> 
-function show_form2() 
-{ 
-var d = document;  
-var a = d.getElementById('div_form2').style.display; 
-d.getElementById('div_form2').style.display = (a == 'none')?'block':'none'; 
-d.getElementById('sp_sel2').innerHTML = (a == 'none')?'close':'<h2>Enter</h2>';  
-} 
-</script> 
 <br>
 
 	<table class="table" border=1>
@@ -112,5 +64,6 @@ d.getElementById('sp_sel2').innerHTML = (a == 'none')?'close':'<h2>Enter</h2>';
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

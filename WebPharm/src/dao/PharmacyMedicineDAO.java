@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -97,7 +99,7 @@ public class PharmacyMedicineDAO {
 	 * @return all medicines from one pharmacy with id = pharId
 	 */
 	public static List<Medicine> getAllMedsByPharmId(int pharmId) {
-		List<Medicine> list = new ArrayList<>();
+		List<Medicine> medicines = new ArrayList<>();
 		Medicine med = new Medicine();
 		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id where medicines.id in (select distinct id_medicine from pharmacies_medicines where "
 				+ "id_pharmacy = " + pharmId + ")";	
@@ -124,14 +126,25 @@ public class PharmacyMedicineDAO {
 				producer.setCountry(Country.valueOf(result.getString("country")));
 				med.setProducer(producer);
 
-				list.add(med);
+				medicines.add(med);
 			}
+			Collections.sort(medicines, new Comparator<Medicine>() {
+
+				public int compare(Medicine o1, Medicine o2) {
+
+					if (o1.getType().compareTo(o2.getType()) == 0) {
+						return o1.getTitle().compareTo(o2.getTitle());
+					} else {
+						return (o1.getType().name()).compareTo(o2.getType().name());
+					}
+				}
+			});
 			statement.close();
 		} catch (SQLException e) {
 			System.out.println("Exception in getPharmMedsByPharmId(int pharmId)!");
 			e.printStackTrace();
 		}
-		return list;
+		return medicines;
 	}
 
 	/**

@@ -1,10 +1,6 @@
 package servlet.Medicine;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MedicineDAO;
-import dao.ProducerDAO;
-import enums.MedicineType;
 import model.Medicine;
-import model.Producer;
+import service.MedicineService;
 import utils.Formatter;
 
 /**
@@ -41,7 +34,7 @@ public class EditMedicine extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (Long.parseLong(request.getParameter("id")) > 0) {
-			Medicine m = MedicineDAO.getMedicineById(Long.parseLong(request.getParameter("id")));
+			Medicine m = MedicineService.getMedicineById(Long.parseLong(request.getParameter("id")));
 			request.setAttribute("id", m.getId());
 			request.setAttribute("title", m.getTitle());
 			request.setAttribute("dateOfManufact", Formatter.fromDateToString(m.getDateOfManufact()));

@@ -18,10 +18,14 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/medicineHeader.jsp" />
+	<div class="mainBlock">
 	<c:set var="types" value="<%=MedicineType.values()%>">
 	</c:set>
-
+<br>
 	<form action="AllMedicines" method="POST">
+	
+	<button class="addButton3"><img src="img/add.png" alt="addMedicine" width="100" height="100"
+								style="vertical-align: middle" title=${id>0 ? "edit medicine" : "add medicine"}></button>
 		<input type="hidden" name="id" value="${id}" /> <input type="hidden"
 			name="selectedType" value="${selectedType}" /> <input type="hidden"
 			name="selectedTitle" value="${selectedTitle}" />
@@ -103,8 +107,8 @@
 
 						<a href="AddOrEditProducer?id=<c:out value="0"/>">or Add
 							Producer</a>
-					</h5> <% application.setAttribute("fromAddMed", "yes");
-// 	session.setAttribute("fromAddMed", "yes");
+					</h5> <%
+ 	application.setAttribute("fromAddMed", "yes");
  %> </c:otherwise> </c:choose></td>
 			</tr>
 			<tr>
@@ -118,8 +122,15 @@
 				</select></td>
 			</tr>
 		</table>
-		<input type="submit" value="Add data" />
-		<p><input value="Return" type="button" onclick="history.back()">
+<%-- 		<input type="submit" value=${id>0 ? 'Edit' : 'Add'} />
+		<p>
+			<input value="Return" type="button" onclick="history.back()">--%>
 	</form>
+	
+	<a href="AllMedicines" class="returnButton"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return to all medicines"></a>
+	
+	
+	</div>
 </body>
 </html>

@@ -14,21 +14,19 @@
 <body>
 <jsp:include page="/header.jsp" />
 <jsp:include page="/producerHeader.jsp" />
-<p>
+<div class="mainBlock">
 
+<a href="AllProducers" class="reloadButton"><img src="img/reload.png" alt="ReloadProducers" width="100" height="100"
+								style="vertical-align: middle" title="reload producers"></a>
+	<a href="AddOrEditProducer?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addProducer" width="100" height="100"
+								style="vertical-align: middle" title="add producer"></a>
+	
+	<br><br><br><br><br><br><br><br>
 
-<br>
-	<a href="AddOrEditProducer?id=<c:out value="0"/>"><button>Add Producer</button></a>
-<%-- <form action="addProducer.jsp" method="post">--%>	
 	<%
  	application.setAttribute("fromAddMed", "no");
  %>
-	<%--	<input type="submit" value="Add Producer" />
-	</form>--%>	
-		<h4>
-			<b><a href="AllProducers"><button class="sendsubmitC"><img src="img/search.png" alt="Search" 
-          style="vertical-align: middle" width=33px height=33px></button></a></b> 
-		</h4>
+		
 	<table class="table" border=1>
 		<thead>
 			<tr>
@@ -58,5 +56,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="AddOrEditProducer?id=<c:out value="0"/>" class="addButton2"><img src="img/add.png" alt="addProducer" width="100" height="100"
+								style="vertical-align: middle" title="add producer"></a>
+	</div>
 </body>
 </html>

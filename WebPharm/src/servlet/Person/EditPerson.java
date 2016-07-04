@@ -2,16 +2,14 @@ package servlet.Person;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PersonDAO;
-
 import model.Person;
+import service.PersonService;
 import utils.Formatter;
 
 
@@ -38,7 +36,7 @@ public class EditPerson extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (Long.parseLong(request.getParameter("id")) > 0){
-		Person person = PersonDAO.getPersonById(Long.parseLong(request.getParameter("id")));
+		Person person = PersonService.getPersonById(Long.parseLong(request.getParameter("id")));
 		request.setAttribute("id", person.getId());
 		request.setAttribute("firstName", person.getFirstName());
 		request.setAttribute("lastName", person.getLastName());
