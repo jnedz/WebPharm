@@ -24,7 +24,7 @@
 		<h4>
 			<br> <input type="hidden" name="roleReg" value="${roleReg}">
 			<c:choose>
-				<c:when test="${WORKER == roleReg}">
+				<c:when test="${'WORKER' == roleReg}">
 				<a
 						href="AddMedicineFromPharmacy?idPharm=<c:out value="${idPharm}"/>"
 						class="addButton"><img src="img/add.png" alt="addMedicine"
@@ -45,7 +45,7 @@
 		</h4>
 
 		<c:choose>
-			<c:when test="${WORKER == roleReg}">
+			<c:when test="${'WORKER' == roleReg}">
 			
 				<table class="table" border=1>
 					<thead>
@@ -95,7 +95,13 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<br><br><br><br>
+				<br><br>
+				<a
+						href="AddMedicineFromPharmacy?idPharm=<c:out value="${idPharm}"/>"
+						class="addButton2"><img src="img/add.png" alt="addMedicine"
+						width="100" height="100" style="vertical-align: middle"
+						title="add medicine"></a>
+				<br><br>
 
 			</c:when>
 			<c:otherwise>

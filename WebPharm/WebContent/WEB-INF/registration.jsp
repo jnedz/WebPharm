@@ -11,9 +11,25 @@
 
 	<div class="registration">
 				<input type="hidden" name="roleReg" value="${roleReg}"> 
+				
+				!roleReg${roleReg}
+				
 
-
-		<c:choose>
+		 <% if ("yes".equals(application.getAttribute("registration"))){%>
+				<form>
+					<br> <a href="">Logout</a>
+					<%
+						application.setAttribute("registration", "no");
+					%>
+				</form>
+			
+		<%}else{%>
+		<a href="Registration">Registration</a>
+				<br>
+				<a href="Enter" >Enter</a>
+		<%}%> 
+	<%-- 	<c:choose>
+		
 			<c:when
 				test="${'yes' == application.getAttribute('registration')}">
 				<form>
@@ -35,7 +51,7 @@
 
 			</c:otherwise>
 		</c:choose>
-
+ --%>
 
 	</div>
 

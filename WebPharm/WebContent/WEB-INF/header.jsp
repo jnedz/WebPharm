@@ -1,6 +1,9 @@
 
 
 <center>
+
+
+
 <header> 
 	<p>
 		<a href="index.jsp"><button class="sendsubmitS">
@@ -10,7 +13,7 @@
 		<a href="AllProducers"><button>All Producers</button></a>
 		<a href="AllMedicines"><button>All Medicines</button></a>
 		<a href="AllPharmacies"><button>All Pharmacies</button></a>
-		<jsp:include page="/registration.jsp" />
-	
+		
+<jsp:include page="/registration.jsp" />	
 </header>
 </center>

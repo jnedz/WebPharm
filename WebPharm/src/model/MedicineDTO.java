@@ -24,8 +24,6 @@ public class MedicineDTO {
 		this.producerTitle = producerTitle;
 	}
 
-	 
-
 
 	public long getId() {
 		return id;

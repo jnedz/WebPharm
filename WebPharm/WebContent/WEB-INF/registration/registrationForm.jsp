@@ -39,14 +39,14 @@
 							<label for="login">Login:</label>
 						</div></td>
 					<td class="td1"><input type="text" name="login" id="frlogin"
-						value="${login}" placeholder="length>=20" tabindex="1" /></td>
+						value="${login}" placeholder="length<=20" tabindex="1" /></td>
 				</tr>
 				<tr>
 					<td class="td1"><div class="field">
 							<label for="password">Password:</label>
 						</div></td>
 					<td class="td1"><input id="frpassword" type="password"
-						name="password" placeholder="length>=20" value="${password}" /></td>
+						name="password" placeholder="length<=25" value="${password}" /></td>
 				</tr>
 
 				<tr>
@@ -54,7 +54,7 @@
 							<label for="firstName">First name:</label>
 						</div></td>
 					<td class="td1"><input id="frname" type="text"
-						name="firstName" placeholder="length>=20" value="${firstName}"
+						name="firstName" placeholder="length<=20" value="${firstName}"
 						tabindex="1" /></td>
 				</tr>
 				<tr>
@@ -62,7 +62,7 @@
 							<label for="lastName">Last name:</label>
 						</div></td>
 					<td class="td1"><input id="frname" type="text" name="lastName"
-						placeholder="length>=20" value="${lastName}" tabindex="2" /></td>
+						placeholder="length<=20" value="${lastName}" tabindex="2" /></td>
 				</tr>
 				<tr>
 					<td class="td1"><div class="field">

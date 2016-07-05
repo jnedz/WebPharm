@@ -29,7 +29,7 @@
 						application.setAttribute("registration", "yes");
 					%>
 						<p>
-						<a href="AllPharmacies"><img src="img/enter.png" alt="Enter"
+						<a href="AllPharmacies?roleReg=WORKER"><img src="img/enter.png" alt="Enter"
 							width="90" height="90" style="vertical-align: middle"
 							title="enter"></a>
 					</c:when>

@@ -29,11 +29,20 @@ function validateForm()
 
 function validateForm() {
     var x1 = document.forms["myForm"]["login"].value;
+    
+    
+    
     if (x1.length>=20 || x1.length<=3) {
-        alert("Name must be filled out (3-20 symbols)");
+        alert("Login must be filled out (3-20 symbols)");
         return false;
     }
     var x2 = document.forms["myForm"]["password"].value;
+    
+    if ((/^(?=.{3,20})[a-z][a-z0-9]*[._-]?[a-z0-9]+$/.test(x1)) || password=="" || password==null) {
+    	 alert("password must be filled out (3-hghgfhgfh symbols)");
+    return false;
+    }
+    
     if (x2.length>=25 || x2.length<=3) {
         alert("password must be filled out (3-25 symbols)");
         return false;
