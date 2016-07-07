@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Person;
-import service.PersonService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
 
 /**
  * Servlet implementation class SortByFirstName
@@ -37,7 +37,7 @@ public class SortByFirstNameByRole extends HttpServlet {
 		System.out.println("###" + request.getParameter("order"));
 		System.out.println("###" + request.getParameter("criteria"));
 		
-		List<Person> sortedList = PersonService.getAll();
+		List<PersonsInfo> sortedList = PersonsInfoService.getAll();
 		
 		String role = request.getParameter("role");
 		String order = request.getParameter("order");
@@ -51,7 +51,7 @@ public class SortByFirstNameByRole extends HttpServlet {
 			order = "NoSort";
 		} 
 		
-		sortedList = PersonService.sortByCriteria(criteria, order, role);
+		sortedList = PersonsInfoService.sortByCriteria(criteria, order, role);
 
 		if (order.equals("ASC")){
 			order="DESC";

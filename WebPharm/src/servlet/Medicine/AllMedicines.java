@@ -53,7 +53,7 @@ public class AllMedicines extends HttpServlet {
 		long id = 0;
 		try {
 				id = Long.parseLong(request.getParameter("id"));
-				med = MedicineService.getMedicineById(Long.parseLong(request.getParameter("id")));
+				med = MedicineService.getMedicineById(Integer.parseInt(request.getParameter("id")));
 				request.setAttribute("id", id);
 		} catch (Exception e) {
 		}

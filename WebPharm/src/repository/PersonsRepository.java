@@ -7,7 +7,7 @@ import model.Person;
 
 public class PersonsRepository {
 
-	public static void completePersonsTable(){
+public static void completePersonsTable(){
 		
 		Person person = new Person();
 		person.setFirstName("Zoya");
@@ -44,5 +44,6 @@ public class PersonsRepository {
 		person.setDateOfBirthday(new GregorianCalendar(1990,05,05));
 		PersonDAO.add(person);
 	}
+	
+	
 }
- 

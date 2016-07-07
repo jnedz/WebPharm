@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DbUtils {
 
-	static final String DB_URL = "jdbc:mysql://localhost/test1";
+	static final String DB_URL = "jdbc:mysql://localhost/test";
 	static final String USER = "root";
 	static final String PASS = "root";
 	private static Connection conn = null;
@@ -21,7 +21,7 @@ public class DbUtils {
 	public static Connection getConnection() {
 		return conn;
 	}
-
+/*
 	public static void createPersonTable() {
 
 		Statement statement = null;
@@ -38,7 +38,7 @@ public class DbUtils {
 			System.out.println("Exeption in createPersonTable().");
 		}
 	}
-
+*/
 	public static void createProducerTable() {
 
 		Statement statement = null;
@@ -105,7 +105,7 @@ public class DbUtils {
 		}
 
 	}
-	
+	/*
 	public static void createPersonsUsersTable() {
 
 		Statement statement = null;
@@ -126,7 +126,46 @@ public class DbUtils {
 		}
 
 	}
+	*/
+	public static void createPersonsInfoTable() {
+
+		Statement statement = null;
+		try {
+			String sql = "create table PersonsInfo (id INT NOT NULL AUTO_INCREMENT, "
+					+ "firstName  varchar(20) not null, lastName varchar(20) not null, "
+					+ "role enum('WORKER', 'USER') default 'USER', dateOfBirthday date, "
+					+ "login varchar(20), password  varchar(20), "
+					+ "primary key (id) )";
+
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("Exeption in createPersonsInfoTable().");
+		}
+	}
 	
+	public static void createPersonsInfoPharmaciesTable() {
+
+		Statement statement = null;
+		try {
+			String sql = "create table PersonsInfo_Pharmacies (id INT NOT NULL AUTO_INCREMENT, id_personsInfo int, "
+					+ "id_pharmacy int, "
+					+ "foreign key (id_personsInfo) references personsInfo (id), "
+					+ "role enum('WORKER', 'USER'), "
+					+ "foreign key (id_pharmacy) references pharmacies (id), "
+					+ "primary key (id) )";
+
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("Exeption in createPersonsInfoPharmaciesTable().");
+		}
+
+	}
+	
+/*	
 	public static void createUsersTable() {
 
 		Statement statement = null;
@@ -141,17 +180,32 @@ public class DbUtils {
 		}
 
 	}
-
-	public static void dropUsersTable() {
+*/
+	
+	public static void dropPersonsInfoTable() {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Users";
+			String sql = "drop table if exists PersonsInfo";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
 		} catch (SQLException sqlexc) {
-			System.out.println("SQL exception in dropUsersTable().");
+			System.out.println("SQL exception in dropPersonsInfoTable().");
+		}
+	}
+
+	
+	public static void dropPersonsInfoPharmaciesTable() {
+
+		Statement statement = null;
+		try {
+			String sql = "drop table if exists PersonsInfo_Pharmacies";
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("SQL exception in dropPersonsInfoPharmaciesTable().");
 		}
 	}
 
@@ -159,7 +213,7 @@ public class DbUtils {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Persons";
+			String sql = "drop table if exists Persons";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
@@ -168,6 +222,18 @@ public class DbUtils {
 		}
 	}
 
+	public static void dropUsersTable() {
+
+		Statement statement = null;
+		try {
+			String sql = "drop table if exists Users";
+			statement = getConnection().createStatement();
+			statement.executeUpdate(sql);
+			statement.close();
+		} catch (SQLException sqlexc) {
+			System.out.println("Exeption in dropUsersTable().");
+		}
+	}
 	public static void dropMedicineTable() {
 
 		Statement statement = null;
@@ -185,7 +251,7 @@ public class DbUtils {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Pharmacies";
+			String sql = "drop table if exists Pharmacies";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
@@ -198,7 +264,7 @@ public class DbUtils {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Producers";
+			String sql = "drop table if exists Producers";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
@@ -211,7 +277,7 @@ public class DbUtils {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Pharmacies_Medicines";
+			String sql = "drop table if exists Pharmacies_Medicines";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
@@ -225,7 +291,7 @@ public class DbUtils {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table  if exists Persons_Users";
+			String sql = "drop table if exists Persons_Users";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();

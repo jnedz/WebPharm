@@ -34,7 +34,7 @@ public class EditMedicine extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (Long.parseLong(request.getParameter("id")) > 0) {
-			Medicine m = MedicineService.getMedicineById(Long.parseLong(request.getParameter("id")));
+			Medicine m = MedicineService.getMedicineById(Integer.parseInt(request.getParameter("id")));
 			request.setAttribute("id", m.getId());
 			request.setAttribute("title", m.getTitle());
 			request.setAttribute("dateOfManufact", Formatter.fromDateToString(m.getDateOfManufact()));

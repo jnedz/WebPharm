@@ -30,7 +30,7 @@ public class DeleteMedicineYes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			MedicineService.delete(MedicineService.getMedicineById(Long.parseLong(request.getParameter("id"))));
+			MedicineService.delete(MedicineService.getMedicineById(Integer.parseInt(request.getParameter("id"))));
 		} catch (Exception e) {
 			request.getRequestDispatcher("/parts/exception.jsp").forward(request, response);
 			System.out.println("Exception in deleteMedicine(id)!");

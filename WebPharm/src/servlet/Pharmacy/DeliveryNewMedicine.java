@@ -37,7 +37,7 @@ public class DeliveryNewMedicine extends HttpServlet {
 		//idPharm=1&idMed=3&way=toPharmacy&quantity=111
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
 		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
-		long idMed = Long.parseLong(request.getParameter("idMed"));
+		int idMed = Integer.parseInt(request.getParameter("idMed"));
 		int count = Integer.parseInt(request.getParameter("quantity"));
 		PharmacyMedicineService apot = new PharmacyMedicineService(pharmacy);
 		apot.deliveryMedToPharmacy(MedicineService.getMedicineById(idMed).getTitle(), count);

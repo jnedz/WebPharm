@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Person;
-import service.PersonService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
 import utils.Formatter;
 
 
@@ -35,8 +35,8 @@ public class EditPerson extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (Long.parseLong(request.getParameter("id")) > 0){
-		Person person = PersonService.getPersonById(Long.parseLong(request.getParameter("id")));
+		if (Integer.parseInt(request.getParameter("id")) > 0){
+		PersonsInfo person = PersonsInfoService.getPersonsInfoById(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("id", person.getId());
 		request.setAttribute("firstName", person.getFirstName());
 		request.setAttribute("lastName", person.getLastName());

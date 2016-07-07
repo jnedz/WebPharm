@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.PersonService;
+import service.PersonsInfoService;
 
 /**
  * Servlet implementation class AllPersons
@@ -29,7 +29,7 @@ public class AllPersons extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("persons", PersonService.getAll());
+		request.setAttribute("persons", PersonsInfoService.getAll());
 		request.getRequestDispatcher("/person/persons.jsp").forward(request, response); 
 	}
 

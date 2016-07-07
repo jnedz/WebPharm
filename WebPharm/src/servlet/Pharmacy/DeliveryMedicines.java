@@ -47,7 +47,7 @@ public class DeliveryMedicines extends HttpServlet {
 		PharmacyMedicineService pharmMedService = new PharmacyMedicineService(
 				pharmacy);
 
-		long idMed = Long.parseLong(request.getParameter("idMed"));
+		int idMed = Integer.parseInt(request.getParameter("idMed"));
 		request.setAttribute("idMed", idMed);
 
 		PharmacyMedicineService pharmMedServiceWithMed = new PharmacyMedicineService(

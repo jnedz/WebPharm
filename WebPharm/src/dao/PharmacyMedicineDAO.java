@@ -33,7 +33,7 @@ public class PharmacyMedicineDAO {
 		try {
 			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, ph.getId());
-			statement.setLong(2, med.getId());
+			statement.setInt(2, med.getId());
 			statement.setDouble(3, med.getPrice());
 			statement.setInt(4, count);
 			int rowsInserted = statement.executeUpdate();
@@ -58,39 +58,18 @@ public class PharmacyMedicineDAO {
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pharmacy.getId());
-			statement.setLong(2, medicine.getId());
+			statement.setInt(2, medicine.getId());
 			int rowsDeleted = statement.executeUpdate();
 			if (rowsDeleted > 0) {
 				System.out.println("A pharmacy_medicine was deleted successfully!");
 			}
 			statement.close();
 		} catch (SQLException ex) {
-			System.out.println("Exception in deletePharmacyMedicine(long id)!");
+			System.out.println("Exception in deletePharmacyMedicine(Int id)!");
 			ex.printStackTrace();
 		}
 	}
 
-	/**
-	 * 
-	 * @param id
-	 *            id from the pharmacies_medicines table
-	 */
-	@SuppressWarnings("unused")
-	private static void deleteById(long id) {
-		String sql = "DELETE FROM pharmacies_medicines WHERE id=?";
-		try {
-			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
-			statement.setLong(1, id);
-			int rowsDeleted = statement.executeUpdate();
-			if (rowsDeleted > 0) {
-				System.out.println("A pharmacy_medicine was deleted successfully!");
-			}
-			statement.close();
-		} catch (SQLException ex) {
-			System.out.println("Exception in deletePharmacyMedicine(long id)!");
-			ex.printStackTrace();
-		}
-	}
 
 	/**
 	 * 
@@ -109,7 +88,7 @@ public class PharmacyMedicineDAO {
 
 			while (result.next()) {
 				med = new Medicine();
-				med.setId(result.getLong(1));
+				med.setId(result.getInt(1));
 				med.setTitle(result.getString(2));
 				med.setType(MedicineType.valueOf(result.getString(3)));
 				Date date = Date.valueOf(result.getDate(4).toString());
@@ -178,34 +157,6 @@ public class PharmacyMedicineDAO {
 		return list;
 	}
 
-	/**
-	 * 
-	 * @param pharmacy
-	 * @param medicine
-	 * @return id from pharmasies_medicines table for the couple
-	 *         pharmacy-medicine. Return "0" if there is not medicine in
-	 *         pharmacy..
-	 */
-	@SuppressWarnings("unused")
-	private static long getPharmMedId(Pharmacy pharmacy, Medicine medicine) {
-		long id = 0;
-		String sql = "SELECT * FROM pharmacies_medicines inner join medicines ON pharmacies_medicines.id_medicine = medicines.id inner join pharmacies "
-				+ "ON pharmacies_medicines.id_pharmacy = pharmacies.id WHERE pharmacies_medicines.id_pharmacy = "
-				+ pharmacy.getId() + " and pharmacies_medicines.id_medicine = " + medicine.getId();
-		try {
-			Statement statement = (Statement) DbUtils.getConnection().createStatement();
-			ResultSet result = statement.executeQuery(sql);
-
-			while (result.next()) {
-				id = result.getLong(1);
-			}
-			statement.close();
-		} catch (SQLException e) {
-			System.out.println("Exception in getPharmMedId(Pharmacy pharmacy, Medicine medicine)!");
-			e.printStackTrace();
-		}
-		return id;
-	}
 
 	/**
 	 * 
@@ -220,7 +171,7 @@ public class PharmacyMedicineDAO {
 		int count = 0;
 
 		for (Medicine med : MedicineDAO.getMedicinesByTitle(medTitle)) {
-			long id = med.getId();
+			int id = med.getId();
 
 			String sql = "SELECT sum(pharmacies_medicines.count) FROM pharmacies_medicines where pharmacies_medicines.id_medicine = "
 					+ id + " and pharmacies_medicines.id_pharmacy = " + pharmacy.getId();
@@ -345,7 +296,7 @@ public class PharmacyMedicineDAO {
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pharmacy.getId());
-			statement.setLong(2, medicine.getId());
+			statement.setInt(2, medicine.getId());
 			ResultSet result = statement.executeQuery();
 			res = result.next();
 			statement.close();

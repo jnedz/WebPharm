@@ -37,7 +37,7 @@ public class DeliveryMedicinesMessage extends HttpServlet {
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
 		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		
-		long idMed = Long.parseLong(request.getParameter("idMed"));
+		int idMed = Integer.parseInt(request.getParameter("idMed"));
 		
 		PharmacyMedicineService pharmMedServ = new PharmacyMedicineService(pharmacy, MedicineService.getMedicineById(idMed));
 		Medicine medicineFromPharm = pharmMedServ.getMedicine();

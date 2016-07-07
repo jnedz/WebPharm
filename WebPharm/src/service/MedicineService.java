@@ -351,7 +351,7 @@ public class MedicineService {
 	 *            medicine`s id
 	 * @return medicine with typed id
 	 */
-	public static Medicine getMedicineById(long id) {
+	public static Medicine getMedicineById(int id) {
 		return MedicineDAO.getMedicineById(id);
 	}
 
@@ -369,7 +369,7 @@ public class MedicineService {
 	 * @param id
 	 *            id of medicine which we want delete
 	 */
-	public void deleteById(long id) {
+	public void deleteById(int id) {
 		MedicineDAO.delete(id);
 	}
 

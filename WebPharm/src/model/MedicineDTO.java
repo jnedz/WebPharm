@@ -7,7 +7,7 @@ import enums.MedicineType;
 
 public class MedicineDTO {
 
-	private long id;
+	private int id;
 	private String title = "";
 	private MedicineType type;
 	private GregorianCalendar dateOfManufact;
@@ -25,11 +25,11 @@ public class MedicineDTO {
 	}
 
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

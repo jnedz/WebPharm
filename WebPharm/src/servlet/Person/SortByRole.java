@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Person;
-import service.PersonService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
 
 /**
  * Servlet implementation class SortByRole
@@ -45,12 +45,12 @@ public class SortByRole extends HttpServlet {
 		request.setAttribute("role", request.getParameter("role"));
 
 		// if (request.getParameter("role").equals("WORKER")){
-		List<Person> list = PersonService.getAll();
+		List<PersonsInfo> list = PersonsInfoService.getAll();
 
 		String role = request.getParameter("role");
 
 		if (!(role.equals("AllPersons"))) {
-			list = PersonService.getPersonsByRole(role);
+			list = PersonsInfoService.getPersonsInfoByRole(role);
 		} 
 
 	//	request.setAttribute("buttonRole", request.getParameter("role"));

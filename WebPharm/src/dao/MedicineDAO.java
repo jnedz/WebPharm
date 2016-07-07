@@ -29,7 +29,7 @@ public class MedicineDAO {
 	 */
 	private static Medicine convert(ResultSet rs) throws SQLException {
 		Medicine med = new Medicine();
-		med.setId(rs.getLong("id"));
+		med.setId(rs.getInt("id"));
 		med.setTitle(rs.getString(2));
 		med.setType(MedicineType.valueOf(rs.getString(3)));
 		Date date = Date.valueOf(rs.getDate(4).toString());
@@ -158,7 +158,7 @@ public class MedicineDAO {
 	 *            medicine`s id
 	 * @return medicine with typed id
 	 */
-	public static Medicine getMedicineById(long id) {
+	public static Medicine getMedicineById(int id) {
 		Medicine med = new Medicine();
 		String sql = "SELECT * FROM medicines join producers ON medicines.id_producer = producers.id WHERE medicines.id = "
 				+ id;
@@ -170,7 +170,7 @@ public class MedicineDAO {
 			}
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Exception in getMedicineById(long id)");
+			System.out.println("Exception in getMedicineById(int id)");
 			e.printStackTrace();
 		}
 		return med;
@@ -190,18 +190,18 @@ public class MedicineDAO {
 	 * @param id
 	 *            id of medicine which we want delete
 	 */
-	public static void delete(long id) {
+	public static void delete(int id) {
 		String sql = "DELETE FROM medicines WHERE id=?";
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
-			statement.setLong(1, id);
+			statement.setInt(1, id);
 			int rowsDeleted = statement.executeUpdate();
 			if (rowsDeleted > 0) {
 				System.out.println("A medicine was deleted successfully!");
 			}
 			statement.close();
 		} catch (SQLException ex) {
-			System.out.println("Exception in deleteMedicine(long id)!");
+			System.out.println("Exception in deleteMedicine(int id)!");
 			ex.printStackTrace();
 		}
 	}

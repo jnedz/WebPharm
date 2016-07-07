@@ -30,7 +30,7 @@ public class DeleteMedicine extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Medicine med = MedicineService.getMedicineById(Long.parseLong(request.getParameter("id")));
+		Medicine med = MedicineService.getMedicineById(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("medicine", med);
 		request.getRequestDispatcher("/medicine/deleteMedicine.jsp").forward(request, response);
 	}

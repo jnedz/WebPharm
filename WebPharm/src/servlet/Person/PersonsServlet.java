@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import enums.PersonRole;
-import model.Person;
-import service.PersonService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
 import utils.Formatter;
 import validator.ValidatorUtils;
 
@@ -36,7 +36,7 @@ public class PersonsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setAttribute("persons", PersonService.getAll());
+		request.setAttribute("persons", PersonsInfoService.getAll());
 		request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 
 	}
@@ -45,15 +45,15 @@ public class PersonsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Person person = new Person();
+		PersonsInfo person = new PersonsInfo();
 		boolean isError = false;
-		long id = 0;
+		int id = 0;
 		try {
-			id = Long.parseLong(request.getParameter("id"));
+			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
 		}
 		if (id > 0) {
-			person = PersonService.getPersonById(id);
+			person = PersonsInfoService.getPersonsInfoById(id);
 			request.setAttribute("id", id);
 		}
 
@@ -97,11 +97,11 @@ public class PersonsServlet extends HttpServlet {
 
 		if (isError == false) {
 			if (id > 0) {
-				PersonService.update(person);
+				PersonsInfoService.update(person);
 			} else {
-				PersonService.add(person);
+				PersonsInfoService.add(person);
 			}
-				request.setAttribute("persons", PersonService.getAll());
+				request.setAttribute("persons", PersonsInfoService.getAll());
 				request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/person/addOrEditPerson.jsp").forward(request, response);
