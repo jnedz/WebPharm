@@ -20,10 +20,14 @@
 	<jsp:include page="/header.jsp" />
 	<jsp:include page="/pharmacyHeader.jsp" />
 	<div class="mainBlock">
-	<a href="PharmaciesServlet?idPharm=<c:out value='${idPharm}'/>"" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
-								style="vertical-align: middle" title="return"></a>
+	<form action="PharmaciesServlet" method="post">
+	<%-- <a href="PharmaciesServlet?idPharm=<c:out value='${idPharm}'/>" class="returnButton2"> --%><button class="returnButton20"><img src="img/return.png" alt="Return" width="90" height="90"
+								style="vertical-align: middle" title="return"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
 	<br><br><br><br><br>
-	<form action="DeliveryMedicines?idMed=<c:out value="${idMed}"/>&way=<c:out value="${way}"/>&idPharm=<c:out value="${idPharm}"/>" method="get">
+	
+	<form action="DeliveryMedicines"  method="post">
 	<input type="hidden" name="idPharm" value="${idPharm}" /> 
 		<input type="hidden" name="idMed" value="${idMed}" /> 
 		<input type="hidden" name="way" value="${way}" /> 

@@ -20,8 +20,27 @@
 <jsp:include page="/pharmacyHeader.jsp" />
 <div class="mainBlock">
 
+<a href="#" onclick="history.back()" class="reloadButton"><img
+			src="img/return.png" alt="Return" width="90" height="90"
+			style="vertical-align: middle" title="return"></a>
+			
+<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton20"><img src="img/reload.png" alt="reload"
+						width="100" height="100" style="vertical-align: middle"
+						title="reload medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
+								
+							<!-- 	<img src="img/reload.png"
+			alt="ReloadPharmacies" width="100" height="100"
+			style="vertical-align: middle" title="reload pharmacies"></a> --> 
+			<br>
+		<br> <br> <br> <br> <br> <br>
+
 	
+	<h4><p>Pharmacy: ${pharmacy.title}<br></h4>
 	<table  class="table">
+	
 		<thead>
 			<tr>
 
@@ -41,20 +60,26 @@
 					<td class="td" style="text-align: center;"><c:out
 							value="${medicine.count}" /></td>
 
-					<td class="td" style="text-align: center;"><h3>
-<form action="DeliveryNewMedicine"> 
+					<td class="td" style="text-align: center;">
+<form action="DeliveryNewMedicine"  method="post"><h3>
 <input type="hidden" name="idPharm" value="${idPharm}" />
 <input type="hidden" name="idMed" value="${medicine.id}" /> 
 <input type="hidden" name="way" value="toPharmacy" /> 
 <input type="text" name="quantity"/>
 <input type="submit" class="addMed" value="Add Medicine">
-</form>
-						</h3></td>
+</h3></form>
+						</td>
 
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton21"><img src="img/reload.png" alt="reload"
+						width="100" height="100" style="vertical-align: middle"
+						title="reload medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
 	</div>
 </body>
 </html>

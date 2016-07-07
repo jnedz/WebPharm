@@ -34,7 +34,13 @@ public class DeliveryNewMedicine extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//idPharm=1&idMed=3&way=toPharmacy&quantity=111
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
 		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		int idMed = Integer.parseInt(request.getParameter("idMed"));
@@ -52,14 +58,6 @@ public class DeliveryNewMedicine extends HttpServlet {
 		request.setAttribute("pharmacy", pharmacy);
 		request.setAttribute("medicines", medicines);
 		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

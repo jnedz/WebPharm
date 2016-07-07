@@ -124,12 +124,19 @@ public class PharmacyMedicineService {
 
 		} else {
 			medicines =	MedicineService.getDateSortedList(getAllMedsByPharmId(pharmacy.getId()));
+			List <Medicine> medicinesWhithEqualsTitle = new ArrayList<>();
+			
 		/*	for (Medicine medicine : medicines) {
 				if (medicine.getCount()==0){
 					medicines.remove(medicine);
 				}
 			}*/
 			for (Medicine medicine : medicines) {
+				if (medicine.getTitle().equals(title)){
+					medicinesWhithEqualsTitle.add(medicine);
+				}
+			}
+			for (Medicine medicine : medicinesWhithEqualsTitle) {
 				if (medicine.getCount() <= count) {
 					// medicine.setCount(medicine.getCount() + count);
 					MedicineService.addOrUpdate(medicine);

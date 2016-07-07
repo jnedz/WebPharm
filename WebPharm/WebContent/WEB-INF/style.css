@@ -84,6 +84,13 @@ input[type="button"] {
 	border-radius: 5px;
 	border: 2px solid #666;
 }
+.unvisible {
+width:  35px;  
+height: 30px; 
+margin: 0;
+padding:0;
+border: 0;
+}
 
 .table1 {
 	border: 0px importent!;
@@ -228,6 +235,20 @@ cursor: hand;
     
 }
 
+.signIn {
+width:  50px;  
+height: 50px; 
+margin: 0;
+padding:0;
+border: 0;
+background: transparent url('img/signIn.png') 70% 70% no-repeat ;
+background-size: cover;
+cursor: pointer; 
+cursor: hand; 
+    
+}
+
+
 .addButton2 {
 	position: absolute;
     right: 70px;
@@ -246,6 +267,36 @@ cursor: hand;
 	position: absolute;
     left: 70px;
     top: 170px;
+}
+.returnButton20 {
+	width: 90px;
+  height:90px;
+	position: absolute;
+    left: 70px;
+    top: 170px;
+    
+    margin: 0 !important;
+padding:0 !important;
+border: 0 !important;
+}
+.addButton20{
+width: 100px;
+  height:100px;
+	position: absolute;
+    right: 70px;
+    top: 170px;
+    margin: 0 !important;
+padding:0 !important;
+border: 0 !important;	
+}
+.addButton21{
+width: 100px;
+  height:100px;
+	position: absolute;
+    right: 70px;
+    margin: 0 !important;
+padding:0 !important;
+border: 0 !important;	
 }
 header {
 	z-index: 1;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Medicine;
 import service.MedicineService;
+import service.PharmacyService;
 
 /**
  * Servlet implementation class AddMedicineFromPharmacy
@@ -32,15 +33,7 @@ public class AddMedicineFromPharmacy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Medicine> medicines = MedicineService.getMedicinesWithUniqueTitle();
-		System.out.println("@@@@@@@" + MedicineService.getAll());
-		System.out.println("___________\n" + medicines);
-		//List<Medicine> medicines = MedicineService.getAll();
-		System.out.println("##########" + request.getParameter("idPharm"));
-		
-		request.setAttribute("idPharm", request.getParameter("idPharm"));
-		request.setAttribute("medicines", medicines);
-		request.getRequestDispatcher("/pharmacy/addMedicineFromPharmacy.jsp").forward(request, response);
+	
 		
 	}
 
@@ -48,8 +41,16 @@ public class AddMedicineFromPharmacy extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		List<Medicine> medicines = MedicineService.getMedicinesWithUniqueTitle();
+		System.out.println("@@@@@@@" + MedicineService.getAll());
+		System.out.println("___________\n" + medicines);
+		//List<Medicine> medicines = MedicineService.getAll();
+		System.out.println("##########" + request.getParameter("idPharm"));
+		
+		request.setAttribute("idPharm", request.getParameter("idPharm"));
+		request.setAttribute("pharmacy", PharmacyService.getPharmacyById(Integer.parseInt(request.getParameter("idPharm"))));
+		request.setAttribute("medicines", medicines);
+		request.getRequestDispatcher("/pharmacy/addMedicineFromPharmacy.jsp").forward(request, response);
 	}
 
 }

@@ -37,6 +37,16 @@ public class DeliveryMedicines extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
 		request.setAttribute("idPharm", idPharm);
 		request.setAttribute("id", idPharm);
@@ -72,9 +82,6 @@ public class DeliveryMedicines extends HttpServlet {
 
 		int quantityMed = 0;
 
-	/*	System.out.println("~~~~~~~~" + idPharm + "----" + idMed + "~~~~~~~~~~"
-				+ medicine.getCount());
-System.out.println("quantMed" + PharmacyMedicineService.get—ountOfMed(pharmacy, medicine));*/
 		int maxCount = 0;
 		if (way.equals("toPharmacy")){
 			maxCount = countAll;
@@ -107,17 +114,6 @@ System.out.println("quantMed" + PharmacyMedicineService.get—ountOfMed(pharmacy, 
 		request.setAttribute("medicines", medicines);
 		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request,
 				response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

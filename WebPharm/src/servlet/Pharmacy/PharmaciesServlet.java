@@ -36,8 +36,12 @@ public class PharmaciesServlet  extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		doPost(request, response);
+        }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
+		System.out.println("id pharm = " + idPharm);
 		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		
 		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getAllMedsByPharmId(idPharm));
@@ -50,8 +54,5 @@ public class PharmaciesServlet  extends HttpServlet{
 		request.setAttribute("medicines", medicines);
 		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request, response);
 		
-		
-		
-        }
-
+	}
 }

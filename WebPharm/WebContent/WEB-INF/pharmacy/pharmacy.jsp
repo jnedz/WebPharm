@@ -21,14 +21,15 @@
 	<jsp:include page="/pharmacyHeader.jsp" />
 	<div class="mainBlock">
 					<input type=hidden name="idPharm" value="${idPharm}">
-		<h4>
-			<br> <input type="hidden" name="roleReg" value="${roleReg}">
+		
+			<input type="hidden" name="roleReg" value="${roleReg}">
 			
+			<h4>
 			<a href="AllPharmacies" class="returnButton2"><img
 				src="img/return.png" alt="Return" width="90" height="90"
 				style="vertical-align: middle" title="return to all pharmacies"></a>
 			<br>
-			<br>
+			<br><br>
 			<br>
 			<br> Pharmacy: ${pharmacy.title}<br> Description:
 			${pharmacy.description}
@@ -36,11 +37,19 @@
 
 		<c:choose>
 			<c:when test="${WORKER == roleReg}">
-			<a
+			<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton20"><img src="img/add.png" alt="addMedicine"
+						width="100" height="100" style="vertical-align: middle"
+						title="add medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
+			
+			
+			<%-- <a
 						href="AddMedicineFromPharmacy?idPharm=<c:out value="${idPharm}"/>"
 						class="addButton"><img src="img/add.png" alt="addMedicine"
 						width="100" height="100" style="vertical-align: middle"
-						title="add medicine"></a>
+						title="add medicine"></a> --%>
 				<table class="table" border=1>
 					<thead>
 						<tr>
@@ -70,31 +79,43 @@
 								<td class="td" style="text-align: center;"><c:out
 										value="${medicine.count}" /></td>
 
-								<td class="td" style="text-align: center;"><h3>
-										<a
-											href="DeliveryMedicinesMessage?idMed=<c:out value="${medicine.id}"/>&way=toPharmacy&idPharm=<c:out value="${idPharm}"/>"><img
+								<td class="td" style="text-align: center;">
+								<form action="DeliveryMedicinesMessage" method="post"><h3>
+										<button class="unvisible"><img
 											src="img/plus.png" alt="toPharm" width="20" height="20"
 											style="vertical-align: middle"
-											title="delivery medicines TO pharmacy"></a>
-									</h3></td>
+											title="delivery medicines TO pharmacy"></button>
+						<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+						<input type="hidden" name=idMed value="${medicine.id}"> 
+						<input type="hidden" name=way value="toPharmacy"> 
+									</h3></form></td>
 
-								<td class="td" style="text-align: center;"><h3>
-										<a
-											href="DeliveryMedicinesMessage?idMed=<c:out value="${medicine.id}"/>&way=fromPharmacy&idPharm=<c:out value="${pharmacy.id}"/>"><img
+								<td class="td" style="text-align: center;">
+								<form action="DeliveryMedicinesMessage" method="post"><h3>
+										<button class="unvisible"><img
 											src="img/minus.png" alt="fromPharm" width="20" height="20"
 											style="vertical-align: middle"
-											title="delivery medicines FROM pharmacy"></a>
-									</h3></td>
+											title="delivery medicines FROM pharmacy"></button>
+						<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+						<input type="hidden" name=idMed value="${medicine.id}"> 
+						<input type="hidden" name=way value="fromPharmacy"> 
+									</h3></form></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 				<br><br>
-				<a
+				<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton21"><img src="img/add.png" alt="addMedicine"
+						width="100" height="100" style="vertical-align: middle"
+						title="add medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
+				<%-- <a
 						href="AddMedicineFromPharmacy?idPharm=<c:out value="${idPharm}"/>"
 						class="addButton2"><img src="img/add.png" alt="addMedicine"
 						width="100" height="100" style="vertical-align: middle"
-						title="add medicine"></a>
+						title="add medicine"></a> --%>
 				<br><br>
 
 			</c:when>
