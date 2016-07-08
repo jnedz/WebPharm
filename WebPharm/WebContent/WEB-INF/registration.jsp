@@ -36,11 +36,12 @@
  </c:set> --%>
 
 
-		<h2><%=application.getAttribute("roleReg")%></h2>
 			
 		 <% if ("yes".equals(application.getAttribute("registration"))){%>
+		<h2><%=application.getAttribute("roleReg")%></h2>
 				<a href="Logout">Logout</a>
 		<%}else{%>
+				<a href="RegistrationNew">RegistrNew</a>
 				<a href="Registration">Registration</a>
 				<a href="Enter" >Enter</a>
 		<%}%> 

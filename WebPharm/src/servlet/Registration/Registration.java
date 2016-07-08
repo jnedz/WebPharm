@@ -42,16 +42,17 @@ public class Registration extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
+
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String dateOfBirthday = request.getParameter("dateOfBirthday").isEmpty() ? Formatter.fromDateToString(new GregorianCalendar()) : request.getParameter("dateOfBirthday");
 		PersonRole role = PersonRole.valueOf(request.getParameter("role"));
-		
+
+		String password=request.getParameter("password");
+		String login=request.getParameter("login");
 		boolean userIsExist = false;
 		for (PersonsInfo personFromDB : PersonsInfoService.getAll()) {
-			if ((personFromDB.getLogin().equals(login)) && personFromDB.getPassword().equals(password)) {
+			if ((login.equals(personFromDB.getLogin())) && password.equals(personFromDB.getPassword())) {
 				userIsExist = true;
 			}
 		}

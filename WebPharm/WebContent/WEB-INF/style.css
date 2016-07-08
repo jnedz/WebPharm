@@ -206,7 +206,18 @@ border: 0;
 cursor: pointer; 
 cursor: hand; 
 }
+.sendsubmitS1 {
+width:  90px;  
+height: 30px; 
+margin: 0;
+padding:0;
+border: 0;
 
+cursor: pointer; 
+cursor: hand; 	
+	
+	
+}
 .mainBlock {
 padding-left: 50px;
 	padding-top: 130px;

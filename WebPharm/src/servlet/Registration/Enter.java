@@ -47,7 +47,7 @@ public class Enter extends HttpServlet {
 
 		boolean userIsExist = false;
 		for (PersonsInfo userFromDB : PersonsInfoService.getAll()) {
-			if ((userFromDB.getLogin().equals(login)) && userFromDB.getPassword().equals(password)) {
+			if (login.equals(userFromDB.getLogin()) && password.equals(userFromDB.getPassword())) {
 				request.setAttribute("roleReg", userFromDB.getRole().name());
 				System.out.println("userFromDB.getRole().name()= " + userFromDB.getRole().name());
 				userIsExist = true;
