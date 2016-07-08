@@ -14,6 +14,8 @@
 <style type="text/css">
  @import "style.css"
 </style>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/inputValidator.js" /></script>
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -61,13 +63,17 @@
 							value="${medicine.count}" /></td>
 
 					<td class="td" style="text-align: center;">
-<form action="DeliveryNewMedicine"  method="post"><h3>
+<form name="1" action="DeliveryNewMedicine" method="post" onsubmit="return validateForm()"><h3>
 <input type="hidden" name="idPharm" value="${idPharm}" />
 <input type="hidden" name="idMed" value="${medicine.id}" /> 
 <input type="hidden" name="way" value="toPharmacy" /> 
-<input type="text" name="quantity"/>
+
+<input type="hidden" name="count" value="${medicine.count}" />
+
+<input type="text" name="quantity" value="${quantity}"/>
 <input type="submit" class="addMed" value="Add Medicine">
 </h3></form>
+
 						</td>
 
 				</tr>
