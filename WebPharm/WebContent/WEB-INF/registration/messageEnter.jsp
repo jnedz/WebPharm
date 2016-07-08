@@ -22,12 +22,23 @@
 		<input type="hidden" name="roleReg" value="${roleReg}">
 		<center>
 			<h4>
+			<c:choose>
+					<c:when test="${roleReg == 'WORKER'}">
+					<%
+						application.setAttribute("roleReg", "WORKER");
+					%>
+			</c:when>
+			</c:choose>
+			
+			
 				<c:choose>
 					<c:when test="${userIsExist == 'true'}">
     Hello! Enter, please :)
        <%
 						application.setAttribute("registration", "yes");
 					%>
+					
+					
 						<p>
 						<a href="AllPharmacies?roleReg=WORKER"><img src="img/enter.png" alt="Enter"
 							width="90" height="90" style="vertical-align: middle"

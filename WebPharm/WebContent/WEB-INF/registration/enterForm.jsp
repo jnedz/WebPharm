@@ -37,14 +37,14 @@
 						<label for="login">Login:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="login" id="frlogin"
-					value="${login}" placeholder="length>=20" tabindex="1" /></td>
+					value="${login}" placeholder="length<=20" tabindex="1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="password">Password:</label>
 					</div></td>
 				<td class="td1"><input id="frpassword" type="password" name="password"
-					placeholder="length>=20" value="${password}" /></td>
+					placeholder="length<=20" value="${password}" /></td>
 			</tr>
 		
 		</table>

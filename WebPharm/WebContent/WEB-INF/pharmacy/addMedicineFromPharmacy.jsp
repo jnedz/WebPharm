@@ -33,9 +33,6 @@
 		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
 								</form>
 								
-							<!-- 	<img src="img/reload.png"
-			alt="ReloadPharmacies" width="100" height="100"
-			style="vertical-align: middle" title="reload pharmacies"></a> --> 
 			<br>
 		<br> <br> <br> <br> <br> <br>
 

@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
-import service.UserService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
+
 
 /**
  * Servlet implementation class Enter
@@ -45,7 +46,7 @@ public class Enter extends HttpServlet {
 		String password = request.getParameter("password");
 
 		boolean userIsExist = false;
-		for (User userFromDB : UserService.getAll()) {
+		for (PersonsInfo userFromDB : PersonsInfoService.getAll()) {
 			if ((userFromDB.getLogin().equals(login)) && userFromDB.getPassword().equals(password)) {
 				request.setAttribute("roleReg", userFromDB.getRole().name());
 				System.out.println("userFromDB.getRole().name()= " + userFromDB.getRole().name());

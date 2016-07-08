@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import enums.PersonRole;
-import model.Person;
-import model.User;
-import service.PersonService;
-import service.UserService;
+import model.PersonsInfo;
+import service.PersonsInfoService;
 import utils.Formatter;
 
 /**
@@ -52,25 +50,21 @@ public class Registration extends HttpServlet {
 		PersonRole role = PersonRole.valueOf(request.getParameter("role"));
 		
 		boolean userIsExist = false;
-		for (User userFromDB : UserService.getAll()) {
-			if ((userFromDB.getLogin().equals(login)) && userFromDB.getPassword().equals(password)) {
+		for (PersonsInfo personFromDB : PersonsInfoService.getAll()) {
+			if ((personFromDB.getLogin().equals(login)) && personFromDB.getPassword().equals(password)) {
 				userIsExist = true;
 			}
 		}
 		
 		if (userIsExist == false){
-		User user = new User();
-		user.setLogin(login);
-		user.setPassword(password);
-		user.setRole(role);
-		UserService.add(user);
-		
-		Person person = new Person();
+		PersonsInfo person = new PersonsInfo();
+		person.setLogin(login);
+		person.setPassword(password);
+		person.setRole(role);
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setDateOfBirthday(Formatter.toDateFromString(dateOfBirthday));
-		person.setRole(role);
-		PersonService.add(person);
+		PersonsInfoService.add(person);
 		
 		}
 	

@@ -8,52 +8,44 @@
 <title>registration</title>
 </head>
 <body>
-
 	<div class="registration">
-				<input type="hidden" name="roleReg" value="${roleReg}"> 
-				
-				!roleReg${roleReg}
-				
-
-		 <% if ("yes".equals(application.getAttribute("registration"))){%>
+<%-- <c:set var="yes" scope=<%=application.getAttribute("registration")%>> --%>
+ <%-- <c:set var="yes" scope="registration" > 
+ 
 				<form>
 					<br> <a href="">Logout</a>
 					<%
 						application.setAttribute("registration", "no");
 					%>
 				</form>
-			
-		<%}else{%>
-		<a href="Registration">Registration</a>
+
+</c:set> 
+<c:set var="no" scope="registration" > 
+
+				<a href="Registration">Registration</a>
 				<br>
 				<a href="Enter" >Enter</a>
-		<%}%> 
-	<%-- 	<c:choose>
-		
-			<c:when
-				test="${'yes' == application.getAttribute('registration')}">
-				<form>
-					<br> <a href="">Logout</a>
-					<%
-						application.setAttribute("registration", "no");
-					%>
-				</form>
 
-			</c:when>
-			<c:otherwise>
-			
-			<a href="Registration" method="get">Registration</a>
+</c:set>
+<c:set var="" scope="registration"> 
+
+				<a href="Registration">Registration</a>
 				<br>
-				<a href="Enter" method="get">Enter</a>
+				<a href="Enter" >Enter</a>
+
+ </c:set> --%>
 
 
-
-
-			</c:otherwise>
-		</c:choose>
- --%>
+		<h2><%=application.getAttribute("roleReg")%></h2>
+			
+		 <% if ("yes".equals(application.getAttribute("registration"))){%>
+				<a href="Logout">Logout</a>
+		<%}else{%>
+				<a href="Registration">Registration</a>
+				<a href="Enter" >Enter</a>
+		<%}%> 
+		
 
 	</div>
-
 </body>
 </html>

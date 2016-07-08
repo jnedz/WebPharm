@@ -36,7 +36,7 @@
 		</h4>
 
 		<c:choose>
-			<c:when test="${WORKER == roleReg}">
+			<c:when test="${'WORKER' == roleReg}">
 			<form action="AddMedicineFromPharmacy" method="post">
 	<button class="addButton20"><img src="img/add.png" alt="addMedicine"
 						width="100" height="100" style="vertical-align: middle"
