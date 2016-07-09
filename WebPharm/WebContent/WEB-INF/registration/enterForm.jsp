@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="/header.jsp" />
 	<div class="mainBlock">
-	<form name="myForm" action="Enter" method="post" onsubmit="return validateForm()">
+	<form name="myForm" action="Enter" method="post" onsubmit="return validateForm()" >
 <%--	<button name="Submit" class="addButton3"><img src="img/add.png" alt="registration" width="100" height="100"
 								style="vertical-align: middle" title="registration"></button>
 	
@@ -37,7 +37,7 @@
 						<label for="login">Login:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="login" id="frlogin"
-					value="${login}" placeholder="length<=20" tabindex="1" /></td>
+					 placeholder="length<=20" value = "" tabindex="1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">

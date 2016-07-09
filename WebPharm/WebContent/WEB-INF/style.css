@@ -8,7 +8,7 @@
 	color: maroon;
    
  	float: right; 
-	margin-top:-60px;
+	/* margin-top:-60px; */
 	padding-right: 20px;
 }
 
@@ -291,14 +291,14 @@ padding:0 !important;
 border: 0 !important;
 }
 .addButton20{
-width: 100px;
-  height:100px;
+ width: 100px;
+ height:100px; 
 	position: absolute;
     right: 70px;
     top: 170px;
     margin: 0 !important;
-padding:0 !important;
-border: 0 !important;	
+ padding:0 !important;
+border: 0 !important; 	
 }
 .addButton21{
 width: 100px;
@@ -324,6 +324,7 @@ header {
 	margin-top: 45px;
 	display: block;
 	height: 10px;
+	text-align: center
 	
 }
 .mH {

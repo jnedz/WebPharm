@@ -9,9 +9,12 @@
 <style type="text/css">
  @import "style.css"
 </style>
-<jsp:include page="/header.jsp" />
+
 </head>
 <body>
+
+<jsp:include page="/header.jsp" />
+
 <div class="mainBlock">
 	<br>
 	<form action="AllPersons" method="post">

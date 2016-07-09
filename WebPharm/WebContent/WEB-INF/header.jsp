@@ -4,8 +4,9 @@
 
 
 
-<header> 
-	<p>
+<!-- <header>  -->
+<!-- 	<p> -->
+<!-- <div class = "header"> -->
 		<a href="index.jsp"><button class="sendsubmitS">
 				<img src="img/home.png" alt="ToMain" width="33" height="33" style="vertical-align: middle">
 			</button></a>
@@ -14,6 +15,6 @@
 		<a href="AllMedicines"><button>All Medicines</button></a>
 		<a href="AllPharmacies"><button>All Pharmacies</button></a>
 		
-<jsp:include page="/registration.jsp" />	
-</header>
+ <jsp:include page="/registration.jsp" /> 	
+<!-- </header> -->
 </center>

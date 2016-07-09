@@ -67,6 +67,9 @@ public class PersonsInfoService {
 	}
 	
 	public static List<PersonsInfo> sortByCriteria(String criteria, String order, String role) {
+		if ("NoSort".equals(order)) {
+			order = "";
+		}
 		return PersonsInfoDAO.sortByCriteria(criteria, order, role);
 	}
 	

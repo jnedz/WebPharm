@@ -18,9 +18,16 @@
 <script src="${pageContext.request.contextPath}/js/app-ajax.js"
 	type="text/javascript"></script>
 </head>
+
+
 <body>
 	<jsp:include page="/header.jsp" />
+	<jsp:include page="/registration.jsp" />
 	<jsp:include page="/personHeader.jsp" />
+	
+	
+	
+	
 <div class="mainBlock">
 	
 		<a href="AllPersons" class="reloadButton"><img src="img/reload.png" alt="ReloadPersons" width="100" height="100"

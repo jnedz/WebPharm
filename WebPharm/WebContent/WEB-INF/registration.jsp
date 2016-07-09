@@ -10,11 +10,11 @@
 <body>
 	<div class="registration">
 
- <%-- <c:set var="registration" scope="sessia" value="<%=application.getAttribute("registration")%>"/>  --%>
- <%-- <c:set var="registration" value="${application.getAttribute('registration')}"/>
- reg: ${registration}
+<c:set var="registration" value="<%= application.getAttribute(\"registration\") %>"/>
  
-<c:choose>
+   
+
+ <c:choose>
     <c:when test="${'yes' == registration}">
         <h2><%=application.getAttribute("roleReg")%></h2>
 				<a href="Logout">Logout</a>
@@ -27,18 +27,6 @@
 </c:choose>
 				
 
- --%>
-
-
-		 <% if ("yes".equals(application.getAttribute("registration"))){%>
-		<h2><%=application.getAttribute("roleReg")%></h2>
-				<a href="Logout">Logout</a>
-		<%}else{%>
-				<a href="RegistrationNew">RegistrNew</a>
-				<a href="Registration">Registration</a>
-				<a href="Enter" >Enter</a>
-		<%}%> 
-		
 	</div>
 </body>
 </html>

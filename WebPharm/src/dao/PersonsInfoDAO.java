@@ -17,7 +17,6 @@ import model.PersonsInfo;
 import utils.DbUtils;
 
 public class PersonsInfoDAO {
-	
 
 	/**
 	 * 
@@ -57,7 +56,8 @@ public class PersonsInfoDAO {
 
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
-				System.out.println("A new personsInfo was inserted successfully!");
+				System.out
+						.println("A new personsInfo was inserted successfully!");
 				statement.close();
 			}
 		} catch (SQLException e) {
@@ -78,6 +78,8 @@ public class PersonsInfoDAO {
 	}
 
 	public static void delete(PersonsInfo person) {
+
+		// delete(person.getId());
 		String sql = "DELETE FROM personsInfo WHERE id = ?";
 		try {
 			PreparedStatement statement = (PreparedStatement) DbUtils
@@ -118,9 +120,10 @@ public class PersonsInfoDAO {
 			String lastName) {
 		List<PersonsInfo> personsList = new ArrayList<>();
 		PersonsInfo person = new PersonsInfo();
-		String sql = "SELECT * FROM personsInfo where firstName = '" + firstName
-				+ "' and lastName = '" + lastName + "' or firstName = '"
-				+ lastName + "' and lastName = '" + firstName + "'";
+		String sql = "SELECT * FROM personsInfo where firstName = '"
+				+ firstName + "' and lastName = '" + lastName
+				+ "' or firstName = '" + lastName + "' and lastName = '"
+				+ firstName + "'";
 		try {
 			Statement statement = (Statement) DbUtils.getConnection()
 					.createStatement();
@@ -217,11 +220,12 @@ public class PersonsInfoDAO {
 			}
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Exception in updateAllPersonsInfo(PersonsInfo person)!");
+			System.out
+					.println("Exception in updateAllPersonsInfo(PersonsInfo person)!");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void update(PersonsInfo person) {
 		String sql = "UPDATE personsInfo SET firstName = ?, lastName = ?, role = ?, dateOfBirthday = ? WHERE id= "
 				+ person.getId();
@@ -259,13 +263,15 @@ public class PersonsInfoDAO {
 			}
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Exception in getPersonsInfoByRole(String role)!");
+			System.out
+					.println("Exception in getPersonsInfoByRole(String role)!");
 			e.printStackTrace();
 		}
 		return personsList;
 	}
 
-	public static List<PersonsInfo> sortByFirstNameAndRole(String order, String role) {
+	public static List<PersonsInfo> sortByFirstNameAndRole(String order,
+			String role) {
 		String sql = "SELECT * FROM personsInfo WHERE role = '" + role
 				+ "' order by firstName " + order;
 		List<PersonsInfo> persons = new ArrayList<>();
@@ -340,7 +346,7 @@ public class PersonsInfoDAO {
 		List<PersonsInfo> persons = new ArrayList<>();
 		String sql = "SELECT * FROM personsInfo";
 		try {
-		
+
 			if (!(role.equals("AllPersons"))) {
 				sql = sql + " where role = '" + role + "'";
 			}
@@ -364,19 +370,20 @@ public class PersonsInfoDAO {
 		}
 		return persons;
 	}
-	
-	
-	public static List<PersonsInfo> sortByCriteria(String criteria, String order, String role) {
+
+	public static List<PersonsInfo> sortByCriteria(String criteria,
+			String order, String role) {
 		List<PersonsInfo> persons = new ArrayList<>();
 		String sql = "SELECT * FROM personsInfo";
 		try {
-		
+
 			if (!(role.equals("AllPersons"))) {
 				sql = sql + " where role = '" + role + "'";
 			}
 
+			// TODO if (!(order.equals(""))) {
 			if (!(order.equals("NoSort"))) {
-				sql = sql.concat(" order by "+ criteria + " "+ order);
+				sql = sql.concat(" order by " + criteria + " " + order);
 			}
 
 			Statement statement = (Statement) DbUtils.getConnection()
@@ -395,12 +402,12 @@ public class PersonsInfoDAO {
 		return persons;
 	}
 
-	public static List<PersonsInfo> getPersonsInfoByFullNameAndDate(String firstName,
-			String lastName, String date) {
+	public static List<PersonsInfo> getPersonsInfoByFullNameAndDate(
+			String firstName, String lastName, String date) {
 		List<PersonsInfo> personsList = new ArrayList<>();
-		String sql = "SELECT * FROM personsInfo where firstName = '" + firstName
-				+ "' and lastName = '" + lastName + "' and dateOfBirthday = '"
-				+ date + "'";
+		String sql = "SELECT * FROM personsInfo where firstName = '"
+				+ firstName + "' and lastName = '" + lastName
+				+ "' and dateOfBirthday = '" + date + "'";
 		try {
 			Statement statement = (Statement) DbUtils.getConnection()
 					.createStatement();
@@ -416,9 +423,5 @@ public class PersonsInfoDAO {
 		}
 		return personsList;
 	}
-
-	
-	
-	
 
 }

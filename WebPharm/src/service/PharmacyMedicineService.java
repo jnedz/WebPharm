@@ -53,9 +53,11 @@ public class PharmacyMedicineService {
 	 *            count of medicine which need pharmacy {@literal if
 	 *            pharmacy-medicine exists - update it, else - add it}
 	 */
-	public static void addOrUpdate(Pharmacy pharmacy, Medicine medicine, int count) {
+	public static void addOrUpdate(Pharmacy pharmacy, Medicine medicine,
+			int count) {
 		if (PharmacyMedicineDAO.isExists(pharmacy, medicine)) {
-			count = PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine) + count;
+			count = PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine)
+					+ count;
 			PharmacyMedicineDAO.update(pharmacy, medicine, count);
 		} else {
 			PharmacyMedicineDAO.add(pharmacy, medicine, count);
@@ -64,7 +66,8 @@ public class PharmacyMedicineService {
 
 	public void addOrUpdate(int count) {
 		if (PharmacyMedicineDAO.isExists(pharmacy, medicine)) {
-			count = PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine) + count;
+			count = PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine)
+					+ count;
 			PharmacyMedicineDAO.update(pharmacy, medicine, count);
 		} else {
 			PharmacyMedicineDAO.add(pharmacy, medicine, count);
@@ -82,16 +85,21 @@ public class PharmacyMedicineService {
 	 * 
 	 */
 	public void deliveryMedToPharmacy(String title, int count) {
+
 		List<Medicine> medicines;
-		
+
 		System.out.println("count=" + count);
 
-		int medicinesCount = new MedicineService().getMedicinesCountByTitle(title);
+		int medicinesCount = new MedicineService()
+				.getMedicinesCountByTitle(title);
 		if (medicinesCount < count || count <= 0) {
-			System.out.println("Amount of medicament is not enough. Pharmacies has only " + medicinesCount);
+			System.out
+					.println("Amount of medicament is not enough. Pharmacies has only "
+							+ medicinesCount);
 
 		} else {
-			medicines = new MedicineService().getMedicinesDateSortedByTitle(title);
+			medicines = new MedicineService()
+					.getMedicinesDateSortedByTitle(title);
 			for (Medicine medicine : medicines) {
 				if (medicine.getCount() <= count) {
 					addOrUpdate(pharmacy, medicine, medicine.getCount());
@@ -118,21 +126,24 @@ public class PharmacyMedicineService {
 	public void deliveryMedFromPharmacy(String title, int count) {
 		List<Medicine> medicines;
 
-		int medicinesCount = PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, title);
+		int medicinesCount = PharmacyMedicineDAO.get—ountByMedTitleFromPharm(
+				pharmacy, title);
 		if (medicinesCount < count || count <= 0) {
-			System.out.println("Amount of medicament is not enough. Pharmacy has only " + medicinesCount);
+			System.out
+					.println("Amount of medicament is not enough. Pharmacy has only "
+							+ medicinesCount);
 
 		} else {
-			medicines =	MedicineService.getDateSortedList(getAllMedsByPharmId(pharmacy.getId()));
-			List <Medicine> medicinesWhithEqualsTitle = new ArrayList<>();
-			
-		/*	for (Medicine medicine : medicines) {
-				if (medicine.getCount()==0){
-					medicines.remove(medicine);
-				}
-			}*/
+			medicines = MedicineService
+					.getDateSortedList(getAllMedsByPharmId(pharmacy.getId()));
+			List<Medicine> medicinesWhithEqualsTitle = new ArrayList<>();
+
+			/*
+			 * for (Medicine medicine : medicines) { if
+			 * (medicine.getCount()==0){ medicines.remove(medicine); } }
+			 */
 			for (Medicine medicine : medicines) {
-				if (medicine.getTitle().equals(title)){
+				if (medicine.getTitle().equals(title)) {
 					medicinesWhithEqualsTitle.add(medicine);
 				}
 			}
@@ -197,7 +208,8 @@ public class PharmacyMedicineService {
 	 */
 	public void deleteMedsWithZeroCount() {
 		int pharmId = pharmacy.getId();
-		for (Medicine medicine : PharmacyMedicineDAO.getAllMedsByPharmId(pharmId)) {
+		for (Medicine medicine : PharmacyMedicineDAO
+				.getAllMedsByPharmId(pharmId)) {
 			if (PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine) == 0) {
 				PharmacyMedicineDAO.delete(pharmacy, medicine);
 			}
@@ -212,8 +224,10 @@ public class PharmacyMedicineService {
 	 */
 	public void markup(double markup) {
 		int pharmId = pharmacy.getId();
-		for (Medicine medicine : PharmacyMedicineDAO.getAllMedsByPharmId(pharmId)) {
-			PharmacyMedicineDAO.update(pharmacy, medicine, medicine.getPrice() * markup);
+		for (Medicine medicine : PharmacyMedicineDAO
+				.getAllMedsByPharmId(pharmId)) {
+			PharmacyMedicineDAO.update(pharmacy, medicine, medicine.getPrice()
+					* markup);
 		}
 	}
 
@@ -228,7 +242,8 @@ public class PharmacyMedicineService {
 	public void markupByTitle(String title, double markup) {
 		for (Medicine medicine : MedicineDAO.getMedicinesByTitle(title)) {
 			if (PharmacyMedicineDAO.isExists(pharmacy, medicine)) {
-				double price = PharmacyMedicineDAO.getPrice(pharmacy, medicine) * markup;
+				double price = PharmacyMedicineDAO.getPrice(pharmacy, medicine)
+						* markup;
 				PharmacyMedicineDAO.update(pharmacy, medicine, price);
 			}
 		}
@@ -248,6 +263,7 @@ public class PharmacyMedicineService {
 			}
 		}
 	}
+
 	/**
 	 * 
 	 * @param ph
@@ -268,8 +284,7 @@ public class PharmacyMedicineService {
 	public void delete(Pharmacy pharmacy, Medicine medicine) {
 		PharmacyMedicineDAO.delete(pharmacy, medicine);
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param pharmId
@@ -279,18 +294,17 @@ public class PharmacyMedicineService {
 	public List<Medicine> getAllMedsByPharmIdDAO(int pharmId) {
 		return PharmacyMedicineDAO.getAllMedsByPharmId(pharmId);
 	}
-	
+
 	/**
 	 * 
 	 * @param medTitle
 	 *            medicines title
 	 * @return a list of Pharmacies that have medicines with title medTitle
 	 */
-	public  List<Pharmacy> getPharmByMedTitle(String medTitle) {
+	public List<Pharmacy> getPharmByMedTitle(String medTitle) {
 		return PharmacyMedicineDAO.getPharmByMedTitle(medTitle);
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param pharmacy
@@ -300,10 +314,12 @@ public class PharmacyMedicineService {
 	 * @return count of medicines with title = medTitle (from one pharmacy =
 	 *         pharmacy)
 	 */
-	public static int get—ountByMedTitleFromPharm(Pharmacy pharmacy, String medTitle) {
-		return PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy, medTitle);
+	public static int get—ountByMedTitleFromPharm(Pharmacy pharmacy,
+			String medTitle) {
+		return PharmacyMedicineDAO.get—ountByMedTitleFromPharm(pharmacy,
+				medTitle);
 	}
-	
+
 	/**
 	 * 
 	 * @param pharmacy
@@ -313,7 +329,7 @@ public class PharmacyMedicineService {
 	public int get—ountOfMed(Pharmacy pharmacy, Medicine medicine) {
 		return PharmacyMedicineDAO.get—ountOfMed(pharmacy, medicine);
 	}
-	
+
 	/**
 	 * 
 	 * @param pharmacy
@@ -323,7 +339,7 @@ public class PharmacyMedicineService {
 	public double getPrice(Pharmacy pharmacy, Medicine medicine) {
 		return PharmacyMedicineDAO.getPrice(pharmacy, medicine);
 	}
-	
+
 	/**
 	 * 
 	 * @param pharmacy
@@ -334,7 +350,7 @@ public class PharmacyMedicineService {
 	public void update(Pharmacy pharmacy, Medicine medicine, double newPrice) {
 		PharmacyMedicineDAO.update(pharmacy, medicine, newPrice);
 	}
-	
+
 	/**
 	 * @param ph
 	 * @param med
@@ -344,7 +360,7 @@ public class PharmacyMedicineService {
 	public void update(Pharmacy ph, Medicine med, int newCount) {
 		PharmacyMedicineDAO.update(ph, med, newCount);
 	}
-	
+
 	/**
 	 * 
 	 * @param pharmacy

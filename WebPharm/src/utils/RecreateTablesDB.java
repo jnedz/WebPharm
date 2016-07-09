@@ -14,33 +14,33 @@ public class RecreateTablesDB {
 
 	public static void main(String[] args) throws SQLException {
 
-		// DbUtils.dropPersonTable();
-		/*
-		 * DbUtils.dropPersonsInfoPharmaciesTable();
-		 * DbUtils.dropPersonsInfoTable();
-		 * DbUtils.dropPharmaciesMedicinesTable();
-		 * DbUtils.dropPharmaciesTable(); DbUtils.dropMedicineTable()
-		 * DbUtils.dropProducersTable();
-		 */
-		// DbUtils.dropPersonsUsersTable();
-		// DbUtils.dropUsersTable();
-/*
+		 DbUtils.dropPersonTable();
+		
+		 DbUtils.dropPersonsInfoPharmaciesTable();
+		 DbUtils.dropPersonsInfoTable();
+		 DbUtils.dropPharmaciesMedicinesTable();
+		 DbUtils.dropPharmaciesTable(); DbUtils.dropMedicineTable();
+		 DbUtils.dropProducersTable();
+		
+		 DbUtils.dropPersonsUsersTable();
+		 DbUtils.dropUsersTable();
+
 		DbUtils.createProducerTable();
 		DbUtils.createMedicineTable();
 		DbUtils.createPersonsInfoTable(); // DbUtils.createPersonTable();
 		DbUtils.createPharmaciesTable();
 		DbUtils.createPharmaciesMedicinesTable();
 		DbUtils.createPersonsInfoPharmaciesTable();
-*/
-		//PersonsInfoRepository.completePersonsInfoTable();
-		// ProducersRepository.completeProducersTable();
-		// MedicinesRepository.completeMedicinesTable();
-		// PharmaciesRepository.completePharmaciesTable();
-		// PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
-		// PersonsInfoPharmasiesRepository.completePersonsInfoPharmaciesTable();
 
-		// DbUtils.createUsersTable();
-		// DbUtils.createPersonsUsersTable();
+		PersonsInfoRepository.completePersonsInfoTable();
+		 ProducersRepository.completeProducersTable();
+		 MedicinesRepository.completeMedicinesTable();
+		 PharmaciesRepository.completePharmaciesTable();
+		 PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
+		 PersonsInfoPharmasiesRepository.completePersonsInfoPharmaciesTable();
+
+//		 DbUtils.createUsersTable();
+//		 DbUtils.createPersonsUsersTable();
 
 	}
 }

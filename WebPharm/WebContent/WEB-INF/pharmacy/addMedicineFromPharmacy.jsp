@@ -60,9 +60,9 @@
 							value="${medicine.count}" /></td>
 
 					<td class="td" style="text-align: center;">
-<form name="1" action="DeliveryNewMedicine" method="post" onsubmit="return validateForm()"><h3>
+<form name="1"  action="DeliveryNewMedicine" method="post" onsubmit="return validateForm()"><h3>
 <input type="hidden" name="idPharm" value="${idPharm}" />
-<input type="hidden" name="idMed" value="${medicine.id}" /> 
+<input type="text" name="idMed" value="${medicine.id}" /> 
 <input type="hidden" name="way" value="toPharmacy" /> 
 
 <input type="hidden" name="count" value="${medicine.count}" />
