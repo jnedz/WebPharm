@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DbUtils {
 
-	static final String DB_URL = "jdbc:mysql://localhost/test1";
+	static final String DB_URL = "jdbc:mysql://localhost/test";
 	static final String USER = "root";
 	static final String PASS = "root";
 	private static Connection conn = null;
@@ -21,24 +21,7 @@ public class DbUtils {
 	public static Connection getConnection() {
 		return conn;
 	}
-/*
-	public static void createPersonTable() {
 
-		Statement statement = null;
-		try {
-			String sql = "create table Persons (id INT NOT NULL AUTO_INCREMENT, "
-					+ "firstName  varchar(20) not null, lastName varchar(20) not null, "
-					+ "role enum('WORKER', 'USER') default 'WORKER', dateOfBirthday date, "
-					+ "primary key (id) )";
-
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in createPersonTable().");
-		}
-	}
-*/
 	public static void createProducerTable() {
 
 		Statement statement = null;
@@ -105,33 +88,12 @@ public class DbUtils {
 		}
 
 	}
-	/*
-	public static void createPersonsUsersTable() {
+	
+	public static void createPersonsTable() {
 
 		Statement statement = null;
 		try {
-			String sql = "create table Persons_Users (id INT NOT NULL AUTO_INCREMENT, id_person int, "
-					+ "id_user int, "
-					+ "firstName  varchar(20) not null, lastName varchar(20) not null, "
-					+ "role enum('WORKER', 'USER') default 'WORKER', dateOfBirthday date, "					
-					+ "foreign key (id_person) references persons (id),"
-					+ "foreign key (id_user) references users (id), "
-					+ "primary key (id) )";
-
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in createPharmaciesTable().");
-		}
-
-	}
-	*/
-	public static void createPersonsInfoTable() {
-
-		Statement statement = null;
-		try {
-			String sql = "create table PersonsInfo (id INT NOT NULL AUTO_INCREMENT, "
+			String sql = "create table Persons (id INT NOT NULL AUTO_INCREMENT, "
 					+ "firstName  varchar(20) not null, lastName varchar(20) not null, "
 					+ "role enum('WORKER', 'USER') default 'USER', dateOfBirthday date, "
 					+ "login varchar(20), password  varchar(20), "
@@ -141,18 +103,18 @@ public class DbUtils {
 			statement.executeUpdate(sql);
 			statement.close();
 		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in createPersonsInfoTable().");
+			System.out.println("Exeption in createPersonsTable().");
 		}
 	}
 	
-	public static void createPersonsInfoPharmaciesTable() {
+	public static void createPersonsPharmaciesTable() {
 
 		Statement statement = null;
 		try {
-			String sql = "create table PersonsInfo_Pharmacies (id INT NOT NULL AUTO_INCREMENT, id_personsInfo int, "
+			String sql = "create table Persons_Pharmacies (id INT NOT NULL AUTO_INCREMENT, id_person int, "
 					+ "id_pharmacy int, "
-					+ "foreign key (id_personsInfo) references personsInfo (id), "
 					+ "role enum('WORKER', 'USER'), "
+					+ "foreign key (id_person) references persons (id), "
 					+ "foreign key (id_pharmacy) references pharmacies (id), "
 					+ "primary key (id) )";
 
@@ -160,56 +122,12 @@ public class DbUtils {
 			statement.executeUpdate(sql);
 			statement.close();
 		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in createPersonsInfoPharmaciesTable().");
+			System.out.println("Exeption in createPersonsPharmaciesTable().");
 		}
 
 	}
 	
-/*	
-	public static void createUsersTable() {
-
-		Statement statement = null;
-		try {
-			String sql = "create table Users (id INT NOT NULL AUTO_INCREMENT, "
-					+ "login varchar(20) not null, password  varchar(20) not null, role enum('WORKER', 'USER'), primary key (id) )";
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in createUsersTable()!");
-		}
-
-	}
-*/
-	
-	public static void dropPersonsInfoTable() {
-
-		Statement statement = null;
-		try {
-			String sql = "drop table if exists PersonsInfo";
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out.println("SQL exception in dropPersonsInfoTable().");
-		}
-	}
-
-	
-	public static void dropPersonsInfoPharmaciesTable() {
-
-		Statement statement = null;
-		try {
-			String sql = "drop table if exists PersonsInfo_Pharmacies";
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out.println("SQL exception in dropPersonsInfoPharmaciesTable().");
-		}
-	}
-
-	public static void dropPersonTable() {
+	public static void dropPersonsTable() {
 
 		Statement statement = null;
 		try {
@@ -218,22 +136,23 @@ public class DbUtils {
 			statement.executeUpdate(sql);
 			statement.close();
 		} catch (SQLException sqlexc) {
-			System.out.println("SQL exception in dropPersonTable().");
+			System.out.println("SQL exception in dropPersonsTable().");
 		}
 	}
 
-	public static void dropUsersTable() {
+	public static void dropPersonsPharmaciesTable() {
 
 		Statement statement = null;
 		try {
-			String sql = "drop table if exists Users";
+			String sql = "drop table if exists Persons_Pharmacies";
 			statement = getConnection().createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
 		} catch (SQLException sqlexc) {
-			System.out.println("Exeption in dropUsersTable().");
+			System.out.println("SQL exception in dropPersonsPharmaciesTable().");
 		}
 	}
+
 	public static void dropMedicineTable() {
 
 		Statement statement = null;
@@ -287,20 +206,6 @@ public class DbUtils {
 		}
 	}
 	
-	public static void dropPersonsUsersTable() {
-
-		Statement statement = null;
-		try {
-			String sql = "drop table if exists Persons_Users";
-			statement = getConnection().createStatement();
-			statement.executeUpdate(sql);
-			statement.close();
-		} catch (SQLException sqlexc) {
-			System.out
-					.println("SQL exception in dropPersonsUsersTable().");
-		}
-	}
-
 	public static void closeConnection() {
 		try {
 			conn.close();
@@ -309,10 +214,4 @@ public class DbUtils {
 		}
 	}
 
-	/*public static void main(String... args) throws ClassNotFoundException,
-			SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-	}*/
 }

@@ -16,9 +16,8 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/personHeader.jsp" />
 	<div class="mainBlock">
-	<br>
+	<jsp:include page="/personHeader.jsp" />
 	<form action="PersonsServlet" method="POST">
 	<button class="addButton3"><img src="img/add.png" alt="addPerson" width="100" height="100"
 								style="vertical-align: middle" title=${id>0 ? "edit person" : "add person"}></button>

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.PersonsInfoService;
+import service.PersonService;
 
 /**
  * Servlet implementation class RegistrationNew
@@ -28,7 +28,7 @@ public class RegistrationNew extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("persons", PersonsInfoService.getAll());
+		request.setAttribute("persons", PersonService.getAll());
 		request.getRequestDispatcher("/registration/registrationFormNew.jsp").forward(request, response);
 	}
 

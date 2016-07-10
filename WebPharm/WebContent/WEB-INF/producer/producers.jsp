@@ -13,15 +13,15 @@
 </head>
 <body>
 <jsp:include page="/header.jsp" />
-<jsp:include page="/producerHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/producerHeader.jsp" />
 
 <a href="AllProducers" class="reloadButton"><img src="img/reload.png" alt="ReloadProducers" width="100" height="100"
 								style="vertical-align: middle" title="reload producers"></a>
 	<a href="AddOrEditProducer?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addProducer" width="100" height="100"
 								style="vertical-align: middle" title="add producer"></a>
 	
-	<br><br><br><br><br><br><br><br>
+	<br><br>
 
 	<%
  	application.setAttribute("fromAddMed", "no");
@@ -30,7 +30,6 @@
 	<table class="table" border=1>
 		<thead>
 			<tr>
-				<th class="th" bgcolor="silver"><h1>Id</h1></th>
 				<th class="th" bgcolor="silver"><h1>Title</h1></th>
 				<th class="th" bgcolor="silver"><h1>Country</h1></th>
 				<th class="th" colspan=2 bgcolor="silver"><h1>Action</h1></th>
@@ -39,9 +38,6 @@
 		<tbody>
 			<c:forEach items="${producers}" var="producer">
 				<tr>
-					<td class="td" bgcolor="silver" style="text-align: center;"><h2>
-							<c:out value="${producer.id}" />
-						</h2></td>
 					<td class="td" style="text-align: center;"><c:out
 							value="${producer.title}" /></td>
 					<td class="td" style="text-align: center;"><c:out

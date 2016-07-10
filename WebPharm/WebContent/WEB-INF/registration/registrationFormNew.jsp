@@ -19,7 +19,7 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<div class="mainBlock">
-	
+	<jsp:include page="/registrationHeader.jsp" />
 	<table class="table">
 
 		<thead>

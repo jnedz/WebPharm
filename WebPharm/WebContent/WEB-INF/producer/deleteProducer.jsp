@@ -12,14 +12,14 @@
 </head>
 <body>
 <jsp:include page="/header.jsp" />
-<jsp:include page="/producerHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/producerHeader.jsp" />
 <a href="AllProducers" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
 								style="vertical-align: middle" title="return to all producers"></a>
 	<center>
 	<h4>Do you really want to delete producer with title ${producer.title}?</h4>
-	<a href="DeleteProducerYes?id=<c:out value="${producer.id}"/>"><button>YES</button></a>
-	<a href="AllProducers"><button>NO</button></a>
+	<a href="DeleteProducerYes?id=<c:out value="${producer.id}"/>"><button class="button">YES</button></a>
+	<a href="AllProducers"><button class="button">NO</button></a>
 	</center>
 </div>
 </body>

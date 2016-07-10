@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import enums.PersonRole;
-import model.PersonsInfo;
+import model.Person;
 import model.Pharmacy;
 import utils.DbUtils;
 
-public class PersonsInfoPharmaciesDAO {
+public class PersonPharmacyDAO {
 
 	
 	/**
@@ -18,9 +18,9 @@ public class PersonsInfoPharmaciesDAO {
 	 * @param ph
 	 * @param role
 	 */
-	public static void add(PersonsInfo pi, Pharmacy ph, String role) {
+	public static void add(Person pi, Pharmacy ph, String role) {
 
-		String sql = "INSERT INTO personsInfo_pharmacies (id_personsInfo, id_pharmacy, role) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO persons_pharmacies (id_person, id_pharmacy, role) VALUES (?, ?, ?)";
 
 		try {
 			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
@@ -29,34 +29,34 @@ public class PersonsInfoPharmaciesDAO {
 			statement.setString(3, role);
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
-				System.out.println("A new personsInfo_pharmacies was inserted successfully!");
+				System.out.println("A new persons_pharmacies was inserted successfully!");
 				statement.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("Exception in add(personsInfo_pharmacies)!");
+			System.out.println("Exception in add(persons_pharmacies)!");
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * 
-	 * @param PersonsInfo pi
+	 * @param Person pi
 	 * @param Pharmacy ph
 	 *            delete Person from Pharmacy (from the table)
 	 */
-	public static void delete(PersonsInfo pi, Pharmacy ph) {
-		String sql = "DELETE FROM PersonsInfo_Pharmacy WHERE id_personsInfo = ? and id_pharmacy = ?";
+	public static void delete(Person pi, Pharmacy ph) {
+		String sql = "DELETE FROM Persons_Pharmacy WHERE id_person = ? and id_pharmacy = ?";
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pi.getId());
 			statement.setInt(2, ph.getId());
 			int rowsDeleted = statement.executeUpdate();
 			if (rowsDeleted > 0) {
-				System.out.println("A PersonsInfo_Pharmacy was deleted successfully!");
+				System.out.println("A Persons_Pharmacy was deleted successfully!");
 			}
 			statement.close();
 		} catch (SQLException ex) {
-			System.out.println("Exception in delete(PersonsInfo pi, Pharmacy ph)!");
+			System.out.println("Exception in delete(Person pi, Pharmacy ph)!");
 			ex.printStackTrace();
 		}
 	}
@@ -67,9 +67,9 @@ public class PersonsInfoPharmaciesDAO {
  * @param ph
  * @return role
  */
-	public static PersonRole getRole(PersonsInfo pi, Pharmacy ph) {
-			String sql = "SELECT role FROM personsInfo_pharmacies where personsInfo_pharmacies.id_personsInfo = "
-					+ pi.getId() + " and personsInfo_pharmacies.id_pharmacy = " + ph.getId();
+	public static PersonRole getRole(Person pi, Pharmacy ph) {
+			String sql = "SELECT role FROM persons_pharmacies where persons_pharmacies.id_person = "
+					+ pi.getId() + " and persons_pharmacies.id_pharmacy = " + ph.getId();
 			PersonRole role = null;
 			try {
 				java.sql.Statement statement = DbUtils.getConnection().createStatement();
@@ -79,7 +79,7 @@ public class PersonsInfoPharmaciesDAO {
 				}
 				statement.close();
 			} catch (SQLException e) {
-				System.out.println("Exception in getRole(personInfo, pharmacy)!");
+				System.out.println("Exception in getRole(person, pharmacy)!");
 			}
 		return role;
 	}
@@ -91,20 +91,20 @@ public class PersonsInfoPharmaciesDAO {
 	 * @param newRole
 	 *            {@literal update price in couple pharmacy-medicine}
 	 */
-	public static void update(PersonsInfo pi, Pharmacy ph, PersonRole newRole) {
-		String sql = "UPDATE personsInfo_pharmacies SET role = ? WHERE id_pharmacy = " + ph.getId()
-				+ " and id_pharmacy = " + ph.getId();
+	public static void update(Person pi, Pharmacy ph, PersonRole newRole) {
+		String sql = "UPDATE persons_pharmacies SET role = ? WHERE id_pharmacy = " + ph.getId()
+				+ " and id_person = " + pi.getId();
 		try {
 			PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setString(1, newRole.name());
 
 			int rowsUpdated = statement.executeUpdate();
 			if (rowsUpdated > 0) {
-				System.out.println("An existing personsInfo_pharmacy was updated successfully!");
+				System.out.println("An existing persons_pharmacy was updated successfully!");
 			}
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Exception in update(personsInfo, pharmacy, role)");
+			System.out.println("Exception in update(person pharmacy, role)");
 			e.printStackTrace();
 		}
 	}

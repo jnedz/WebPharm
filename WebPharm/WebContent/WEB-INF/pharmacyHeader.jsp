@@ -1,5 +1,3 @@
 <div class="title">
-<br>
-	<p>
-	<h4>PHARMACIES</h4>
+	<h6>PHARMACIES</h6>
 </div>

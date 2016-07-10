@@ -32,7 +32,7 @@ public class DeleteProducerYes extends HttpServlet {
 		try {
 			ProducerService.deleteProducer(ProducerService.getProducerById(Integer.parseInt(request.getParameter("id"))));
 		} catch (Exception e) {
-			request.getRequestDispatcher("/parts/exception.jsp").forward(request, response);
+			request.getRequestDispatcher("/producer/exception.jsp").forward(request, response);
 			System.out.println("Exception in deleteProducer(id)!");
 			e.printStackTrace();
 		}

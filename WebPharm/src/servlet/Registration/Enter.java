@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.PersonsInfo;
-import service.PersonsInfoService;
+import model.Person;
+import service.PersonService;
 
 
 /**
@@ -46,9 +46,13 @@ public class Enter extends HttpServlet {
 		String password = request.getParameter("password");
 
 		boolean userIsExist = false;
-		for (PersonsInfo userFromDB : PersonsInfoService.getAll()) {
+		for (Person userFromDB : PersonService.getAll()) {
 			if (login.equals(userFromDB.getLogin()) && password.equals(userFromDB.getPassword())) {
 				request.setAttribute("roleReg", userFromDB.getRole().name());
+				request.setAttribute("roleReg", userFromDB.getRole().name());
+				//String name = userFromDB.getFirstName()+ " " + userFromDB.getLastName();
+				//System.out.println("name" + name);
+				//request.setAttribute("roleReg", name);
 				System.out.println("userFromDB.getRole().name()= " + userFromDB.getRole().name());
 				userIsExist = true;
 			}

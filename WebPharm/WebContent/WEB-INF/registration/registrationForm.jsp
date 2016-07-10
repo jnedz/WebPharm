@@ -19,13 +19,9 @@
 <body>
 	<jsp:include page="/header.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/registrationHeader.jsp" />
 		<form name="myForm" action="Registration" method="post"
 			onsubmit="return validateForm()">
-
-			<%--	<button name="Submit" class="addButton3"><img src="img/add.png" alt="registration" width="100" height="100"
-								style="vertical-align: middle" title="registration"></button>
-		 --%>
-
 			<table class="table1" border="0">
 				<caption>
 					Enter Registration data:<br>
@@ -46,7 +42,7 @@
 							<label for="password">Password:</label>
 						</div></td>
 					<td class="td1"><input id="frpassword" type="password"
-						name="password" placeholder="length<=25" value="${password}" /></td>
+						name="password" placeholder="length<=25" value="${password}" tabindex="2"/></td>
 				</tr>
 
 				<tr>
@@ -55,14 +51,14 @@
 						</div></td>
 					<td class="td1"><input id="frname" type="text"
 						name="firstName" placeholder="length<=20" value="${firstName}"
-						tabindex="1" /></td>
+						tabindex="3" /></td>
 				</tr>
 				<tr>
 					<td class="td1"><div class="field">
 							<label for="lastName">Last name:</label>
 						</div></td>
 					<td class="td1"><input id="frname" type="text" name="lastName"
-						placeholder="length<=20" value="${lastName}" tabindex="2" /></td>
+						placeholder="length<=20" value="${lastName}" tabindex="4" /></td>
 				</tr>
 				<tr>
 					<td class="td1"><div class="field">
@@ -70,7 +66,7 @@
 						</div></td>
 					<td class="td1"><input type="text" name="dateOfBirthday"
 						value="${dateOfBirthday}"
-						placeholder='format "<%= Constants.format %>"' tabindex="3" /></td>
+						placeholder='format "<%= Constants.format %>"' tabindex="5" /></td>
 				</tr>
 				<tr>
 					<td class="td1"><div class="field">

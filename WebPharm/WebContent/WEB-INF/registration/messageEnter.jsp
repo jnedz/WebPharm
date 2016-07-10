@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>messageRegistration</title>
+<title>messageEnter</title>
 <style type="text/css">
 @import
 "style.css"
@@ -15,8 +15,8 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/pharmacyHeader.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/registrationHeader.jsp" />
 		<input type="hidden" name="login" value="${login}">
 		<input type="hidden" name="userIsExist" value="${userIsExist}">
 		<input type="hidden" name="roleReg" value="${roleReg}">

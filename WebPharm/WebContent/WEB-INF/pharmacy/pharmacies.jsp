@@ -15,16 +15,16 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/pharmacyHeader.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/pharmacyHeader.jsp" />
 
 		<a href="#" onclick="history.back()" class="reloadButton"><img
 			src="img/return.png" alt="Return" width="90" height="90"
-			style="vertical-align: middle" title="return"></a> <a
-			href="AllPharmacies" class="addButton" ><img src="img/reload.png"
+			style="vertical-align: middle" title="return"></a> 
+		<a href="AllPharmacies" class="addButton" ><img src="img/reload.png"
 			alt="ReloadPharmacies" width="100" height="100"
 			style="vertical-align: middle" title="reload pharmacies"></a> <br>
-		<br> <br> <br> <br> <br> <br>
+		<br> <br> 
 
 
 

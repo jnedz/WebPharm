@@ -10,8 +10,8 @@
 </head>
 <body>
 <jsp:include page="/header.jsp" />
-<jsp:include page="/pharmacyHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/pharmacyHeader.jsp" />
 <a href="#" onclick="history.back()" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
 								style="vertical-align: middle" title="return"></a>
 <center>

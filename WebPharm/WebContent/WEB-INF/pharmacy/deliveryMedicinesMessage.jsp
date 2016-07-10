@@ -18,14 +18,14 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/pharmacyHeader.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/pharmacyHeader.jsp" />
 	<form action="PharmaciesServlet" method="post">
-	<%-- <a href="PharmaciesServlet?idPharm=<c:out value='${idPharm}'/>" class="returnButton2"> --%><button class="returnButton20"><img src="img/return.png" alt="Return" width="90" height="90"
+	<button class="returnButton20"><img src="img/return.png" alt="Return" width="90" height="90"
 								style="vertical-align: middle" title="return"></button> 
 		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
 								</form>
-	<br><br><br><br><br>
+	<br>
 	
 	<form action="DeliveryMedicines"  method="post">
 	<input type="hidden" name="idPharm" value="${idPharm}" /> 

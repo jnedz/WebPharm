@@ -7,11 +7,30 @@ import enums.PersonRole;
 
 public class Person {
 
-	private long id;
+
+	private int id;
 	private String firstName;
 	private String lastName;
 	private PersonRole role;
 	private GregorianCalendar DateOfBirthday;
+	private String login;
+	private String password;
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public GregorianCalendar getDateOfBirthday() {
 		return DateOfBirthday;
@@ -29,11 +48,11 @@ public class Person {
 		this.role = role;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -64,7 +83,8 @@ public class Person {
 		// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		// String date = format.format(getDateOfBirthday().getTime());
 		return "\nid = " + id + "; " + "First name: " + getFirstName().toString() + "; " + " Last name: "
-				+ getLastName().toString() + "; "  + "Role: " + getRole() + "; " + "Date of birthday: " + getDateOfBirthdayInString();
+				+ getLastName().toString() + "; "  + "Role: " + getRole() + "; " + "Date of birthday: " + getDateOfBirthdayInString() + 
+				"login: " + getLogin() + " password: " + getPassword();
 	}
 
 }

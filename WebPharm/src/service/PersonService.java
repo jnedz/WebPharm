@@ -1,7 +1,6 @@
 package service;
 
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.PersonDAO;
@@ -9,70 +8,59 @@ import enums.PersonRole;
 import model.Person;
 
 public class PersonService {
-	
-	public static void add(Person person) {
+
+	public static void add(Person person){
 		PersonDAO.add(person);
 	}
-
-	public static void add(String firstName, String lastName, PersonRole role) {
-		PersonDAO.add(firstName, lastName, role);
+	
+	public static void add(String firstName, String lastName, PersonRole role){
+		Person person = new Person();
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setRole(role);
+		person.setDateOfBirthday(new GregorianCalendar());
+		person.setLogin("");
+		person.setPassword("");
+		PersonDAO.add(person);
 	}
-
-	public static void delete(Person person) {
-		PersonDAO.delete(person);
+	
+	public static void delete(int id){
+		PersonDAO.delete(id);;
 	}
-
-	public static List<Person> getAll() {
+	
+	public static void delete(Person person){
+		PersonDAO.delete(person.getId());
+	}
+	
+	public static List<Person> getAll(){
 		return PersonDAO.getAll();
 	}
-
-	public static List<Person> getPersonsByFullName(String firstName, String lastName) {
+	
+	public static List<Person> getPersonsByFullName(String firstName,
+			String lastName) {
 		return PersonDAO.getPersonsByFullName(firstName, lastName);
 	}
-
-	public static void delete(long id) {
-		PersonDAO.delete(id);
-	}
-
-	public static Person getPersonById(long id) {
+	
+	public static Person getPersonById(int id) {
 		return PersonDAO.getPersonById(id);
 	}
-
+	
 	public static void update(Person person) {
 		PersonDAO.update(person);
 	}
 	
-	public static List<Person> getPersonsByRole(String role) {
-		return PersonDAO.getPersonsByRole(role);
+	public static void updateAllPerson(Person person) {
+		PersonDAO.updateAllPerson(person);
 	}
 	
-	public static List<Person> sortByFirstName(String order, List<Person> list) {
-		List<Person> sortedList = list;
-		Collections.sort(sortedList, new Comparator<Person>() {
-				@Override
-				public int compare(Person o1, Person o2) {
-					 return o1.getFirstName().compareTo(o2.getFirstName());
-				}
-		});
-		if (order.equals("DESC")){
-		Collections.reverse(sortedList);
-		}
-		return sortedList;
-	}
-	
-	public static List<Person> sortByFirstName(String order, String role) {
-		return sortByFirstName(order, getPersonsByRole(role));
-	}
-	
-	public static List<Person> sortByFirstNameAndRole(String order, String role) {
-		return PersonDAO.sortByFirstNameAndRole(order, role);
-	}
-	
-	public static List<Person> sortByFirstName(String order) {
-		return PersonDAO.sortByFirstName(order);
-	}
-
 	public static List<Person> sortByCriteria(String criteria, String order, String role) {
-		return PersonDAO.sortByCriteria(criteria, order, role);
+		if ("NoSort".equals(order)) {
+			order = "";
+		}
+		if ("AllPersons".equals(role)){
+			role = "";
+		}
+		return PersonDAO.sort(criteria, order, role);
 	}
+	
 }

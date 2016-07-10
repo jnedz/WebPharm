@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.PersonsInfo;
-import service.PersonsInfoService;
+import model.Person;
+import service.PersonService;
 
 /**
  * Servlet implementation class DeletePersonYes
@@ -30,9 +30,9 @@ public class DeletePersonYes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PersonsInfo p = PersonsInfoService.getPersonsInfoById(Integer.parseInt(request.getParameter("id")));
-		PersonsInfoService.delete(p);
-		request.setAttribute("persons", PersonsInfoService.getAll());
+		Person p = PersonService.getPersonById(Integer.parseInt(request.getParameter("id")));
+		PersonService.delete(p);
+		request.setAttribute("persons", PersonService.getAll());
 		request.getRequestDispatcher("/person/persons.jsp").forward(request, response); 
 	}
 

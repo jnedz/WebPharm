@@ -9,14 +9,11 @@
 <style type="text/css">
  @import "style.css"
 </style>
-
 </head>
 <body>
-
 <jsp:include page="/header.jsp" />
-
 <div class="mainBlock">
-	<br>
+	<br><br><br><br>
 	<form action="AllPersons" method="post">
 		<input type="submit" value="All Persons" />
 	</form>

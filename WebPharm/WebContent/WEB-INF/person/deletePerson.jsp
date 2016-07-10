@@ -12,8 +12,8 @@
 </head>
 <body>
 <jsp:include page="/header.jsp" />
-<jsp:include page="/personHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/personHeader.jsp" />
 
 <a href="AllPersons" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
 								style="vertical-align: middle" title="return to all persons"></a>
@@ -25,8 +25,8 @@
 			method="post">
 			<input type="submit" value="YES">
 		</form>--%> <br>
-		<a href="DeletePersonYes?id=<c:out value='<%=request.getParameter("id")%>'/>"><button>YES</button></a>
-		<a href="AllPersons"><button>NO</button></a>
+		<a href="DeletePersonYes?id=<c:out value='<%=request.getParameter("id")%>'/>"><button class="button">YES</button></a>
+		<a href="AllPersons"><button class="button">NO</button></a>
 	</center>
 	</div>
 </body>

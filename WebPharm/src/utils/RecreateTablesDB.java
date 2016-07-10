@@ -3,8 +3,7 @@ package utils;
 import java.sql.SQLException;
 
 import repository.MedicinesRepository;
-import repository.PersonsInfoPharmasiesRepository;
-import repository.PersonsInfoRepository;
+import repository.PersonsPharmasiesRepository;
 import repository.PersonsRepository;
 import repository.PharmaciesMedicinesRepository;
 import repository.PharmaciesRepository;
@@ -14,33 +13,26 @@ public class RecreateTablesDB {
 
 	public static void main(String[] args) throws SQLException {
 
-		 DbUtils.dropPersonTable();
-		
-		 DbUtils.dropPersonsInfoPharmaciesTable();
-		 DbUtils.dropPersonsInfoTable();
-		 DbUtils.dropPharmaciesMedicinesTable();
-		 DbUtils.dropPharmaciesTable(); DbUtils.dropMedicineTable();
-		 DbUtils.dropProducersTable();
-		
-		 DbUtils.dropPersonsUsersTable();
-		 DbUtils.dropUsersTable();
+		DbUtils.dropPersonsPharmaciesTable();
+		DbUtils.dropPersonsTable();
+		DbUtils.dropPharmaciesMedicinesTable();
+		DbUtils.dropPharmaciesTable();
+		DbUtils.dropMedicineTable();
+		DbUtils.dropProducersTable();
 
 		DbUtils.createProducerTable();
 		DbUtils.createMedicineTable();
-		DbUtils.createPersonsInfoTable(); // DbUtils.createPersonTable();
+		DbUtils.createPersonsTable();
 		DbUtils.createPharmaciesTable();
 		DbUtils.createPharmaciesMedicinesTable();
-		DbUtils.createPersonsInfoPharmaciesTable();
+		DbUtils.createPersonsPharmaciesTable();
 
-		PersonsInfoRepository.completePersonsInfoTable();
-		 ProducersRepository.completeProducersTable();
-		 MedicinesRepository.completeMedicinesTable();
-		 PharmaciesRepository.completePharmaciesTable();
-		 PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
-		 PersonsInfoPharmasiesRepository.completePersonsInfoPharmaciesTable();
-
-//		 DbUtils.createUsersTable();
-//		 DbUtils.createPersonsUsersTable();
+		PersonsRepository.completePersonsTable();
+		ProducersRepository.completeProducersTable();
+		MedicinesRepository.completeMedicinesTable();
+		PharmaciesRepository.completePharmaciesTable();
+		PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
+		PersonsPharmasiesRepository.completePersonsInfoPharmaciesTable();
 
 	}
 }

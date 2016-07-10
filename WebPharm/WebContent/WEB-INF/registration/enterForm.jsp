@@ -16,14 +16,9 @@
 <body>
 <jsp:include page="/header.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/registrationHeader.jsp" />
 	<form name="myForm" action="Enter" method="post" onsubmit="return validateForm()" >
-<%--	<button name="Submit" class="addButton3"><img src="img/add.png" alt="registration" width="100" height="100"
-								style="vertical-align: middle" title="registration"></button>
-	
-	<%--	<input type="hidden" name="id" value="${id}" /> <input type="hidden"
-			name="selectedRole" value="${selectedRole}" />
-		 --%>	
-			
+
 		<table class="table1" border="0">
 			<caption>
 				Enter login and password:<br>
@@ -37,14 +32,14 @@
 						<label for="login">Login:</label>
 					</div></td>
 				<td class="td1"><input type="text" name="login" id="frlogin"
-					 placeholder="length<=20" value = "" tabindex="1" /></td>
+					value = "" tabindex="1" /></td>
 			</tr>
 			<tr>
 				<td class="td1"><div class="field">
 						<label for="password">Password:</label>
 					</div></td>
 				<td class="td1"><input id="frpassword" type="password" name="password"
-					placeholder="length<=20" value="${password}" /></td>
+					value="" tabindex="2"/></td>
 			</tr>
 		
 		</table>

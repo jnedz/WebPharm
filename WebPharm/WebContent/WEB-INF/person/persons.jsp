@@ -22,20 +22,16 @@
 
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/registration.jsp" />
-	<jsp:include page="/personHeader.jsp" />
-	
-	
-	
 	
 <div class="mainBlock">
+<jsp:include page="/personHeader.jsp" /> 
 	
 		<a href="AllPersons" class="reloadButton"><img src="img/reload.png" alt="ReloadPersons" width="100" height="100"
 								style="vertical-align: middle" title="reload persons"></a>
 	<a href="EditPerson?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addPerson" width="100" height="100"
 								style="vertical-align: middle" title="add person"></a>
 	
-	<br><br><br><br><br><br><br><br>
+	<br><br>
 	
 	
 	
@@ -195,11 +191,10 @@
 							value="${person.role}" /></td>
 
 					<td class="td" style="text-align: center;"><h3>
-							<a href="EditPerson?id=<c:out value="${person.id}"/>"><button
-									class="sendsubmitS">
+							<a href="EditPerson?id=<c:out value="${person.id}"/>">
 									<img src="img/update.png" alt="Edit" width="20" height="20"
 										style="vertical-align: middle" title="Edit">
-								</button></a>
+								</a>
 						</h3></td>
 
 					<td class="td" style="text-align: center;"><h3>

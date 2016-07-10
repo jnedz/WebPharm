@@ -19,8 +19,8 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<jsp:include page="/pharmacyHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/pharmacyHeader.jsp" />
 
 <a href="#" onclick="history.back()" class="reloadButton"><img
 			src="img/return.png" alt="Return" width="90" height="90"
@@ -34,8 +34,6 @@
 								</form>
 								
 			<br>
-		<br> <br> <br> <br> <br> <br>
-
 	
 	<h4><p>Pharmacy: ${pharmacy.title}<br></h4>
 	<table  class="table">

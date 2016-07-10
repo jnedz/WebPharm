@@ -1,83 +1,81 @@
 @CHARSET "UTF-8";
+ a { 
+    text-decoration: none; 
+   } 
 .registration {
-	 border-radius: 5px; 
-   height: 8px; 
-   width: 80px;
-   font-size: 90%;
+	border-radius: 5px;
+	height: 8px;
+	width: 80px;
+	font-size: 90%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	color: maroon;
-   
- 	float: right; 
+	float: right;
 	/* margin-top:-60px; */
 	padding-right: 20px;
 }
-
-h1 {
-	font-size: 110%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #333366;
+.home {
+	background-image: none;
+	background-color: transparent;
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
-
-h2 {
-	font-size: 100%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #333366;
+.center {
+	position: absolute;
+	left: 25%;
+	top: 10px;
 }
-
-h3 {
-	font-size: 110%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #ff0000;
+.header {
+	z-index: 1;
+	position: fixed;
+	display: block;
+	height: 80px;
+	width: 100%;
+	background-image: url('img/header01.jpg');
 }
-
-h4, caption {
-	font-size: 120%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #800000;
+.title {
+	width: 100%;
+	display: block; 
+	text-align: center
 }
-legend {
-	font-size: 110%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #800000;
+.mainBlock {
+	padding-left: 50px;
+	padding-top: 30px;
 }
-
-h5, label {
-	font-size: 110%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #808080;
+.addButton2, .returnButton {
+	position: absolute;
+	right: 70px;
+	background-image: none;
+	background-color: transparent;
 }
-
-input[type="submit"], button {
-	font-size: 100%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: maroon;
-	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
-		endColorstr='#EBFFFF');
-	width: 145px;
-  height:35px;
-	padding: 5px 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 2px solid #666;
+.returnButton2 {
+	position: absolute;
+	left: 70px;
+	top: 170px;
+	background-image: none;
+	background-color: transparent;
+}
+.reloadButton {
+	position: absolute;
+	top: 130px;
+	left: 70px;
+}
+.addButton {
+	position: absolute;
+	top: 125px;
+	right: 70px;
 }
 .buttonOrder {
 	width: 37px;
-  height:37px;
-	
-}
-
-
-input[type="button"] {
+	height: 37px;
 	font-size: 100%;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	color: maroon;
 	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
 		endColorstr='#EBFFFF');
-	width: 145px;
-  height:35px;
 	padding: 5px 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -85,16 +83,118 @@ input[type="button"] {
 	border: 2px solid #666;
 }
 .unvisible {
-width:  35px;  
-height: 30px; 
-margin: 0;
-padding:0;
-border: 0;
+	width: 35px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
 }
-
+.sendsubmit {
+	width: 35px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url('img/search.png') 70% 70% no-repeat;
+	background-size: cover;
+	text-indent: -1000em;
+	cursor: pointer;
+	cursor: hand;
+}
+.addButton20 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	right: 70px;
+	top: 130px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+.addButton21, .addButton3  {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	right: 70px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+.returnButton20 {
+	width: 90px;
+	height: 90px;
+	position: absolute;
+	left: 70px;
+	top: 170px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+ h1, h2 {
+	font-size: 110%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333366;
+}
+h3 {
+	font-size: 110%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #ff0000;
+}
+h4, caption, legend {
+	font-size: 120%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #800000;
+}
+h5, label {
+	font-size: 110%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #808080;
+}
+ h6 {
+	font-size: 200%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #800000;
+}
+input[type="submit"] {
+	font-size: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: maroon;
+	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
+		endColorstr='#EBFFFF');
+	width: 145px;
+	height: 35px;
+	padding: 5px 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 2px solid #666;
+}
+.button {
+	font-size: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: maroon;
+	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
+		endColorstr='#EBFFFF');
+	width: 145px;
+	height: 35px;
+	padding: 5px 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 2px solid #666;
+}
 .table1 {
 	border: 0px importent!;
-	
 }
 .table {
 	border-collapse: collapse;
@@ -103,11 +203,11 @@ border: 0;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
 		endColorstr='#EBFFFF');
 }
-
 .td, .th {
-	padding: 4px;
-	border: 2px solid grey;
+	padding: 2px;
+	border: 1px solid grey;
 }
+
 .td1, .th1 {
 	padding: 0px importent!;
 	border: 0px importent!;
@@ -125,235 +225,72 @@ select {
 	border-radius: 5px;
 	border: 2px solid #666;
 	width: 145px;
-  height:35px;
+	height: 35px;
 }
-
-A {
-	text-decoration: none;
-}
-
-A:hover {
-	text-decoration: underline;
-	color: red;
-}
-:-moz-placeholder {
-color: blue;
-}
-::-webkit-input-placeholder {
-color: blue;
-}
-.field {clear:both; text-align:right;}
-.field {clear:both; text-align:right;}
-label {float:left;}
-.field {clear:both; text-align:right;}
-label {float:left;}
-.main {float:left}
-.field {clear:both; text-align:right; line-height:25px;}
-label {float:left; padding-right:10px;}
-.main {float:left}
 input[type="text"] {
-  
-   border-radius: 5px; 
-   -webkit-border-radius: 5px; 
-   -moz-border-radius: 5px; 
-   -khtml-border-radius: 5px; 
-   background: #ffffff !important; 
-   outline: none; 
-   height: 20px; 
-   width: 155px;
-   color: black; 
-   font-size: 11px; 
-   font-family: Tahoma; 
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	background: #ffffff !important;
+	outline: none;
+	height: 20px;
+	width: 155px;
+	color: black;
+	font-size: 11px;
+	font-family: Tahoma;
 }
-
-
 input[type="password"] {
-   border-radius: 5px; 
-   height: 20px; 
-   width: 155px;
-}
-.sendsubmit {
-width:  35px;  
-height: 35px; 
-margin: 0;
-padding:0;
-border: 0;
-background: transparent url('img/search.png') 70% 70% no-repeat ;
-background-size: cover;
-text-indent: -1000em;
-cursor: pointer; 
-cursor: hand; 
+	border-radius: 5px;
+	height: 20px;
+	width: 155px;
 }
 .sendsubmitC {
-width:  100px;  
-height: 100px; 
-margin: 0;
-padding:0;
-border: 0;
-background: transparent url('img/reload.png') 70% 70% no-repeat ;
-background-size: cover;
-text-indent: -1000em;
-cursor: pointer; 
-cursor: hand; 
-}
-.sendsubmitS {
-width:  45px;  
-height: 35px; 
-margin: 0;
-padding:0;
-border: 0;
-
-cursor: pointer; 
-cursor: hand; 
+	width: 100px;
+	height: 100px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url('img/reload.png') 70% 70% no-repeat;
+	background-size: cover;
+	text-indent: -1000em;
+	cursor: pointer;
+	cursor: hand;
 }
 .sendsubmitS1 {
-width:  90px;  
-height: 30px; 
-margin: 0;
-padding:0;
-border: 0;
-
-cursor: pointer; 
-cursor: hand; 	
-	
-	
+	width: 90px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	cursor: hand;
 }
-.mainBlock {
-padding-left: 50px;
-	padding-top: 130px;
-	}
 .selectPerson {
 	padding-right: 500px;
 }
-
-.addButton {
-	position: absolute;
-	top: 155px; 
-    right: 70px;
-}
-.addButton3 {
-	position: absolute;
-    right: 70px;
-	width:  100px;  
-height: 100px; 
-margin: 0;
-padding:0;
-border: 0;
-background: transparent url('img/img/add.png') 70% 70% no-repeat ;
-background-size: cover;
-cursor: pointer; 
-cursor: hand; 
-    
-}
-
 .signIn {
-width:  50px;  
-height: 50px; 
-margin: 0;
-padding:0;
-border: 0;
-background: transparent url('img/signIn.png') 70% 70% no-repeat ;
-background-size: cover;
-cursor: pointer; 
-cursor: hand; 
-    
-}
-
-
-.addButton2 {
-	position: absolute;
-    right: 70px;
-}
-.reloadButton {
-	position: absolute;
-    
-	top: 155px; 
-    left: 70px;
-}
-.returnButton {
-	position: absolute;
-    right: 70px;
-}
-.returnButton2 {
-	position: absolute;
-    left: 70px;
-    top: 170px;
-}
-.returnButton20 {
-	width: 90px;
-  height:90px;
-	position: absolute;
-    left: 70px;
-    top: 170px;
-    
-    margin: 0 !important;
-padding:0 !important;
-border: 0 !important;
-}
-.addButton20{
- width: 100px;
- height:100px; 
-	position: absolute;
-    right: 70px;
-    top: 170px;
-    margin: 0 !important;
- padding:0 !important;
-border: 0 !important; 	
-}
-.addButton21{
-width: 100px;
-  height:100px;
-	position: absolute;
-    right: 70px;
-    margin: 0 !important;
-padding:0 !important;
-border: 0 !important;	
-}
-header {
-	z-index: 1;
-	 position: fixed;
-	display: block;
-	height: 120px;
-	 width: 100%;
-	background-image: url('img/header01.jpg');
-}
-.title {
-	z-index: 1;
-	position: fixed;
-	width: 100%;
-	margin-top: 45px;
-	display: block;
-	height: 10px;
-	text-align: center
-	
-}
-.mH {
-	padding-top:110px
-	display: block;
-	height: 110px;
-	background-image: url('img/medicine.jpg') !important;
-}
-.phH {
-	display: block;
-	height: 110px;
-	background-image: url('img/pharmacy.jpg') !important;
-}
-.prH {
-	display: block;
-	height: 110px;
-	background-image: url('img/producer.jpg') !important;
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent url('img/signIn.png') 70% 70% no-repeat;
+	background-size: cover;
+	cursor: pointer;
+	cursor: hand;
 }
 .hid {
 	font-size: xx-large;
 	font-size: 93% !important;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	border: transparent;
-    padding: 0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    border-color: transparent;
-   outline: none; 
-   color: red !important; 
+	padding: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-color: transparent;
+	outline: none;
+	color: red !important;
 }
 placeholder {
 	color: aqua !important;

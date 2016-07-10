@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.PersonsInfo;
-import service.PersonsInfoService;
+import model.Person;
+import service.PersonService;
 
 
 
@@ -35,7 +35,7 @@ public class DeletePerson extends HttpServlet {
 		
 		
 		System.out.println("Person_id = " + request.getParameter("id"));
-		PersonsInfo p = PersonsInfoService.getPersonsInfoById(Integer.parseInt(request.getParameter("id")));
+		Person p = PersonService.getPersonById(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("person", p);
 		request.getRequestDispatcher("/person/deletePerson.jsp").forward(request, response); 
 		

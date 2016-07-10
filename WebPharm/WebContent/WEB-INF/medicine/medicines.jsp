@@ -21,15 +21,15 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<jsp:include page="/medicineHeader.jsp" />
 <div class="mainBlock">
+<jsp:include page="/medicineHeader.jsp" />
 
 <a href="AllMedicines" class="reloadButton"><img src="img/reload.png" alt="ReloadMedicines" width="100" height="100"
 								style="vertical-align: middle" title="reload medicines"></a>
 	<a href="EditMedicine?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addMedicin" width="100" height="100"
 								style="vertical-align: middle" title="add medicine"></a>
 	
-	<br><br><br><br><br><br><br><br>
+	<br><br>
 
 
 

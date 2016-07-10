@@ -13,6 +13,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="mainBlock">
+<jsp:include page="/producerHeader.jsp" />
 <a href="AllProducers" class="returnButton2"><img src="img/return.png" alt="Return" width="90" height="90"
 								style="vertical-align: middle" title="return to all producers"></a>
 	<center>

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.PersonsInfo;
-import service.PersonsInfoService;
+import model.Person;
+import service.PersonService;
 import utils.Formatter;
 
 /**
@@ -48,10 +48,10 @@ public class SelectPersonByInput extends HttpServlet {
 		String lastNameErr = "";
 		String dateErr = "";
 
-		List<PersonsInfo> persons = new ArrayList<>();
+		List<Person> persons = new ArrayList<>();
 
 		if (firstNameForSeach.isEmpty() && lastNameForSeach.isEmpty() && dateForSeach.isEmpty()) {
-			request.setAttribute("persons", PersonsInfoService.getAll());
+			request.setAttribute("persons", PersonService.getAll());
 			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		}
 
@@ -84,11 +84,11 @@ public class SelectPersonByInput extends HttpServlet {
 			request.setAttribute("firstNameForSeach", firstNameForSeach);
 			request.setAttribute("lastNameForSeach", lastNameForSeach);
 			request.setAttribute("dateForSeach", dateForSeach);
-			request.setAttribute("persons", PersonsInfoService.getAll());
+			request.setAttribute("persons", PersonService.getAll());
 			request.getRequestDispatcher("/person/persons.jsp").forward(request, response);
 		}
 
-		for (PersonsInfo person : PersonsInfoService.getAll()) {
+		for (Person person : PersonService.getAll()) {
 			if (firstNameForSeach.length() == 0 || person.getFirstName().contains(firstNameForSeach)) {
 				if (lastNameForSeach.length() == 0 || person.getLastName().contains(lastNameForSeach)) {
 					if (dateForSeach.length() == 0 || Formatter.fromDateToString(person.getDateOfBirthday()).contains(dateForSeach)) {

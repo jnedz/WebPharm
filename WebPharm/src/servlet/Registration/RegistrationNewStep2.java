@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import enums.PersonRole;
-import model.PersonsInfo;
-import service.PersonsInfoService;
+import model.Person;
+import service.PersonService;
 import utils.Formatter;
 
 /**
@@ -46,7 +46,7 @@ public class RegistrationNewStep2 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		PersonsInfo person = PersonsInfoService.getPersonsInfoById(id);
+		Person person = PersonService.getPersonById(id);
 		
 //		String firstName = request.getParameter("firstName");
 //		String lastName = request.getParameter("lastName");

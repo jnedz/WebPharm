@@ -17,11 +17,10 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
-	<jsp:include page="/medicineHeader.jsp" />
 	<div class="mainBlock">
+	<jsp:include page="/medicineHeader.jsp" />
 	<c:set var="types" value="<%=MedicineType.values()%>">
 	</c:set>
-<br>
 	<form action="AllMedicines" method="POST">
 	
 	<button class="addButton3"><img src="img/add.png" alt="addMedicine" width="100" height="100"
