@@ -52,7 +52,6 @@ public class PersonDAO {
 			statement.setDate(4, date);
 			statement.setString(5, person.getLogin());
 			statement.setString(6, person.getPassword());
-
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
 				System.out
@@ -95,10 +94,22 @@ public class PersonDAO {
 		try {
 			Statement statement = (Statement) DbUtils.getConnection()
 					.createStatement();
-			ResultSet result = statement.executeQuery(sql);
-			while (result.next()) {
+			ResultSet rs = statement.executeQuery(sql);
+			while (rs.next()) {
+				person = new Person();
+				person.setId(rs.getInt(1));
+				person.setFirstName(rs.getString(2));
+				person.setLastName(rs.getString(3));
+				person.setRole(PersonRole.valueOf(rs.getString(4)));
+				Date date = Date.valueOf(rs.getDate(5).toString());
+				GregorianCalendar cal = new GregorianCalendar();
+				cal.setTime(date);
+				person.setDateOfBirthday(cal);
+				person.setLogin(rs.getString(6));
+				person.setPassword(rs.getString(7));
+				
 				if (personsList.isEmpty()) {
-					personsList.add(convert(result));
+					personsList.add(person);
 				}
 				boolean isExists = false;
 				for (int i = 0; i < personsList.size(); i++) {
@@ -109,7 +120,7 @@ public class PersonDAO {
 					}
 				}
 				if (!isExists) {
-					personsList.add(convert(result));
+					personsList.add(person);
 				}
 			}
 			statement.close();
@@ -180,7 +191,6 @@ public class PersonDAO {
 			statement.setDate(4, date);
 			statement.setString(5, person.getLogin());
 			statement.setString(6, person.getPassword());
-
 			int rowsUpdated = statement.executeUpdate();
 			if (rowsUpdated > 0) {
 				System.out

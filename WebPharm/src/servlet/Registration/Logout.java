@@ -29,7 +29,9 @@ public class Logout extends HttpServlet {
 		
 		getServletConfig().getServletContext().setAttribute("registration", "no");
 		getServletConfig().getServletContext().setAttribute("roleReg", "");
-		
+		getServletConfig().getServletContext().setAttribute("firstName", "");
+		getServletConfig().getServletContext().setAttribute("lastName", "");
+		getServletConfig().getServletContext().setAttribute("idPharm", "");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

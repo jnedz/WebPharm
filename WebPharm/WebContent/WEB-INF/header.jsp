@@ -9,12 +9,13 @@
 			value="<%=application.getAttribute(\"registration\")%>" />
 		<c:choose>
 			<c:when test="${'yes' == registration}">
-				<h2><%=application.getAttribute("roleReg")%></h2>
+				<%-- <h2><%=application.getAttribute("roleReg")%></h2> --%>
+				<h7><%=application.getAttribute("firstName")%></h7>
+				<h7><%=application.getAttribute("lastName")%></h7>
 				<a href="Logout">Logout</a>
 			</c:when>
 			<c:otherwise>
-				<a href="RegistrationNew">RegistrNew</a>
-				<a href="Registration">Registration</a>
+				<a href="RegistrationNew">Registration</a>
 				<a href="Enter">Enter</a>
 			</c:otherwise>
 		</c:choose>

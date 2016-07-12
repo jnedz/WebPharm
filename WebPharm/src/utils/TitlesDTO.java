@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.MedicineDAO;
+import dao.PharmacyDAO;
 import dao.ProducerDAO;
 import model.Medicine;
+import model.Pharmacy;
 import model.Producer;
 
 public class TitlesDTO {
@@ -32,5 +34,14 @@ public class TitlesDTO {
 		return titles;
 	}
 	
+	public static List<String> pharmaciesTitles () {
+		List<String> titles = new ArrayList<>();
+		for (Pharmacy p: PharmacyDAO.getAll()) {
+			if(!(titles.contains(p.getTitle()))){
+				titles.add(p.getTitle());
+			}
+		}
+		return titles;
+	}
 
 }

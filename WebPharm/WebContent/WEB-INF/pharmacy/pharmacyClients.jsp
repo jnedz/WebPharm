@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pharmacy</title>
+<title>pharmacyClients</title>
 <style type="text/css">
 @import
 "style.css"
@@ -35,24 +35,7 @@
 			${pharmacy.description}
 		</h4>
 
-		<c:choose>
-			<c:when test="${'WORKER' == roleReg && pharmacy.id == idPharmApplication}">
-			<br>
-			<form action="WorkWithStorage" method="post">
-			<input type="hidden" name=idPharm value="${pharmacy.id}"> 
-						<input type="hidden" name=title value="${pharmacy.title}"> 
-						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithLeft">Storage</button> </form>
-						
-				<form action="WorkWithClients" method="post">
-				<input type="hidden" name=idPharm value="${pharmacy.id}"> 
-						<input type="hidden" name=title value="${pharmacy.title}"> 
-						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithRight">Clients</button></form>	
-			
-			
-			</c:when>
-			<c:otherwise>
+		
 <table class="table" border=1>
 					<thead>
 						<tr>
@@ -84,10 +67,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-<br><br><br><br>
-
-			</c:otherwise>
-		</c:choose>
 
 
 	</div>

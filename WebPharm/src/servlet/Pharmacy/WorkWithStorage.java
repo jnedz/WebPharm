@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Medicine;
 import model.Pharmacy;
-import service.MedicineService;
 import service.PharmacyMedicineService;
 import service.PharmacyService;
 
 /**
- * Servlet implementation class DeliveryNewMedicine
+ * Servlet implementation class WorkWithStorage
  */
-@WebServlet("/DeliveryNewMedicine")
-public class DeliveryNewMedicine extends HttpServlet {
+@WebServlet("/WorkWithStorage")
+public class WorkWithStorage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeliveryNewMedicine() {
+    public WorkWithStorage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,8 @@ public class DeliveryNewMedicine extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -42,18 +42,10 @@ public class DeliveryNewMedicine extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
+		System.out.println("id pharm = " + idPharm);
 		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
-		int idMed = Integer.parseInt(request.getParameter("idMed"));
-		int count = Integer.parseInt(request.getParameter("quantity"));
-		PharmacyMedicineService apot = new PharmacyMedicineService(pharmacy);
-		apot.deliveryMedToPharmacy(MedicineService.getMedicineById(idMed).getTitle(), count);
-		
 		
 		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getAllMedsByPharmId(idPharm));
-		if (medicines.size()==0){
-			request.setAttribute("pharmacy", pharmacy);
-			request.getRequestDispatcher("/pharmacy/messageNoMedsInPharm.jsp").forward(request, response);
-		}
 		request.setAttribute("idPharm", idPharm);
 		request.setAttribute("pharmacy", pharmacy);
 		request.setAttribute("medicines", medicines);

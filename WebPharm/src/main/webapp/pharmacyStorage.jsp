@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pharmacy</title>
+<title>pharmacyStorage</title>
 <style type="text/css">
 @import
 "style.css"
@@ -23,8 +23,6 @@
 	
 	<c:set var="idPharmApplication"
 			value="<%=application.getAttribute(\"idPharm\")%>" />
-	
-			<input type="hidden" name="roleReg" value="${roleReg}">
 			
 			<h4>
 			<a href="AllPharmacies" class="returnButton2"><img
@@ -35,25 +33,14 @@
 			${pharmacy.description}
 		</h4>
 
-		<c:choose>
-			<c:when test="${'WORKER' == roleReg && pharmacy.id == idPharmApplication}">
-			<br>
-			<form action="WorkWithStorage" method="post">
-			<input type="hidden" name=idPharm value="${pharmacy.id}"> 
-						<input type="hidden" name=title value="${pharmacy.title}"> 
-						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithLeft">Storage</button> </form>
-						
-				<form action="WorkWithClients" method="post">
-				<input type="hidden" name=idPharm value="${pharmacy.id}"> 
-						<input type="hidden" name=title value="${pharmacy.title}"> 
-						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithRight">Clients</button></form>	
-			
-			
-			</c:when>
-			<c:otherwise>
-<table class="table" border=1>
+		
+			<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton20"><img src="img/add.png" alt="addMedicine"
+						width="100" height="100" style="vertical-align: middle"
+						title="add medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
+				<table class="table" border=1>
 					<thead>
 						<tr>
 							<th class="th" bgcolor="silver"><h1>Type</h1></th>
@@ -62,6 +49,7 @@
 							<th class="th" bgcolor="silver"><h1>Term</h1></th>
 							<th class="th" bgcolor="silver"><h1>Price</h1></th>
 							<th class="th" bgcolor="silver"><h1>Count</h1></th>
+							<th class="th" colspan=2 bgcolor="silver"><h1>Delivery</h1></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,15 +68,40 @@
 										value="${medicine.price} UA" /></td>
 								<td class="td" style="text-align: center;"><c:out
 										value="${medicine.count}" /></td>
+
+								<td class="td" style="text-align: center;">
+								<form action="DeliveryMedicinesMessage" method="post"><h3>
+										<button class="unvisible"><img
+											src="img/plus.png" alt="toPharm" width="20" height="20"
+											style="vertical-align: middle"
+											title="delivery medicines TO pharmacy"></button>
+						<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+						<input type="hidden" name=idMed value="${medicine.id}"> 
+						<input type="hidden" name=way value="toPharmacy"> 
+									</h3></form></td>
+
+								<td class="td" style="text-align: center;">
+								<form action="DeliveryMedicinesMessage" method="post"><h3>
+										<button class="unvisible"><img
+											src="img/minus.png" alt="fromPharm" width="20" height="20"
+											style="vertical-align: middle"
+											title="delivery medicines FROM pharmacy"></button>
+						<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+						<input type="hidden" name=idMed value="${medicine.id}"> 
+						<input type="hidden" name=way value="fromPharmacy"> 
+									</h3></form></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-<br><br><br><br>
-
-			</c:otherwise>
-		</c:choose>
-
+				<br><br>
+				<form action="AddMedicineFromPharmacy" method="post">
+	<button class="addButton21"><img src="img/add.png" alt="addMedicine"
+						width="100" height="100" style="vertical-align: middle"
+						title="add medicine"></button> 
+		<input type="hidden" name="idPharm" value="${idPharm}" /> 						
+								</form>
+				<br><br>
 
 	</div>
 </body>

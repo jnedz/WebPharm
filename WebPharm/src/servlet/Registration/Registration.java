@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import enums.PersonRole;
 import model.Person;
+import model.Pharmacy;
+import service.PersonPharmacyService;
 import service.PersonService;
+import service.PharmacyService;
 import utils.Formatter;
 
 /**
@@ -47,7 +50,15 @@ public class Registration extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String dateOfBirthday = request.getParameter("dateOfBirthday").isEmpty() ? Formatter.fromDateToString(new GregorianCalendar()) : request.getParameter("dateOfBirthday");
 		PersonRole role = PersonRole.valueOf(request.getParameter("role"));
-
+		String pharmacyTitle = request.getParameter("pharmacyTitle");
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@" + pharmacyTitle);
+		
+		Pharmacy pharmacy = PharmacyService.getPharmaciesByTitle(pharmacyTitle).get(0);
+		int idPharm = pharmacy.getId();
+		
+		getServletConfig().getServletContext().setAttribute("idPharm", idPharm);
+		
 		String password=request.getParameter("password");
 		String login=request.getParameter("login");
 		boolean userIsExist = false;
@@ -67,6 +78,8 @@ public class Registration extends HttpServlet {
 		person.setDateOfBirthday(Formatter.toDateFromString(dateOfBirthday));
 		PersonService.add(person);
 		
+		PersonPharmacyService.add(PersonService.getPersonsByFullName(firstName, lastName).get(0), pharmacy);
+		getServletConfig().getServletContext().setAttribute("idPharm", idPharm);
 		}
 	
 		request.setAttribute("login", login);

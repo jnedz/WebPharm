@@ -1,5 +1,6 @@
 <%@page import="enums.PersonRole"%>
 <%@page import="utils.Constants"%>
+<%@page import="utils.TitlesDTO"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -80,6 +81,21 @@
 	       </c:forEach></td>
 					<td class="td1"></td>
 				</tr>
+				
+				<tr>
+					<td class="td1"><div class="field">
+							<label for="pharmacy">Pharmacy:</label>
+						</div></td>
+					<td class="td1">
+					<select size="1" name="pharmacyTitle">
+				<c:forEach items="<%=utils.TitlesDTO.pharmaciesTitles()%>"
+									var="pharmacyTitle">
+									<option value="${pharmacyTitle}">${pharmacyTitle}</option>
+								</c:forEach>
+									</select>
+					</td>
+				</tr>
+				
 			</table>
 
 			<p>

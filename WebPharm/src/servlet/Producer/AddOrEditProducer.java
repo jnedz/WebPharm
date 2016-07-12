@@ -40,6 +40,7 @@ public class AddOrEditProducer extends HttpServlet {
 		//	session.setAttribute("fromAddMed", "yes");
 		//}
 		
+		
 		if (Integer.parseInt(request.getParameter("id")) > 0) {
 		Producer producer = ProducerService.getProducerById(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("id", request.getParameter("id"));

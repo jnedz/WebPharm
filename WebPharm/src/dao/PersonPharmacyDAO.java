@@ -3,6 +3,8 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import enums.PersonRole;
 import model.Person;
@@ -18,7 +20,7 @@ public class PersonPharmacyDAO {
 	 * @param ph
 	 * @param role
 	 */
-	public static void add(Person pi, Pharmacy ph, String role) {
+	public static void add(Person pi, Pharmacy ph) {
 
 		String sql = "INSERT INTO persons_pharmacies (id_person, id_pharmacy, role) VALUES (?, ?, ?)";
 
@@ -26,7 +28,7 @@ public class PersonPharmacyDAO {
 			java.sql.PreparedStatement statement = DbUtils.getConnection().prepareStatement(sql);
 			statement.setInt(1, pi.getId());
 			statement.setInt(2, ph.getId());
-			statement.setString(3, role);
+			statement.setString(3, pi.getRole().name());
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
 				System.out.println("A new persons_pharmacies was inserted successfully!");
@@ -84,7 +86,30 @@ public class PersonPharmacyDAO {
 		return role;
 	}
 
-	
+	/**
+	 * @param person
+	 * @return pharmacies
+	 */
+		public static List<Pharmacy> getPharmacies(Person person) {
+				String sql = "SELECT id_pharmacy FROM persons_pharmacies where id_person = "
+						+ person.getId() + " and role = '" + person.getRole().name() + "'";
+				
+				Pharmacy pharmacy = new Pharmacy();
+				List<Pharmacy>pharmacies = new ArrayList<>();
+				try {
+					java.sql.Statement statement = DbUtils.getConnection().createStatement();
+					ResultSet result = statement.executeQuery(sql);
+					while (result.next()) {
+						pharmacy = PharmacyDAO.getPharmacyById(result.getInt("id_pharmacy"));
+						pharmacies.add(pharmacy);
+					}
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println("Exception in getPharmacies(person)!");
+				}
+			return pharmacies;
+		}
+		
 	/**
 	 * @param personsInfo
 	 * @param pharmacy

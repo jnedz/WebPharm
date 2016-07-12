@@ -61,7 +61,11 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table><p>
+	<h2>Or fill in all your personal data <a href="Registration" class="registr"><img
+			src="img/registr.jpg" alt="registration" width="180" height="50"
+			style="vertical-align: middle" title="registration"></a></h2>
+			
 		<a href="AllPharmacies" class="returnButton"><img
 			src="img/return.png" alt="allPharmacies" width="90" height="90"
 			style="vertical-align: middle" title="all pharmacies"></a>

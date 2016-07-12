@@ -112,7 +112,7 @@ public class DeliveryMedicines extends HttpServlet {
 		java.util.List<Medicine> medicines = pharmMedService
 				.getAllMedsByPharm();
 		request.setAttribute("medicines", medicines);
-		request.getRequestDispatcher("/pharmacy/pharmacy.jsp").forward(request,
+		request.getRequestDispatcher("/pharmacy/pharmacyStorage.jsp").forward(request,
 				response);
 	}
 

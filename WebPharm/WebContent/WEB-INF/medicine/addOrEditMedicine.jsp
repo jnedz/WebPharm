@@ -2,8 +2,8 @@
 <%@page import="utils.Constants"%>
 <%@page import="utils.TitlesDTO"%>
 <%@page import="java.util.GregorianCalendar"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -121,9 +121,6 @@
 				</select></td>
 			</tr>
 		</table>
-<%-- 		<input type="submit" value=${id>0 ? 'Edit' : 'Add'} />
-		<p>
-			<input value="Return" type="button" onclick="history.back()">--%>
 	</form>
 	
 	<a href="AllMedicines" class="returnButton"><img src="img/return.png" alt="Return" width="90" height="90"

@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.descriptor.web.ApplicationParameter;
+
+import dao.PersonPharmacyDAO;
 import model.Person;
+import service.PersonPharmacyService;
 import service.PersonService;
+import service.PharmacyService;
 
 
 /**
@@ -45,20 +50,27 @@ public class Enter extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 
-		boolean userIsExist = false;
+		
 		for (Person userFromDB : PersonService.getAll()) {
 			if (login.equals(userFromDB.getLogin()) && password.equals(userFromDB.getPassword())) {
-				request.setAttribute("roleReg", userFromDB.getRole().name());
-				request.setAttribute("roleReg", userFromDB.getRole().name());
-				//String name = userFromDB.getFirstName()+ " " + userFromDB.getLastName();
-				//System.out.println("name" + name);
-				//request.setAttribute("roleReg", name);
-				System.out.println("userFromDB.getRole().name()= " + userFromDB.getRole().name());
-				userIsExist = true;
+				
+				getServletConfig().getServletContext().setAttribute("roleReg", userFromDB.getRole().name());
+				getServletConfig().getServletContext().setAttribute("firstName", userFromDB.getFirstName());
+				getServletConfig().getServletContext().setAttribute("lastName", userFromDB.getLastName());
+				try{
+				getServletConfig().getServletContext().setAttribute("idPharm", PersonPharmacyService.getPharmacies(userFromDB).get(0).getId());
+				System.out.println("idPharm = " + PersonPharmacyService.getPharmacies(userFromDB).get(0).getId());
+				}catch(Exception ex){
+					System.out.println("Exception: idPharm dont founded! " + ex);
+				}
+				
+				getServletConfig().getServletContext().setAttribute("registration", "yes");
+				request.setAttribute("pharmacies", PharmacyService.getAll());
+				request.getRequestDispatcher("/pharmacy/pharmacies.jsp").forward(request, response);
+				
 			}
 		}
-		request.setAttribute("userIsExist", userIsExist);
-		request.setAttribute("login", login);
+		
 		request.getRequestDispatcher("/registration/messageEnter.jsp").forward(request, response);
 	}
 

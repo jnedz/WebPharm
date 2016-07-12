@@ -3,7 +3,7 @@ package utils;
 import java.sql.SQLException;
 
 import repository.MedicinesRepository;
-import repository.PersonsPharmasiesRepository;
+import repository.PersonsPharmaciesRepository;
 import repository.PersonsRepository;
 import repository.PharmaciesMedicinesRepository;
 import repository.PharmaciesRepository;
@@ -32,7 +32,7 @@ public class RecreateTablesDB {
 		MedicinesRepository.completeMedicinesTable();
 		PharmaciesRepository.completePharmaciesTable();
 		PharmaciesMedicinesRepository.completePharmaciesMedicinesTable();
-		PersonsPharmasiesRepository.completePersonsInfoPharmaciesTable();
+		PersonsPharmaciesRepository.completePersonsInfoPharmaciesTable();
 
 	}
 }
