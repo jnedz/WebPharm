@@ -1,18 +1,13 @@
 package service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import dao.MedicineDAO;
 import dao.PharmacyMedicineDAO;
 import model.Medicine;
 import model.Pharmacy;
-import utils.DbUtils;
 
 public class PharmacyMedicineService {
 
@@ -143,11 +138,6 @@ public class PharmacyMedicineService {
 			medicines = MedicineService
 					.getDateSortedList(getAllMedsByPharmId(pharmacy.getId()));
 			List<Medicine> medicinesWhithEqualsTitle = new ArrayList<>();
-
-			/*
-			 * for (Medicine medicine : medicines) { if
-			 * (medicine.getCount()==0){ medicines.remove(medicine); } }
-			 */
 			for (Medicine medicine : medicines) {
 				if (medicine.getTitle().equals(title)) {
 					medicinesWhithEqualsTitle.add(medicine);
@@ -155,7 +145,6 @@ public class PharmacyMedicineService {
 			}
 			for (Medicine medicine : medicinesWhithEqualsTitle) {
 				if (medicine.getCount() <= count) {
-					// medicine.setCount(medicine.getCount() + count);
 					MedicineService.addOrUpdate(medicine);
 					count = count - medicine.getCount();
 					PharmacyMedicineDAO.update(pharmacy, medicine, 0);
@@ -291,16 +280,7 @@ public class PharmacyMedicineService {
 		PharmacyMedicineDAO.delete(pharmacy, medicine);
 	}
 
-	/**
-	 * 
-	 * @param pharmId
-	 *            pharmacy id
-	 * @return all medicines from one pharmacy with id = pharId
-	 */
-	public List<Medicine> getAllMedsByPharmIdDAO(int pharmId) {
-		return PharmacyMedicineDAO.getAllMedsByPharmId(pharmId);
-	}
-
+	
 	/**
 	 * 
 	 * @param medTitle
@@ -377,52 +357,43 @@ public class PharmacyMedicineService {
 		return PharmacyMedicineDAO.isExists(pharmacy, medicine);
 	}
 
-	/*public static List<Medicine> getMedicinesWithUniqueTitle() {
-		String sql = "SELECT * from medicines join producers on medicines.id_producer = producers.id group by medicines.type, medicines.title";
+	public static List<Medicine> getMedicinesWithUniqueTitle(Pharmacy pharmacy) {
+		
 		List<Medicine> medicines = new ArrayList<>();
-		Medicine med = new Medicine();
-		try {
-			Statement statement = (Statement) DbUtils.getConnection().createStatement();
-			ResultSet result = statement.executeQuery(sql);
-			while (result.next()) {
-				med = convert(result);
-
-				boolean addMed = false;
-
-				if (medicines.isEmpty()) {
-					med.setCount(get—ountByTitle(med.getTitle()));
-					addMed = true;
-				} else {
-					for (Medicine medicine : medicines) {
-						med.setCount(get—ountByTitle(med.getTitle()));
-						if (!med.getTitle().equals(medicine.getTitle())) {
-							addMed = true;
-						}
+		boolean addMed = false;
+		
+		for (Medicine med : getAllMedsByPharmId(pharmacy.getId())){
+			if (medicines.isEmpty()) {
+				addMed = true;
+			} else{
+				for (Medicine m : medicines){
+					if (m.getTitle().equals(med.getTitle())){
+						m.setCount(m.getCount()+med.getCount());
+						addMed = false;
+					}else{
+						addMed = true;
 					}
-				}
-				if (addMed == true) {
+				}}
+				if (addMed == true){
 					medicines.add(med);
 				}
-			}
-			Collections.sort(medicines, new Comparator<Medicine>() {
-
-				public int compare(Medicine o1, Medicine o2) {
-
-					if (o1.getType().compareTo(o2.getType()) == 0) {
-						return o1.getTitle().compareTo(o2.getTitle());
-					} else {
-						return (o1.getType().name()).compareTo(o2.getType().name());
-					}
-				}
-			});
-			statement.close();
-			result.close();
-		} catch (SQLException ex) {
-			System.out.println("Exception in getMedicinesWithUniqueTitle()! (medicines)");
-			ex.printStackTrace();
 		}
 		return medicines;
 	}
 
-*/
+	public static List<Medicine> getMedicinesSortByDate(int idPharm, String order) {
+		List <Medicine> medicines = new ArrayList<>();
+		if ("NoSort".equals(order)){
+			medicines = PharmacyMedicineDAO.getAllMedsByPharmId(idPharm);
+		}
+		if ("ASC".equals(order)){
+			medicines = MedicineService.getDateSortedList(PharmacyMedicineDAO.getAllMedsByPharmId(idPharm));
+		}
+		if ("DESC".equals(order)){
+			medicines = MedicineService.getDateSortedList(PharmacyMedicineDAO.getAllMedsByPharmId(idPharm));
+			Collections.reverse(medicines);
+		}
+		return medicines;
+	}
+
 }

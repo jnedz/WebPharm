@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pharmacy</title>
+<title>pharmacy</title>
 <style type="text/css">
 @import
 "style.css"
@@ -30,7 +30,7 @@
 			<a href="AllPharmacies" class="returnButton2"><img
 				src="img/return.png" alt="Return" width="90" height="90"
 				style="vertical-align: middle" title="return to all pharmacies"></a>
-			<br><br>
+			<br><br><br>
 			<br> Pharmacy: ${pharmacy.title}<br> Description:
 			${pharmacy.description}
 		</h4>
@@ -42,13 +42,15 @@
 			<input type="hidden" name=idPharm value="${pharmacy.id}"> 
 						<input type="hidden" name=title value="${pharmacy.title}"> 
 						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithLeft">Storage</button> </form>
+	<button class="WorkWithLeft"><img src="img/storage.png" alt="Storage" width="90" height="90"
+								style="vertical-align: middle" title="Storage"></button> </form>
 						
 				<form action="WorkWithClients" method="post">
 				<input type="hidden" name=idPharm value="${pharmacy.id}"> 
 						<input type="hidden" name=title value="${pharmacy.title}"> 
 						<input type="hidden" name=gescription value="${pharmacy.description}">
-	<button class="WorkWithRight">Clients</button></form>	
+	<button class="WorkWithRight"><img src="img/client.png" alt="Clients" width="90" height="90"
+								style="vertical-align: middle" title="Clients"></button></form>	
 			
 			
 			</c:when>

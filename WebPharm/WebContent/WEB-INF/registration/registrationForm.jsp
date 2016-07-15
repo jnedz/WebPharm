@@ -76,7 +76,7 @@
 					<td class="td1"><c:forEach items="<%=PersonRole.values()%>"
 							var="role">
 							<INPUT TYPE="radio" NAME="role"
-							 ${role == roleSel ? 'checked' : ''}
+							 ${role == 'USER' ? 'checked' : ''}
 								VALUE="${role}"> ${role}
 	       </c:forEach></td>
 					<td class="td1"></td>

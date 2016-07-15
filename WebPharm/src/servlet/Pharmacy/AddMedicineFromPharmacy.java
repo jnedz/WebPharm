@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Medicine;
+import model.Pharmacy;
 import service.MedicineService;
+import service.PharmacyMedicineService;
 import service.PharmacyService;
 
 /**
@@ -42,14 +44,15 @@ public class AddMedicineFromPharmacy extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Medicine> medicines = MedicineService.getMedicinesWithUniqueTitle();
-		System.out.println("@@@@@@@" + MedicineService.getAll());
-		System.out.println("___________\n" + medicines);
-		//List<Medicine> medicines = MedicineService.getAll();
-		System.out.println("##########" + request.getParameter("idPharm"));
 		
 		request.setAttribute("idPharm", request.getParameter("idPharm"));
 		request.setAttribute("pharmacy", PharmacyService.getPharmacyById(Integer.parseInt(request.getParameter("idPharm"))));
 		request.setAttribute("medicines", medicines);
+		
+		System.out.println("!!!!!!!!!!!!!!!!\n" + PharmacyMedicineService.getAllMedsByPharmId(Integer.parseInt(request.getParameter("idPharm"))));
+		System.out.println("2222222222222222222222222222\n" + PharmacyMedicineService.getMedicinesWithUniqueTitle(PharmacyService.getPharmacyById(Integer.parseInt(request.getParameter("idPharm")))));
+		
+		request.setAttribute("meds", PharmacyMedicineService.getMedicinesWithUniqueTitle(PharmacyService.getPharmacyById(Integer.parseInt(request.getParameter("idPharm")))));
 		request.getRequestDispatcher("/pharmacy/addMedicineFromPharmacy.jsp").forward(request, response);
 	}
 

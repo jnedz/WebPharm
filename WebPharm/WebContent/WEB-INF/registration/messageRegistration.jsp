@@ -27,7 +27,10 @@
 								style="vertical-align: middle" title="return"></a>
     </c:when>    
     <c:otherwise>
-      Thank you for registration! <br><br>Your login: ${login}, role: ${role} 
+   <%--  
+    <c:set var="pharmacyTitle"
+			value="<%=application.getAttribute(\"pharmacyTitle\")%>" /> --%>
+      Thank you for registration! <br><br>Your login: ${login}, role: ${role}, pharmacy: ${pharmacyTitle}.
       <br>Enter in program for continue, please. <br><br>
       <a href="Enter"><img src="img/enter.png" alt="Enter" width="90" height="90"
 								style="vertical-align: middle" title="enter"></a>

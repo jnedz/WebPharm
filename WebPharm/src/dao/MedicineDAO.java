@@ -539,4 +539,22 @@ public class MedicineDAO {
 		return medicines;
 	}
 
+	/*public static List<Medicine> getMedicinesSortByDate(String order) {
+		String sql = "SELECT * FROM medicines JOIN producers ON medicines.id_producer = producers.id "
+				+ "order by dateOfManufact " + order;
+		List<Medicine> medicines = new ArrayList<>();
+		try {
+			Statement statement = (Statement) DbUtils.getConnection().createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				medicines.add(convert(result));
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.out.println("Exception in getMedicinesSortByDate(order)!");
+			e.printStackTrace();
+		}
+		return medicines;
+	}*/
+
 }

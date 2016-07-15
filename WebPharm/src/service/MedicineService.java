@@ -435,4 +435,8 @@ public class MedicineService {
 	public static List<Medicine> getMedicinesByType(String type) {
 		return MedicineDAO.getMedicinesByType(type);
 	}
+
+	/*public static List<Medicine> getMedicinesSortByDate(String order) {
+		return MedicineDAO.getMedicinesSortByDate(order);
+	}*/
 }

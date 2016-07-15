@@ -32,7 +32,7 @@ function validateForm() {
     
     
     
-    if (x1.length>=20 || x1.length<=3) {
+    if (x1.length>=20 || x1.length<3) {
         alert("Login must be filled out (3-20 symbols)");
         return false;
     }
@@ -43,24 +43,24 @@ function validateForm() {
     return false;
     }
   */  
-    if (x2.length>=20 || x2.length<=3) {
+    if (x2.length>=20 || x2.length<3) {
         alert("password must be filled out (3-20 symbols)");
         return false;
     }
     var x3 = document.forms["myForm"]["firstName"].value;
-    if (x3.length>=20 || x3.length<=2) {
-        alert("first name must be filled out in correct formate");
+    if (x3.length>=20 || x3.length<3) {
+        alert("first name must be filled out (3-20 symbols)");
         return false;
     }
     var x4 = document.forms["myForm"]["lastName"].value;
-    if (x4.length>=20 || x4.length<=2) {
-        alert("last name must be filled out in correct formate");
+    if (x4.length>=20 || x4.length<3) {
+        alert("last name must be filled out (3-20 symbols)");
         return false;
     }
     
     var x5 = document.forms["myForm"]["dateOfBirthday"].value;
     if ( x5.length == 10 ){} else{
-        alert("date name must be filled out in correct formate");
+        alert("date name must be filled out in correct format: dd.MM.yyy");
         return false;
     }
 

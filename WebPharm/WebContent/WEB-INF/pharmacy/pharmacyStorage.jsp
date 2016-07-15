@@ -15,6 +15,10 @@
 @import
 "style.css"
 </style>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.0.0.js" /></script>
+<script src="${pageContext.request.contextPath}/js/app-ajax.js"
+	type="text/javascript"></script>
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
@@ -45,7 +49,32 @@
 						<tr>
 							<th class="th" bgcolor="silver"><h1>Type</h1></th>
 							<th class="th" bgcolor="silver"><h1>Title</h1></th>
-							<th class="th" bgcolor="silver"><h1>Date Of Manufacture</h1></th>
+							<th class="th" bgcolor="silver"><h1>Date of Manufacture 
+							
+						<c:choose>
+    <c:when test="${order == null || order == 'NoSort'}">
+    <form action="SortByDate" method="post">
+        <input type="hidden" name="idPharm" value="${idPharm}"> 
+         <input type="hidden" name="order" value="ASC"> 
+        <button class="buttonOrder" name="order" id="form1">
+			<img src="img/noSort.png"
+						width="25" height="25" alt="NoSort"
+						style="vertical-align: middle"/> 
+							</button></form>
+    </c:when>    
+    <c:otherwise>
+       <form action="SortByDate" method="post">
+        <input type="hidden" name="idPharm" value="${idPharm}"> 
+        <input type="hidden" name="order" value="${order}"> 
+        <button class="buttonOrder" name="order" id="form1">
+			<img src="${order == 'ASC' ?'img/za.png' : 'img/az.png'}"
+						width="25" height="25" alt="Sort"
+						style="vertical-align: middle"/> 
+							</button></form>
+          </c:otherwise>
+</c:choose>
+				
+						</h1></th>
 							<th class="th" bgcolor="silver"><h1>Term</h1></th>
 							<th class="th" bgcolor="silver"><h1>Price</h1></th>
 							<th class="th" bgcolor="silver"><h1>Count</h1></th>
@@ -61,7 +90,7 @@
 										value="${medicine.title}" /></td>
 								<td class="td" style="text-align: center;"><fmt:formatDate
 										pattern="<%= Constants.format %>"
-										value="${medicine.dateOfManufact.time}" /></td>
+										value="${medicine.dateOfManufact.time}" /> </td>
 								<td class="td" style="text-align: center;"><c:out
 										value="${medicine.term} mnth" /></td>
 								<td class="td" style="text-align: center;"><c:out
@@ -94,7 +123,22 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<br><br>
+				<br>
+				<%-- <form action="SortByDate" method="post">
+			<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+	<button class="SortByDate" method="post"><img src="img/date.png" alt="Sort Medicines by Date" width="90" height="90"
+								style="vertical-align: middle" title="Sort Medicines by Date"></button> </form>
+						 --%>
+		<form action="WorkWithStorage" method="post">	
+		<input type="hidden" name=idPharm value="${pharmacy.id}"> 
+						<input type="hidden" name=title value="${pharmacy.title}"> 
+						<input type="hidden" name=gescription value="${pharmacy.description}">			 
+	<button class="bottonLeft"><img src="img/reload.png"
+			alt="ReloadPharmacy" width="100" height="100"
+			style="vertical-align: middle" title="reload pharmacy"></button>
+			</form>
+			
+			
 				<form action="AddMedicineFromPharmacy" method="post">
 	<button class="addButton21"><img src="img/add.png" alt="addMedicine"
 						width="100" height="100" style="vertical-align: middle"

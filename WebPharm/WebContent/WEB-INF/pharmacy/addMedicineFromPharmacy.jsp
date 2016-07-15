@@ -15,11 +15,9 @@
 @import
 "style.css"
 </style>
-<script type="text/javascript"
-	src="js/jquery-3.0.0.js" /></script> 
+<script type="text/javascript" src="js/jquery-3.0.0.js" /></script>
 
-<script type="text/javascript"
-	src="js/inputValidator.js" /></script>
+<script type="text/javascript" src="js/inputValidator.js" /></script>
 </head>
 <body>
 	<jsp:include page="/header.jsp" />
@@ -51,14 +49,28 @@
 
 					<th class="th" bgcolor="silver"><h1>Type</h1></th>
 					<th class="th" bgcolor="silver"><h1>Title</h1></th>
-					<th class="th" bgcolor="silver"><h1>Count</h1></th>
+					<th class="th" bgcolor="silver"><h1>Count(STORAGE)</h1></th>
+					 <th class="th" bgcolor="silver"><h1>Count(${pharmacy.title})</h1></th> 
 					<th class="th" colspan=1 bgcolor="silver"><h1>Enter count
 							for order</h1></th>
 				</tr>
 			</thead>
 			<tbody>
+			
+			
 				<c:forEach items="${medicines}" var="medicine" varStatus="loop">
-
+				
+				
+				<c:forEach items="${meds}" var="med">
+				<c:choose>
+			<c:when test="${medicine.title == med.title}">
+				<c:set var="medtitle" value="${med.title}"/>
+				<c:set var="medcount" value="${med.count}"/>
+			</c:when>
+		</c:choose>
+				</c:forEach>
+				
+				
 					<tr>
 						<td class="td" style="text-align: center;"><c:out
 								value="${medicine.type}" /></td>
@@ -66,17 +78,18 @@
 								value="${medicine.title}" /></td>
 						<td class="td" style="text-align: center;"><c:out
 								value="${medicine.count}" /></td>
-
+								
+								
+ <td class="td" style="text-align: center;">${medicine.title == medtitle ? medcount : 0}</td> 
+ 
+ 
 						<td class="td" style="text-align: center;">
-							<form id = "F${loop.index }" name="F${loop.index }" action="DeliveryNewMedicine"
-								method="post" >
-							
-						<%-- 	<form name="F${loop.index }" action="DeliveryNewMedicine"
-								method="post" onsubmit="return validateForm()"> --%>
-							
+							<form id="F${loop.index }" name="F${loop.index }"
+								action="DeliveryNewMedicine" method="post">
+
 								<h3>
-									<input type="hidden" name="idPharm" value="${idPharm}" /> <input
-										type="text" name="idMed" value="${medicine.id}" /> <input
+									<input type="hidden" name="idPharm" value="${idPharm}" />  <input
+										type="hidden" name="idMed" value="${medicine.id}" /> <input
 										type="hidden" name="way" value="toPharmacy" /> <input
 										type="hidden" name="count" value="${medicine.count}" /> <input
 										type="text" name="quantity" value="${quantity}" /> <input
@@ -86,9 +99,7 @@
 
 								</h3>
 							</form>
-
 						</td>
-
 					</tr>
 				</c:forEach>
 			</tbody>

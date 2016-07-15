@@ -20,8 +20,10 @@
 		<input type="hidden" name="id" value="${producer.id}" />
 		<h4>Producer title: ${producer.title},
 			counry: ${producer.country}</h4>
-
-		<form action='AddOrEditProducer' method="get">
+ 	<form action='AddOrEditProducer' method="get">
+ 	<%
+ 	application.setAttribute("fromMeds", "yes");
+ %>
 			<input type="hidden" name="id" value="${producer.id}" /> <input
 				type="submit" value="Edit Producer" />
 		</form>

@@ -33,13 +33,7 @@ public class AddOrEditProducer extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("$$$$$$$$$$$$$$$$$$$$" + request.getParameter("id"));
-		//HttpSession session = request.getSession(true);
-		//System.out.println("#####################" + session.getAttribute("fromAddMed"));
 		System.out.println(getServletConfig().getServletContext().getAttribute("fromAddMed"));
-		//if ("yes".equals(session.getAttribute("fromAddMed").toString())) {
-		//	session.setAttribute("fromAddMed", "yes");
-		//}
-		
 		
 		if (Integer.parseInt(request.getParameter("id")) > 0) {
 		Producer producer = ProducerService.getProducerById(Integer.parseInt(request.getParameter("id")));

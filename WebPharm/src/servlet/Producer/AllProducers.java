@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import enums.Country;
 import model.Producer;
+import service.MedicineService;
 import service.ProducerService;
 import validator.ValidatorUtils;
 
@@ -82,6 +83,12 @@ public class AllProducers extends HttpServlet {
 					request.getRequestDispatcher("/producer/messageIsEqualsProd.jsp").forward(request, response);
 				}
 			}
+			if ("yes".equals(getServletConfig().getServletContext().getAttribute("fromMeds"))) {
+				ProducerService.update(producer);
+				request.setAttribute("producers",ProducerService.getAll());
+				request.setAttribute("medicines", MedicineService.getAllSortedByTypeAndTitle());
+				request.getRequestDispatcher("/medicine/medicines.jsp").forward(request, response);
+			} 
 			if (isEqualsProd == false) {
 				if (id > 0) {
 					ProducerService.update(producer);
@@ -103,5 +110,5 @@ public class AllProducers extends HttpServlet {
 			request.getRequestDispatcher("/producer/addOrEditProducer.jsp").forward(request, response);
 		}
 	}
-	
+
 }

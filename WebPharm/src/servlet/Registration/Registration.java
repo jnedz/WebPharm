@@ -81,7 +81,7 @@ public class Registration extends HttpServlet {
 		PersonPharmacyService.add(PersonService.getPersonsByFullName(firstName, lastName).get(0), pharmacy);
 		getServletConfig().getServletContext().setAttribute("idPharm", idPharm);
 		}
-	
+		request.setAttribute("pharmacyTitle", pharmacyTitle);
 		request.setAttribute("login", login);
 		request.setAttribute("role", role);
 		request.setAttribute("userIsExist", userIsExist);

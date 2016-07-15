@@ -27,6 +27,10 @@
 <div class="mainBlock">
 <jsp:include page="/medicineHeader.jsp" />
 
+<%
+ 	application.setAttribute("fromMeds", "no");
+ %>
+
 <a href="AllMedicines" class="reloadButton"><img src="img/reload.png" alt="ReloadMedicines" width="100" height="100"
 								style="vertical-align: middle" title="reload medicines"></a>
 	<a href="EditMedicine?id=<c:out value="0"/>" class="addButton"><img src="img/add.png" alt="addMedicin" width="100" height="100"
@@ -83,7 +87,6 @@
 		<tbody>
 			<c:forEach items="${medicines}" var="medicine">
 				<tr class="${'NOTYPE' == medicine.type ? 'trRed' : 'tr'}">
-				
 				<td class="td" style="text-align: center;"><c:out
 							value="${medicine.type}" /></td>
 					<td class="td" style="text-align: center;"><c:out
@@ -99,7 +102,6 @@
 
 					<td class="td" style="text-align: center;"><a
 						href="ProducerInfo?id=<c:out value="${medicine.producer.id}"/>">${medicine.producer.title}</a></td>
-
 					<td class="td" style="text-align: center;"><h3>
 							<a href="EditMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/update.png" alt="Edit" width="20" height="20" style="vertical-align: middle" title="Edit"></a>
 						</h3></td>
@@ -108,7 +110,20 @@
 							<a href="DeleteMedicine?id=<c:out value="${medicine.id}"/>"><img src="img/delete.png" alt="Delete" width="20" height="20" style="vertical-align: middle" title="Delete"></a>
 						</h3></td>
 				</tr>
+				
+				
+				
+		<c:choose>
+			<c:when test="${'NOTYPE' == medicine.type}">
+				<c:set var="notype" value="yes" />
+			</c:when>
+		</c:choose>
 			</c:forEach>
+			<c:choose>
+			<c:when test="${'yes' == notype}">
+				<h4>Attention! The table contains medicine without type. Recommend edit it.</h4>
+			</c:when>
+		</c:choose>
 		</tbody>
 	</table>
 	</div><div id="pagination"></div>

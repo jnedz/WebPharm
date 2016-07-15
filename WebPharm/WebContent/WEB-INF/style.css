@@ -1,39 +1,52 @@
 @CHARSET "UTF-8";
-
+.basket{
+	position: absolute;
+	right: 70px;
+	top: 150px;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.SortByDate {
+	position: absolute;
+	left: 70px;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.WorkWithRightBottom {
+	position: absolute;
+	right: 70px;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 .WorkWithLeft {
 	position: absolute;
-	left: 20%;
-	font-size: 150%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: maroon;
-	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
-		endColorstr='#EBFFFF');
-	width: 200px;
-	height: 60px;
-	padding: 5px 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 2px solid #666;
+	top: 170px;
+	left: 25%;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 .WorkWithRight {
 	position: absolute;
-	right: 20%;
-	font-size: 150%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: maroon;
-	background: -moz-linear-gradient(#00BBD6, #EBFFFF);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6',
-		endColorstr='#EBFFFF');
-	width: 200px;
-	height: 60px;
-	padding: 5px 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 2px solid #666;
+	top: 170px;
+	right: 50%;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 a {
@@ -97,6 +110,18 @@ body {
 	right: 70px;
 	background-image: none;
 	background-color: transparent;
+}
+
+.bottonLeft {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 70px;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 .addButtonLeft {
@@ -337,13 +362,14 @@ input[type="text"] {
 	font-size: 11px;
 	font-family: Tahoma;
 }
-
 input[type="password"] {
 	border-radius: 5px;
 	height: 20px;
 	width: 155px;
 }
-
+.quantity {
+	width: 50px !important;
+}
 .sendsubmitC {
 	width: 100px;
 	height: 100px;

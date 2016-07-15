@@ -1,7 +1,6 @@
 package servlet.Pharmacy;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Medicine;
-import model.Pharmacy;
 import service.PharmacyMedicineService;
 import service.PharmacyService;
 
 /**
- * Servlet implementation class WorkWithClients
+ * Servlet implementation class SortByDate
  */
-@WebServlet("/WorkWithClients")
-public class WorkWithClients extends HttpServlet {
+@WebServlet("/SortByDate")
+public class SortByDate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkWithClients() {
+    public SortByDate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +31,33 @@ public class WorkWithClients extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
-		System.out.println("id pharm = " + idPharm);
-		Pharmacy pharmacy = PharmacyService.getPharmacyById(idPharm);
 		
-		ArrayList <Medicine> medicines = new ArrayList<>(PharmacyMedicineService.getMedicinesWithUniqueTitle(pharmacy));
-		request.setAttribute("idPharm", idPharm);
-		request.setAttribute("pharmacy", pharmacy);
-		request.setAttribute("medicines", medicines);
-		request.getRequestDispatcher("/pharmacy/pharmacyClients.jsp").forward(request, response);
+		int idPharm = Integer.parseInt(request.getParameter("idPharm"));
+		String order = request.getParameter("order");
+		if (request.getParameter("order") == null) {
+			order = "NoSort";
+		}
+		java.util.List <Medicine> meds = PharmacyMedicineService.getMedicinesSortByDate(idPharm, order);
+		
+		if (order.equals("ASC")){
+			order="DESC";
+		}else {
+			order = "ASC";
+		}
+		
+		
+		request.setAttribute("order", order);
+		request.setAttribute("pharmacy", PharmacyService.getPharmacyById(idPharm));
+		request.setAttribute("medicines", meds);
+		request.setAttribute("idPharm", request.getParameter("idPharm"));
+		request.getRequestDispatcher("/pharmacy/pharmacyStorage.jsp").forward(request, response);
 	}
 
 }
