@@ -60,7 +60,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${medicines}" var="medicine">
+						<c:forEach items="${medicines}" var="medicine" varStatus="loop">
 							<tr>
 								<td class="td" style="text-align: center;"><c:out
 										value="${medicine.type}" /></td>
@@ -76,7 +76,7 @@
 								<td class="td" style="text-align: center;"><c:out
 										value="${medicine.count}" /></td>
 								<td class="td" style="text-align: center;">
-								<form id="F${loop.index }" name="F${loop.index }" action="ClientsOrder" method="post">
+								<form id="F${loop.index }" name="F${loop.index }" action="ClientsOrder" method="post" onsubmit = "return false">
 								<h3>
 									<input type="hidden" name="idPharm" value="${idPharm}" /> 
 									<input type="hidden" name="counter" value="${counter}" />  <input
@@ -99,5 +99,42 @@
 	<button class="WorkWithRightBottom"><img src="img/reload.png" alt="ReloadClientsOrder" width="90" height="90"
 								style="vertical-align: middle" title="Reload Clients Order"></button></form>	
 	</div>
+	
+	
+	
+	<form id="Fp"  action="ClientsOrder" method="post" >
+		<c:forEach items="${medicines}" var="medicine" varStatus="loop">
+							<tr>
+								<td class="td" style="text-align: center;"><c:out
+										value="${medicine.type}" /></td>
+								<td class="td" style="text-align: center;"><c:out
+										value="${medicine.title}" /></td>
+								<td class="td" style="text-align: center;"><fmt:formatDate
+										pattern="<%= Constants.format %>"
+										value="${medicine.dateOfManufact.time}" /></td>
+								<td class="td" style="text-align: center;"><c:out
+										value="${medicine.term} mnth" /></td>
+								<td class="td" style="text-align: center;"><c:out
+										value="${medicine.price} UA" /></td>
+								<td class="td" style="text-align: center;"><c:out
+										value="${medicine.count}" /></td>
+								<td class="td" style="text-align: center;">
+								
+								<h3>
+									<input type="hidden" name="idPharm" value="${idPharm}" /> 
+									<input type="hidden" name="${'counter'+loop.index}" value="${counter}" />  <input
+										type="hidden" name="titleMed" value="${medicine.title}" /> 
+										<input type="hidden" name="count" value="${medicine.count}" /> <input
+										type="text" name="quantity" value="${quantity}" tabindex=1 class="quantity"/> <input
+										type="submit" class="addMed" name="${loop.index}"
+										id="${loop.index}" value="Clients Order"
+										onClick="getdetails(this)">
+								</h3>
+							
+							</tr>
+						</c:forEach>
+						
+						</form>
+	
 </body>
 </html>

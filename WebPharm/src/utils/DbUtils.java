@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DbUtils {
 
-	static final String DB_URL = "jdbc:mysql://localhost/test";
+	static final String DB_URL = "jdbc:mysql://localhost/test1";
 	static final String USER = "root";
 	static final String PASS = "root";
 	private static Connection conn = null;
