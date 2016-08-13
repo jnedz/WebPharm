@@ -388,7 +388,7 @@ public class MedicineDAO {
 			res = result.next();
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Exception in !");
+			System.out.println("Exception in isExists(Medicine medicine)");
 			e.printStackTrace();
 		}
 		return res;
